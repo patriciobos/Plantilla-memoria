@@ -1,0 +1,96 @@
+% Chapter Template
+
+\chapter{Conclusiones} % Main chapter title
+
+\label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Conclusiones del trabajo realizado}
+
+En la presente memoria de tesis se ha documentado el Trabajo Final para la obtención del grado de \degreename.  
+
+Se obtuvo un \textit{firmware} que permite controlar un acuario en forma remota mediante una interfaz web embebida en la plataforma CIAA-NXP. Se aplicaron simplificaciones al modelo de acuario, principalmente debido a las restricciones de tiempo establecidas para la finalización del trabajo y a la ejecución de acciones de contingencia de riesgos identificados al comienzo de la planificación del trabajo, a saber:
+
+\begin{itemize}
+	\item Riesgo: No contar con un subsidio para la adquisición de sensores y actuadores de acuario.
+	\item Riesgo: No disponer de una CIAA-NXP a tiempo para el comienzo del proyecto.
+	\item Contingencia:  Simular sensores y actuadores del modelo de acuario.
+\end{itemize}
+
+Con las mencionadas simplificaciones se obtuvo una ``planta piloto'' que permitió avanzar en el desarrollo del \textit{firmware} de control y cumplir con los requerimientos de tiempo de finalización.
+
+Se pudo integrar el \textit{stack} TCP/IP lwIP con el RTOS freeRTOS al \textit{firmware} de control sobre la base de un \textit{port} desarrollado por NXP, fabricante del microcontrolador LPC4337.
+
+\medskip
+
+Durante el desarrollo de este Trabajo Final se aplicaron conocimientos adquiridos a lo largo de la Carrera de Especialización en Sistemas Embebidos. Si bien el conjunto total de asignaturas cursadas aportaron conocimientos necesarios para la práctica profesional en el área de los Sistemas Embebidos, se quiere dejar constancia en particular, de las asignaturas con mayor relevancia para el trabajo presentado.
+
+\begin{itemize}
+\item
+\textbf{Arquitectura de microprocesadores}. Resultó necesario tener conocimientos sobre la Arquitectura ARM Cortex M para la programación de la plataforma CIAA-NXP y el uso de los periféricos.
+
+\item
+\textbf{Programación de microprocesadores}. Se utilizaron buenas prácticas de programación de Lenguaje C para microcontroladores y periféricos, aprendidas en esta asignatura. Se empleó un formato de código consistente: comentarios en las declaraciones de funciones y partes importantes del código, constantes en mayúsculas, \textit{camelCase} para poner nombres significativos a funciones y variables. Se utilizaron APIs\footnote{\textit{Application Program Interface}} para abstraer distintas capas del código. Se obtuvo un código más legible y reutilizable.
+
+\item
+\textbf{Ingeniería de Software en Sistemas Embebidos}. Se utilizaron técnicas provenientes de la Ingeniería de Software. Siempre que fue posible se utilizó un método sistemático e iterativo de desarrollo pensando en el ciclo de vida del \textit{software}. Se hizo uso extensivo de Git como sistema de control de versiones del software.  Asimismo, se aplicaron metodologías de ensayo de \textit{software} aprendidas en esta asignatura.
+
+\item
+\textbf{Gestión de Proyectos en Ingeniería}. Resultó de gran utilidad elaborar un Plan de Proyecto para organizar el Trabajo Final.  Parte del material elaborado en esta asignatura como la planificación y el desglose de tareas se pueden encontrar en la presente memoria, en el capítulo \ref{Chapter2}.
+
+\item
+\textbf{Sistemas Operativos de Tiempo Real (I y II)}. Se aplicaron los conocimientos adquiridos sobre freeRTOS respecto a tareas, cambios de contexto y semáforos entre otros.  Asimismo, se utilizaron herramientas de desarrollo propias de freeRTOS para medir el uso de las pilas de las tareas creadas y optimizar el uso de la memoria.
+
+\item 
+\textbf{Protocolos de Comunicación}. Se aplicaron ampliamente los conocimientos obtenidos en el área de Ethernet. En particular, resultó útil el material sobre el \textit{stack} TCP/IP lwIP.
+
+\item
+\textbf{Diseño de Sistemas Críticos}. Siempre que fue posible se utilizaron técnicas de programación defensiva para que el comportamiento del \textit{firmware} resulte lo más predecible posible.  Se buscó obtener un sistema de control que no falle en primer lugar, y que si lo hace, falle en forma segura evitando daños tanto a los seres vivos dentro y fuera del acuario como a la propiedad.
+\end{itemize}
+
+
+
+\medskip
+
+\noindent Asimismo, durante el desarrollo del trabajo final se adquirieron conocimientos en las áreas de:
+
+\begin{itemize}
+	\item Programación en lenguaje HTML5.
+	\item Programación en lenguaje JavaScript.  
+	\item Utilización de \textit{linker scripts} para el entorno de desarrollo LPCXpresso.
+\end{itemize}
+
+
+\medskip
+
+Por lo tanto, se concluye que los objetivos planteados al comienzo del trabajo han sido alcanzados satisfactoriamente, habiéndose cumplido con los criterios de aceptación del sistema final y además, se han obtenido conocimientos valiosos para la formación profesional del autor.
+
+%----------------------------------------------------------------------------------------
+%	SECTION 2
+%----------------------------------------------------------------------------------------
+\clearpage
+\section{Trabajo futuro}
+
+Se considera oportuno identificar las líneas de trabajo futuro para dar continuidad al esfuerzo invertido.  Se listan a continuación las principales.
+
+\begin{itemize}
+	\item Trabajar con una planta piloto real, con sensores y actuadores de acuario.  Caracterizar la dinámica del entorno real y ajustar la lógica de control si fuera necesario.
+	\vspace{5px}
+	\item Escalar el \textit{firmware} desarrollado para obtener un \textit{framework} que posibilite cambiar el dominio de aplicación a otras áreas de control donde el modelo de ``medir, alertar y actuar'' aplique.
+	\vspace{5px}
+	\item Permitir la introducción de nuevos sensores y actuadores debidamente parametrizados mediante la interfaz de usuario.
+	\vspace{5px}
+	\item Mejorar la portabilidad de la interfaz web utilizando técnicas de RWD (\textit{Responsive Web Design}) para que permita su correcta visualización en distintos dispositivos, navegadores y resoluciones de pantalla.
+\end{itemize}
+
+
+
+
+
+
