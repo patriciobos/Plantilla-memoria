@@ -10,7 +10,7 @@
 \label{sec:ejemplo}
 La idea de esta sección es presentar el tema de modo que cualquier persona que no conoce el tema pueda entender de qué se trata y por qué es importante realizar este trabajo y cuál es su impacto.
 
-Si en el texto se hace alusión a diferentes partes del trabajo referirse a ellas como Capítulo, Sección o subsección según corresponda. Por ejemplo: ``En el Capítulo \ref{Chapter1} se explica tal cosa'', o ``En la Sección \ref{sec:ejemplo} se presenta lo que sea'', o ``En la la subsección \ref{subsec:ejemplo} se discute otra cosa''.
+Si en el texto se hace alusión a diferentes partes del trabajo referirse a ellas como Capítulo, Sección o subsección según corresponda. Por ejemplo: ``En el Capítulo \ref{Chapter1} se explica tal cosa'', o ``En la Sección \ref{sec:ejemplo} se presenta lo que sea'', o ``En la subsección \ref{subsec:ejemplo} se discute otra cosa''.
 
 Entre párrafos sucesivos dejar un espacio, como el que se observa entre este párrafo y el anterior. Pero las oraciones de un mismo párrafo van en forma consecutiva, como se observa acá. Luego, cuando se quiere poner una lista tabulada se hace así:
 
@@ -20,7 +20,9 @@ Entre párrafos sucesivos dejar un espacio, como el que se observa entre este p�
 \end{itemize}
 
 Notar el uso de las mayúsculas y el punto al final de cada elemento.
+
 Si se desea poner una lista numerada el formato es este:
+
 \begin{enumerate}
 	\item Este es el primer elemento de la lista.
 	\item Este es el segundo elemento de la lista.
@@ -31,10 +33,124 @@ Notar el uso de las mayúsculas y el punto al final de cada elemento.
 \subsection{Este es el título de una subsección}
 \label{subsec:ejemplo}
 
-Se recomienda no utilizar \textbf{texto en negritas} en ningún párrafo, ni tampoco \underline{texto subrayado}. En cambio sí se sugiere utilizar \textit{texto en cursiva} donde se considere apropiado.
+Se recomienda no utilizar \textbf{texto en negritas} en ningún párrafo, ni tampoco texto \underline{subrayado}. En cambio sí se sugiere utilizar \textit{texto en cursiva} donde se considere apropiado.
 
 Se sugiere que la escritura sea impersonal. Por ejemplo, no utilizar ``el diseño del firmware lo hice de acuerdo con tal principio'', sino ``el firmware fue diseñado utilizando tal principio''. En lo posible hablar en tiempo pasado, ya que la memoria describe un trabajo que ya fue realizado.
 
 Se recomienda no utilizar una sección de glosario sino colocar la descripción de las abreviaturas como parte del mismo cuerpo del texto. Por ejemplo, RTOS (\textit{Real Time Operating System}, Sistema Operativo de Tiempo Real) o en caso de considerarlo apropiado mediante notas a pie de página.
 
-Si se desea indicar alguna página web utilizar el siguiente formato de referencias bibliográficas, dónde las referencias se detallan en la sección de bibliografía de la memoria,utilizado el formato establecido por IEEE en [1]. Por ejemplo, ``el presente trabajo se basa en la plataforma EDU-CIAA-NXP, la cual se describe en detalle en [2]''. 
+Si se desea indicar alguna página web utilizar el siguiente formato de referencias bibliográficas, dónde las referencias se detallan en la sección de bibliografía de la memoria,utilizado el formato establecido por IEEE en \citep{IEEE:citation}. Por ejemplo, ``el presente trabajo se basa en la plataforma EDU-CIAA-NXP, la cual se describe en detalle en \citep{CIAA}''.
+
+\section{Figuras y tablas} 
+
+Al insertar figuras en la memoria se deben considerar determinadas pautas. Para empezar, usar siempre tipografía claramente legible. Luego, tener claro que es incorrecto escribir por ejemplo esto: ``El diseño elegido es un cuadrado,  como se ve en la siguiente figura:''
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.4]{./Figures/cuadradoAzul.png}
+\end{figure}
+
+La forma correcta de utilizar una figura es la siguiente: ``Se eligió utilizar un cuadrado azul para el logo, el cual se ilustra en la figura \ref{fig:cuadradoAzul}''.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=.4]{./Figures/cuadradoAzul.png}
+	\caption{Ilustración del cuadrado azul que se eligió para el diseño del logo.}
+	\label{fig:cuadradoAzul}
+\end{figure}
+
+El texto de las figuras debe estar siempre en español, excepto que se decida reproducir una figura original tomada de alguna referencia. En ese caso la referencia de la cual se tomó la figura debe ser indicada en el epígrafe de la figura e incluida como una nota al pie, como se ilustra en la figura \ref{fig:palabraIngles}.
+
+\begin{figure}[hp]
+	\centering
+	\includegraphics[scale=.4]{./Figures/word.jpeg}
+	\caption{Imagen  ilustrativa de tal cosa, tomada de la página oficial del fabricante del procesador\protect\footnotemark.}
+	\label{fig:palabraIngles}
+\end{figure}
+
+\footnotetext{\url{https://goo.gl/images/i7C70w}}
+
+
+La figura y el epígrafe deben conformar una unidad cuyo significado principal pueda ser comprendido por el lector sin necesidad de leer el cuerpo central de la memoria. Para eso es necesario que el epígrafe sea todo lo detallado que corresponda y si en la figura se utilizan abreviaturas entonces aclarar su significado en el epígrafe o en la misma figura.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=.4]{./Figures/questionMark.png}
+	\caption{El lector no sabe por qué de pronto aparece esta figura.}
+	\label{fig:questionMark}
+\end{figure}
+
+Nunca colocar una figura en el documento antes de hacer la primera referencia a ella, como se ilustra con la figura \ref{fig:questionMark}, porque sino el lector no comprenderá por qué de pronto aparece la figura en el documento, lo que distraerá su atención.
+
+Se pueden colocar dos figuras una al lado de la otra como se puede ver en la figura \ref{fig:peces} y referirse tanto a la subfigura \ref{fig:sub1} como a la subfigura \ref{fig:sub2}.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=.15\textheight]{./Figures/Dory.jpg}
+  \caption[Paracanthurus Hepatus]{Paracanthurus Hepatus\protect\footnotemark}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=.15\textheight]{./Figures/Nemo.jpg}
+  	\caption[Amphiprion Ocellaris]{Amphiprion Ocellaris\protect\footnotemark}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{Especies exóticas de peces tropicales.}
+\label{fig:peces}
+\end{figure}
+
+\footnotetext[1]{GFDL 1.2, https://commons.wikimedia.org/w/index.php?curid=654994}
+
+\footnotetext{De Tewy - Trabajo propio, CC BY 2.5, https://commons.wikimedia.org/w/index.php?curid=1382534}
+
+Para las tablas utilizar el mismo formato que para las figuras, sólo que el epígrafe se debe colocar arriba de la tabla, como se ilustra en la tabla \ref{tab:peces}. Observar que sólo algunas filas van con líneas visibles y notar el uso de las negritas para los encabezados.
+
+\begin{table}[h]
+	\centering
+	\caption[Costos estimados de distintas especies de peces.]{Costos estimados de distintas especies de peces\protect\footnotemark.}
+	\begin{tabular}{@{} l *2c @{}}    
+		\toprule
+		\textbf{Especie} 			& \textbf{Tamaño} 	& \textbf{Valor aprox.}  \\
+		\midrule
+		Amphiprion Ocellaris		& 10 cm 			& \$ 6.000 \\		
+		Hepatus Blue Tang			& 15 cm				& \$ 7.000 \\
+		Zebrasoma Xanthurus			& 12 cm				& \$ 6.800 \\
+		Cirujano Naso Rubio			& 14 cm				& \$ 5.700 \\
+		Zebrasoma Cirujano			& 10 cm				& \$ 4.500 \\ 
+		Zebrasoma Desjardinii		& 10 cm 			& \$ 3.200 \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:peces}
+\end{table}
+
+\footnotetext{Fuente: \url{http://mercadolibre.com.ar}}
+
+En cada capítulo se debe reiniciar el número de conteo de las figuras y las tablas, por ejemplo, Fig. 2.1 o Tabla 2.1, pero no se debe reiniciar el conteo en cada sección. \textbf{Por suerte la plantilla se encarga de esto por nosotros.}
+
+\clearpage
+\section{Ecuaciones}
+\label{sec:Ecuaciones}
+
+Al insertar ecuaciones en la memoria estas se deben numerar de la siguiente forma:
+
+\begin{equation}
+	\label{eq:metric}
+	ds^2 = c^2 dt^2 \left( \frac{d\sigma^2}{1-k\sigma^2} + \sigma^2\left[ d\theta^2 + \sin^2\theta d\phi^2 \right] \right)
+\end{equation}
+                                                        
+Es importante tener presente que en el caso de las ecuaciones estas pueden ser referidas por su número, como por ejemplo ``tal como describe la ecuación \ref{eq:metric}'', pero también es correcto utilizar los dos puntos, como por ejemplo ``la expresión matemática que describe este comportamiento es la siguiente:''
+
+\begin{equation}
+	\label{eq:schrodinger}
+	\frac{\hbar^2}{2m}\nabla^2\Psi + V(\mathbf{r})\Psi = -i\hbar \frac{\partial\Psi}{\partial t}
+\end{equation}
+
+
+Para las ecuaciones se debe utilizar un tamaño de letra equivalente al utilizado para el texto del trabajo, en tipografía cursiva y preferentemente del tipo Times New Roman o similar. El espaciado antes y después de cada ecuación es de aproximadamente el doble que entre párrafos consecutivos del cuerpo principal del texto. \textbf{Por suerte la plantilla se encarga de esto por nosotros.}
+
+
+

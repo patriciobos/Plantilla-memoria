@@ -83,18 +83,16 @@ headsepline, % Uncomment to get a line under the header
 }
 
 %----------------------------------------------------------------------------------------
-%	THESIS INFORMATION
+%	INFORMACIÓN DE LA MEMORIA
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Título del trabajo} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
-\supervisor{Nombre del Director} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
-\examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
-\degree{Especialista en Sistemas Embebidos } % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
-\author{Nombre del Autor} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
-\addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
-\juradoUNO{Nombre del jurado 1 (pertenencia)} % print it elsewhere with \jur1name
-\juradoDOS{Nombre del jurado 2 (pertenencia)} % print it elsewhere with \jur2name
-\juradoTRES{Nombre del jurado 3 (pertenencia)} % print it elsewhere with \jur3name
+\thesistitle{Título del trabajo} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
+\supervisor{Nombre del Director} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \supname
+\degree{Especialista en Sistemas Embebidos } % Nombre del grado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
+\author{Nombre del Autor} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
+\juradoUNO{Nombre del jurado 1 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
+\juradoDOS{Nombre del jurado 2 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
+\juradoTRES{Nombre del jurado 3 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
 \fechaINICIO{enero de 2016}
 \fechaFINAL{diciembre de 2016}
 
@@ -117,7 +115,7 @@ headsepline, % Uncomment to get a line under the header
 \newcaptionname{spanish}{\byname}{por}
 
 \renewcommand{\lstlistingname}{Algoritmo}% Listing -> Algorithm
-\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Algorithms
+\renewcommand{\lstlistlistingname}{Índice de \lstlistingname s}% List of Listings -> List of Algorithms
 
 \renewcommand{\listtablename}{Índice de Tablas}
 \renewcommand{\tablename}{Tabla} 
@@ -131,7 +129,7 @@ headsepline, % Uncomment to get a line under the header
 \pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
 
 %----------------------------------------------------------------------------------------
-%	TITLE PAGE
+%	CARÁTULA
 %----------------------------------------------------------------------------------------
 
 \begin{titlepage}
@@ -145,34 +143,25 @@ headsepline, % Uncomment to get a line under the header
 \vspace{1cm}
 
 \textsc{\Large Memoria del Trabajo Final}\\[0.5cm] % Thesis type
-%\HRule \\[0.4cm] % Horizontal line
+
 {\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
-%\HRule \\[1.5cm] % Horizontal line
- 
-%\begin{minipage}[t]{0.4\textwidth}
-%\begin{flushleft} \large
+
 \vspace{1cm}
 \LARGE\textbf{Autor:\\
-\authorname}\\ % Author name - remove the \href bracket to remove the link
+\authorname}\\ % Author name
 
 \vspace{1cm}
 
 \large
 \vspace{10px}
 {Director:} \\
-{\supname} % Supervisor name - remove the \href bracket to remove the link  
+{\supname} % Supervisor name
  
 \vspace{1cm}
 Jurados:\\
 \jurunoname\\
 \jurdosname\\
 \jurtresname
-%\large \textit{Memoria presentada en cumplimiento con los requisitos\\ para el grado de \degreename}\\[0.3cm] % University requirement text
-%\textit{en el}\\[0.4cm]
-%\groupname\\\deptname\\[2cm] % Research group name and department name
-% 
-%{\large \today}\\[4cm] % Date
-%\includegraphics{Logo} % University/department logo - uncomment to place it
  
 \vfill
 \textit{Este trabajo fue realizado en las Ciudad Autónoma de Buenos Aires, entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
@@ -181,7 +170,7 @@ Jurados:\\
 
 
 %----------------------------------------------------------------------------------------
-%	ABSTRACT PAGE
+%	RESUMEN - ABSTRACT 
 %----------------------------------------------------------------------------------------
 
 \begin{abstract}
@@ -197,13 +186,13 @@ No usar en este resumen ninguna referencia bibliográfica del tipo [1], ni tampo
 \end{abstract}
 
 %----------------------------------------------------------------------------------------
-%	AGRADECIMIENTOS
+%	CONTENIDO DE LA MEMORIA  - AGRADECIMIENTOS
 %----------------------------------------------------------------------------------------
 
 \begin{acknowledgements}
-%\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
+%\addchaptertocentry{\acknowledgementname} % Descomentando esta línea se puede agregar los agradecimientos al índice
 \vspace{1.5cm}
-%The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
+
 Agradecimientos personales. \textbf{[OPCIONAL]} 
 
 No olvidarse de agradecer al tutor.
@@ -225,10 +214,10 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 
 
 %----------------------------------------------------------------------------------------
-%	DEDICATORIA
+%	CONTENIDO DE LA MEMORIA  - DEDICATORIA
 %----------------------------------------------------------------------------------------
 
-\dedicatory{\textbf{Dedicado a... [OPCIONAL]}} 
+\dedicatory{\textbf{Dedicado a... [OPCIONAL]}}  % escribir acá si se desea una dedicatoria
 
 %----------------------------------------------------------------------------------------
 %	CONTENIDO DE LA MEMORIA  - CAPÍTULOS
@@ -240,8 +229,8 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 
 \renewcommand{\tablename}{Tabla} 
 
-% Include the chapters of the thesis as separate files from the Chapters folder
-% Uncomment the lines as you write the chapters
+% Incluir los capítulos como archivos separados desde la carpeta Chapters
+% Descomentar las líneas a medida que se escriben los capítulos
 
 \include{Chapters/Chapter1}
 \include{Chapters/Chapter2} 
@@ -253,10 +242,10 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 %	CONTENIDO DE LA MEMORIA  - APÉNDICES
 %----------------------------------------------------------------------------------------
 
-\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+\appendix % indicativo para indicarle a LaTeX los siguientes "capítulos" son apéndices
 
-% Include the appendices of the thesis as separate files from the Appendices folder
-% Uncomment the lines as you write the Appendices
+% Incluir los apéndices de la memoria como archivos separadas desde la carpeta Appendices
+% Descomentar las líneas a medida que se escriben los apéndices
 
 %\include{Appendices/AppendixA}
 %\include{Appendices/AppendixB}
