@@ -1,15 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Memoria para Trabajos Final es de la 
-% Carrera de Especialización en 
-% Sistemas Embebidos de la FIUBA
-%
-% Versión 3.00 (11/10/2016)
-%
-% Basado en:
-
 % Masters/Doctoral Thesis 
 % LaTeX Template
 % Version 2.3 (25/3/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
 %
 % Version 2.x major modifications by:
 % Vel (vel@latextemplates.com)
@@ -49,7 +44,8 @@ headsepline, % Uncomment to get a line under the header
 \usepackage[T1]{fontenc} % Output font encoding for international characters
 
 \usepackage{palatino} % Use the Palatino font by default
-\usepackage[backend=bibtex,natbib=true]{biblatex} % Use the bibtex backend
+%,style=authoryear
+\usepackage[backend=bibtex,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
 \addbibresource{references.bib} % The filename of the bibliography
 
@@ -87,22 +83,18 @@ headsepline, % Uncomment to get a line under the header
 }
 
 %----------------------------------------------------------------------------------------
-%	INFORMACIÓN DE LA PORTADA
+%	INFORMACIÓN DE LA MEMORIA
 %----------------------------------------------------------------------------------------
 
 \thesistitle{Título del trabajo} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\supervisor{Nombre del Director (Filiación)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \supname
+\supervisor{Nombre del Director} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \supname
 \degree{Especialista en Sistemas Embebidos } % Nombre del grado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \author{Nombre del Autor} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
-\juradoUNO{Nombre del jurado 1 (Filiación)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
-\juradoDOS{Nombre del jurado 2 (Filiación)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
-\juradoTRES{Nombre del jurado 3 (Filiación)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
+\juradoUNO{Nombre del jurado 1 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
+\juradoDOS{Nombre del jurado 2 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
+\juradoTRES{Nombre del jurado 3 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
 \fechaINICIO{enero de 2016}
 \fechaFINAL{diciembre de 2016}
-
-%----------------------------------------------------------------------------------------
-%	FIN INFORMACIÓN DE LA PORTADA
-%----------------------------------------------------------------------------------------
 
 \subject{Memoria del Trabajo Final de la Carrera de Especialización en Sistemas Embebidos de la UBA} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
 \keywords{CESE, Sistemas Embebidos, CIAA} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
@@ -137,7 +129,7 @@ headsepline, % Uncomment to get a line under the header
 \pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
 
 %----------------------------------------------------------------------------------------
-%	PORTADA
+%	CARÁTULA
 %----------------------------------------------------------------------------------------
 
 \begin{titlepage}
@@ -178,7 +170,7 @@ Jurados:\\
 
 
 %----------------------------------------------------------------------------------------
-%	RESUMEN
+%	RESUMEN - ABSTRACT 
 %----------------------------------------------------------------------------------------
 
 \begin{abstract}
@@ -194,7 +186,7 @@ No usar en este resumen ninguna referencia bibliográfica del tipo [1], ni tampo
 \end{abstract}
 
 %----------------------------------------------------------------------------------------
-%	AGRADECIMIENTOS
+%	CONTENIDO DE LA MEMORIA  - AGRADECIMIENTOS
 %----------------------------------------------------------------------------------------
 
 \begin{acknowledgements}
@@ -203,7 +195,9 @@ No usar en este resumen ninguna referencia bibliográfica del tipo [1], ni tampo
 
 Agradecimientos personales. \textbf{[OPCIONAL]} 
 
-No poner anti-agradecimientos (este trabajo fue posible a pesar de...)
+No olvidarse de agradecer al tutor.
+
+No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 
 \end{acknowledgements}
 
@@ -220,13 +214,13 @@ No poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 
 
 %----------------------------------------------------------------------------------------
-%	DEDICATORIA
+%	CONTENIDO DE LA MEMORIA  - DEDICATORIA
 %----------------------------------------------------------------------------------------
 
 \dedicatory{\textbf{Dedicado a... [OPCIONAL]}}  % escribir acá si se desea una dedicatoria
 
 %----------------------------------------------------------------------------------------
-%	CAPÍTULOS
+%	CONTENIDO DE LA MEMORIA  - CAPÍTULOS
 %----------------------------------------------------------------------------------------
 
 \mainmatter % Begin numeric (1,2,3...) page numbering
@@ -245,7 +239,7 @@ No poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 \include{Chapters/Chapter5} 
 
 %----------------------------------------------------------------------------------------
-%	APÉNDICES
+%	CONTENIDO DE LA MEMORIA  - APÉNDICES
 %----------------------------------------------------------------------------------------
 
 \appendix % indicativo para indicarle a LaTeX los siguientes "capítulos" son apéndices
