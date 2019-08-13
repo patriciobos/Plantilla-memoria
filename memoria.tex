@@ -44,8 +44,8 @@ headsepline, % Uncomment to get a line under the header
 \usepackage[T1]{fontenc} % Output font encoding for international characters
 
 \usepackage{palatino} % Use the Palatino font by default
-%,style=authoryear
-\usepackage[backend=bibtex,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+
+\usepackage[backend=bibtex,natbib=true, style=numeric, sorting=none]{biblatex} % Use the bibtex backend for bibliography
 
 \addbibresource{references.bib} % The filename of the bibliography
 
@@ -62,7 +62,7 @@ headsepline, % Uncomment to get a line under the header
 %\hypersetup{breaklinks=true}
 \urlstyle{same}
 %\usepackage{cite}
-
+\hyphenation{biblatex}
 %--------------------------
 
 \usepackage{color}
