@@ -53,7 +53,7 @@ Al insertar figuras en la memoria se deben considerar determinadas pautas. Para 
 
 La forma correcta de utilizar una figura es la siguiente: ``Se eligió utilizar un cuadrado azul para el logo, el cual se ilustra en la figura \ref{fig:cuadradoAzul}''.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[scale=.35]{./Figures/cuadradoAzul.png}
 	\caption{Ilustración del cuadrado azul que se eligió para el diseño del logo.}
@@ -62,7 +62,7 @@ La forma correcta de utilizar una figura es la siguiente: ``Se eligió utilizar 
 
 El texto de las figuras debe estar siempre en español, excepto que se decida reproducir una figura original tomada de alguna referencia. En ese caso la referencia de la cual se tomó la figura debe ser indicada en el epígrafe de la figura e incluida como una nota al pie, como se ilustra en la figura \ref{fig:palabraIngles}.
 
-\begin{figure}[h!]
+\begin{figure}[htpb]
 	\centering
 	\includegraphics[scale=.25]{./Figures/word.jpeg}
 	\caption{Imagen tomada de la página oficial del procesador\protect\footnotemark.}
@@ -74,14 +74,63 @@ El texto de las figuras debe estar siempre en español, excepto que se decida re
 
 La figura y el epígrafe deben conformar una unidad cuyo significado principal pueda ser comprendido por el lector sin necesidad de leer el cuerpo central de la memoria. Para eso es necesario que el epígrafe sea todo lo detallado que corresponda y si en la figura se utilizan abreviaturas entonces aclarar su significado en el epígrafe o en la misma figura.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[scale=.4]{./Figures/questionMark.png}
-	\caption{El lector no sabe por qué de pronto aparece esta figura.}
+	\caption{Por qué de pronto aparece esta figura?.}
 	\label{fig:questionMark}
 \end{figure}
 
 Nunca colocar una figura en el documento antes de hacer la primera referencia a ella, como se ilustra con la figura \ref{fig:questionMark}, porque sino el lector no comprenderá por qué de pronto aparece la figura en el documento, lo que distraerá su atención.
+
+En la figura \ref{fig:izquierda} y \ref{fig:derecha} se presenta un ejemplo de cómo incluir más de una figura utilizando un entorno \textit{minipage}.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[b]{0.47\textwidth}
+    \centering
+     \includegraphics[width=.5\textwidth]{./Figures/questionMark.png}
+	\caption{Una imagen a la izquierda.}
+	\label{fig:izquierda}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.47\textwidth}
+    \centering
+     \includegraphics[width=.5\textwidth]{./Figures/questionMark.png}
+	\caption{Una imagen a la derecha.}
+	\label{fig:derecha}
+  \end{minipage}
+\end{figure}
+
+Otra posibilidad es utilizar el entorno \textit{subfigure} para incluir más de una figura, como se puede ver en la figura \ref{fig:three graphs}. Notar que se pueden referenciar también las figuras internas individualmente de esta manera: \ref{fig:1de3}, \ref{fig:2de3} y \ref{fig:3de3}.
+ 
+\begin{figure}[htp]
+     \centering
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=.7\textwidth]{./Figures/questionMark}
+         \caption{Un caption.}
+         \label{fig:1de3}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=.7\textwidth]{./Figures/questionMark}
+         \caption{Otro.}
+         \label{fig:2de3}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=.7\textwidth]{./Figures/questionMark}
+         \caption{Y otro más.}
+         \label{fig:3de3}
+     \end{subfigure}
+        \caption{Tres gráficos simples}
+        \label{fig:three graphs}
+\end{figure}
+
+El código para generar las imágenes se encuentra disponible para su reutilización en el archivo \file{Chapter2.tex}.
 
 \subsection{Tablas}
 
@@ -95,9 +144,9 @@ Para las tablas utilizar el mismo formato que para las figuras, sólo que el ep�
 		\toprule
 		\textbf{Especie}       & \textbf{Tamaño}  & \textbf{Valor aprox.}\\
 		\midrule
-		Amphiprion Ocellaris	  & 10 cm 			& \$ 6.000 \\		
-		Hepatus Blue Tang      & 15 cm			 & \$ 7.000 \\
-		Zebrasoma Xanthurus    & 12 cm			 & \$ 6.800 \\
+		Amphiprion Ocellaris   & 10 cm			& \$ 6.000 \\		
+		Hepatus Blue Tang      & 15 cm			& \$ 7.000 \\
+		Zebrasoma Xanthurus    & 12 cm			& \$ 6.800 \\
 		\bottomrule
 		\hline
 	\end{tabular}
@@ -110,9 +159,9 @@ Para las tablas utilizar el mismo formato que para las figuras, sólo que el ep�
 	\caption[caption corto]{caption largo más descriptivo}
 	\begin{tabular}{l c c}    
 		\toprule
-		\textbf{Especie} 	 & \textbf{Tamaño}  & \textbf{Valor aprox.}  \\
+		\textbf{Especie} 	 & \textbf{Tamaño} 		& \textbf{Valor aprox.}  \\
 		\midrule
-		Amphiprion Ocellaris	 & 10 cm 			& \$ 6.000 \\		
+		Amphiprion Ocellaris & 10 cm 				& \$ 6.000 \\		
 		Hepatus Blue Tang	 & 15 cm				& \$ 7.000 \\
 		Zebrasoma Xanthurus	 & 12 cm				& \$ 6.800 \\
 		\bottomrule
@@ -126,21 +175,19 @@ En cada capítulo se debe reiniciar el número de conteo de las figuras y las ta
 \subsection{Ecuaciones}
 \label{sec:Ecuaciones}
 
-Al insertar ecuaciones en la memoria estas se deben numerar de la siguiente forma:
+Al insertar ecuaciones en la memoria dentro de un entorno \textit{equation}, éstas se numeran en forma automática  y se pueden referir al igual que como se hace con las figuras y tablas, por ejemplo ver la ecuación \ref{eq:metric}.
 
 \begin{equation}
 	\label{eq:metric}
 	ds^2 = c^2 dt^2 \left( \frac{d\sigma^2}{1-k\sigma^2} + \sigma^2\left[ d\theta^2 + \sin^2\theta d\phi^2 \right] \right)
 \end{equation}
                                                         
-Es importante tener presente que en el caso de las ecuaciones estas pueden ser referidas por su número, como por ejemplo ``tal como describe la ecuación \ref{eq:metric}'', pero también es correcto utilizar los dos puntos, como por ejemplo ``la expresión matemática que describe este comportamiento es la siguiente:''
+Es importante tener presente que si bien las ecuaciones pueden ser referidas por su número, también es correcto utilizar los dos puntos, como por ejemplo ``la expresión matemática que describe este comportamiento es la siguiente:''
 
 \begin{equation}
 	\label{eq:schrodinger}
 	\frac{\hbar^2}{2m}\nabla^2\Psi + V(\mathbf{r})\Psi = -i\hbar \frac{\partial\Psi}{\partial t}
 \end{equation}
-
-Para las ecuaciones se debe utilizar un tamaño de letra equivalente al utilizado para el texto del trabajo, en tipografía cursiva y preferentemente del tipo Times New Roman o similar. El espaciado antes y después de cada ecuación es de aproximadamente el doble que entre párrafos consecutivos del cuerpo principal del texto. Por suerte la plantilla se encarga de esto por nosotros.
 
 Para generar la ecuación \ref{eq:metric} se utilizó el siguiente código:
 
