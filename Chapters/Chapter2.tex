@@ -5,7 +5,7 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-La idea de esta sección es presentar el tema de modo que cualquier persona que no conoce el tema pueda entender de qué se trata y por qué es importante realizar este trabajo y cuál es su impacto.
+La idea de esta sección es presentar aspectos del proyecto de modo que cualquier persona que no conozca el tema pueda entender de qué se trata y por qué es importante realizar este trabajo y cuál es su impacto.
 \section{Estilo y convenciones}
 \label{sec:ejemplo}
 
@@ -13,7 +13,7 @@ La idea de esta sección es presentar el tema de modo que cualquier persona que 
 
 Si en el texto se hace alusión a diferentes partes del trabajo referirse a ellas como capítulo, sección o subsección según corresponda. Por ejemplo: ``En el capítulo \ref{Chapter1} se explica tal cosa'', o ``En la sección \ref{sec:ejemplo} se presenta lo que sea'', o ``En la subsección \ref{subsec:ejemplo} se discute otra cosa''.
 
-Entre párrafos sucesivos dejar un espacio, como el que se observa entre este párrafo y el anterior. Pero las oraciones de un mismo párrafo van en forma consecutiva, como se observa acá. Luego, cuando se quiere poner una lista tabulada se hace así:
+Cuando se quiere poner una lista tabulada, se hace así:
 
 \begin{itemize}
 	\item Este es el primer elemento de la lista.
@@ -34,9 +34,13 @@ Notar el uso de las mayúsculas y el punto al final de cada elemento.
 \subsection{Este es el título de una subsección}
 \label{subsec:ejemplo}
 
-Se recomienda no utilizar \textbf{texto en negritas} en ningún párrafo, ni tampoco texto \underline{subrayado}. En cambio sí se sugiere utilizar \textit{texto en cursiva} donde se considere apropiado.
+Se recomienda no utilizar \textbf{texto en negritas} en ningún párrafo, ni tampoco texto \underline{subrayado}. En cambio sí se debe utilizar \textit{texto en cursiva} para palabras en un idioma extranjero, al menos la primera vez que aparecen en el texto. En el caso de palabras que estamos inventando se deben utilizar ``comillas''. Por ejemplo, un \textit{digital filter} es una especie de ``selector'' que permite separar ciertos componentes armónicos en partícular..
 
-Se sugiere que la escritura sea impersonal. Por ejemplo, no utilizar ``el diseño del firmware lo hice de acuerdo con tal principio'', sino ``el firmware fue diseñado utilizando tal principio''. En lo posible hablar en tiempo pasado, ya que la memoria describe un trabajo que ya fue realizado.
+La escritura debe ser impersonal. Por ejemplo, no utilizar ``el diseño del firmware lo hice de acuerdo con tal principio'', sino ``el firmware fue diseñado utilizando tal principio''. 
+
+El trabajo es algo que al momento de escribir la memoria se supone que ya está concluido, entonces todo lo que se refiera a hacer el trabajo se narra en tiempo pasado, porque es algo que ya ocurrió. Por ejemplo, "se diseñó el firmware empleando la técnica de test driven development".
+
+En cambio la memoria es algo que está vivo cada vez que el lector la lee. Por eso transcurre siempre en tiempo presente, como por ejemplo "En el presente capítulo se da una visión global sobre las distintas pruebas realizadas y los resultados obtenidos. Se explica el modo en que fueron llevados a cabo los test unitarios y las pruebas del sistema"
 
 Se recomienda no utilizar una sección de glosario sino colocar la descripción de las abreviaturas como parte del mismo cuerpo del texto. Por ejemplo, RTOS (\textit{Real Time Operating System}, Sistema Operativo de Tiempo Real) o en caso de considerarlo apropiado mediante notas a pie de página.
 
@@ -48,14 +52,14 @@ Al insertar figuras en la memoria se deben considerar determinadas pautas. Para 
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=.35]{./Figures/cuadradoAzul.png}
+\includegraphics[scale=.3]{./Figures/cuadradoAzul.png}
 \end{figure}
 
-La forma correcta de utilizar una figura es la siguiente: ``Se eligió utilizar un cuadrado azul para el logo, el cual se ilustra en la figura \ref{fig:cuadradoAzul}''.
+La forma correcta de utilizar una figura es la siguiente: ``Se eligió utilizar un cuadrado azul para el logo, como puede observarse en la figura \ref{fig:cuadradoAzul}''.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.35]{./Figures/cuadradoAzul.png}
+	\includegraphics[scale=.3]{./Figures/cuadradoAzul.png}
 	\caption{Ilustración del cuadrado azul que se eligió para el diseño del logo.}
 	\label{fig:cuadradoAzul}
 \end{figure}
@@ -76,7 +80,7 @@ La figura y el epígrafe deben conformar una unidad cuyo significado principal p
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.4]{./Figures/questionMark.png}
+	\includegraphics[scale=.37]{./Figures/questionMark.png}
 	\caption{Por qué de pronto aparece esta figura?.}
 	\label{fig:questionMark}
 \end{figure}
@@ -89,14 +93,14 @@ En la figura \ref{fig:izquierda} y \ref{fig:derecha} se presenta un ejemplo de c
   \centering
   \begin{minipage}[b]{0.47\textwidth}
     \centering
-     \includegraphics[width=.5\textwidth]{./Figures/questionMark.png}
+     \includegraphics[width=.45\textwidth]{./Figures/questionMark.png}
 	\caption{Una imagen a la izquierda.}
 	\label{fig:izquierda}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.47\textwidth}
     \centering
-     \includegraphics[width=.5\textwidth]{./Figures/questionMark.png}
+     \includegraphics[width=.45\textwidth]{./Figures/questionMark.png}
 	\caption{Una imagen a la derecha.}
 	\label{fig:derecha}
   \end{minipage}
@@ -104,25 +108,25 @@ En la figura \ref{fig:izquierda} y \ref{fig:derecha} se presenta un ejemplo de c
 
 Otra posibilidad es utilizar el entorno \textit{subfigure} para incluir más de una figura, como se puede ver en la figura \ref{fig:three graphs}. Notar que se pueden referenciar también las figuras internas individualmente de esta manera: \ref{fig:1de3}, \ref{fig:2de3} y \ref{fig:3de3}.
  
-\begin{figure}[htp]
+\begin{figure}[!htpb]
      \centering
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[width=.7\textwidth]{./Figures/questionMark}
+         \includegraphics[width=.65\textwidth]{./Figures/questionMark}
          \caption{Un caption.}
          \label{fig:1de3}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[width=.7\textwidth]{./Figures/questionMark}
+         \includegraphics[width=.65\textwidth]{./Figures/questionMark}
          \caption{Otro.}
          \label{fig:2de3}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[width=.7\textwidth]{./Figures/questionMark}
+         \includegraphics[width=.65\textwidth]{./Figures/questionMark}
          \caption{Y otro más.}
          \label{fig:3de3}
      \end{subfigure}
