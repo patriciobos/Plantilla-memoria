@@ -166,7 +166,7 @@ En el menú herramientas se encuentran las opciones de compilación.  Para produ
 
 Notar que para actualizar las tablas de contenidos se debe ejecutar PDFLaTeX dos veces.  Esto se debe a que es necesario actualizar algunos archivos auxiliares antes de obtener el resultado final.  En forma similar, para actualizar las referecias se debe ejecutar primero PDFLaTeX, después BibTeX y finalmente PDFLaTeX dos veces por idénticos motivos.
 
-\section{Personalizando la plantilla en el archivo \file{memoria.tex}}
+\section{Personalizando la plantilla, el archivo \file{memoria.tex}}
 \label{sec:FillingFile}
 
 Para personalizar la plantilla se debe incorporar la información propia en los distintos archivos \file{.tex}. 
@@ -209,7 +209,7 @@ El archivo \file{memoria.tex} se encuentra densamente comentado para explicar qu
 
 El índice de contenidos, las listas de figura de tablas se generan en forma automática y no requieren intervención ni edición manual por parte del usuario de la plantilla. 
 
-En la parte final del documento se encuentra el bloque donde se incluyen los capítulos y los apéndices.  Por defecto se incluyen los 5 capítulos propuestos que se encuentran en la carpeta /Chapters. Cada capítulo se debe escribir en un archivo .tex separado y se debe poner en la carpeta \emph{Chapters} con el nombre \file{Chapter1}, \file{Chapter2}, etc\ldots El código para incluir capítulos desde archivos externos se muestra a continuación.
+En la parte final del documento se encuentran los capítulos y los apéndices.  Por defecto se incluyen los 5 capítulos propuestos que se encuentran en la carpeta /Chapters. Cada capítulo se debe escribir en un archivo .tex separado y se debe poner en la carpeta \emph{Chapters} con el nombre \file{Chapter1}, \file{Chapter2}, etc\ldots El código para incluir capítulos desde archivos externos se muestra a continuación.
 
 \begin{verbatim}
 	\include{Chapters/Chapter1}
@@ -227,10 +227,9 @@ Finalmente, se encuentra el código para incluir la bibliografía en el document
 \section{Bibliografía}
 \label{sec:biblio}
 
-
 Las opciones de formato de la bibliografía se controlan a través del paquete de latex \option{biblatex} que se incluye en la memoria en el archivo memoria.tex.  Estas opciones determinan cómo se generan las citas bibliográficas en el cuerpo del documento y cómo se genera la biblografía al final de la memoria.
 
-En el preámbulo se puede encontrar la línea código que incluye el paquete biblatex, que no requiere ninguna modificación del usuario de la plantilla, y que contiene las siguientes opciones:
+En el preámbulo se puede encontrar el código que incluye el paquete biblatex, que no requiere ninguna modificación del usuario de la plantilla, y que contiene las siguientes opciones:
 
 \begin{lstlisting}
 \usepackage[backend=bibtex,
