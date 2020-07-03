@@ -178,7 +178,7 @@
 \RequirePackage{palatino} % Use the Palatino font by default
 \RequirePackage[backend=bibtex,natbib=true, style=numeric, sorting=none]{biblatex} % Use the bibtex backend for bibliography
 \RequirePackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
-\RequirePackage{color}
+\RequirePackage{xcolor}
 \RequirePackage{subcaption}
 
 \addbibresource{references.bib} % The filename of the bibliography
@@ -195,9 +195,20 @@
     pdftitle = {\@title},
     pdfauthor = {\authorname},
     pdfkeywords={\keywordnames},
-    pdfsubject={\subjectname}
+    pdfsubject={\subjectname}%,
+%    colorlinks,
+%    linkcolor={red!50!black},
+%    citecolor={blue!50!black},
+%    urlcolor={blue!80!black}
   }
 }
+
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+  }
 %\makeatother
 
 %----------------------------------------------------------------------------------------
