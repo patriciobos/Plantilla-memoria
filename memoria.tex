@@ -40,48 +40,6 @@ headsepline, % Uncomment to get a line under the header
 
 
 
-\usepackage[utf8]{inputenc} % Required for inputting international characters
-\usepackage[T1]{fontenc} % Output font encoding for international characters
-
-\usepackage{palatino} % Use the Palatino font by default
-
-\usepackage[backend=bibtex,natbib=true, style=numeric, sorting=none]{biblatex} % Use the bibtex backend for bibliography
-
-\addbibresource{references.bib} % The filename of the bibliography
-
-\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
-
-\usepackage{caption}
-\usepackage{subcaption}
-
-%------------------------
-\usepackage{listings}
-
-%\usepackage[hyphens]{url}
-%\usepackage[hidelinks]{hyperref}
-%\hypersetup{breaklinks=true}
-\urlstyle{same}
-%\usepackage{cite}
-\hyphenation{biblatex}
-%--------------------------
-
-\usepackage{color}
-
-%
-%----------------------------------------------------------------------------------------
-%	MARGIN SETTINGS
-%----------------------------------------------------------------------------------------
-
-\geometry{
-	paper=a4paper, % Change to letterpaper for US letter
-	inner=2cm, % Inner margin
-	outer=3.3cm, % Outer margin
-	bindingoffset=2cm, % Binding offset
-	top=1.5cm, % Top margin
-	bottom=1.5cm, % Bottom margin
-	%showframe,% show how the type block is set on the page
-}
-
 %----------------------------------------------------------------------------------------
 %	INFORMACIÓN DE LA MEMORIA
 %----------------------------------------------------------------------------------------
@@ -104,21 +62,21 @@ headsepline, % Uncomment to get a line under the header
 \group{{Laboratorio de Sistemas Embebidos}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
 
 
-\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
-\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
-\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+%\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+%\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+%\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
 
 
-\newcaptionname{spanish}{\acknowledgementname}{Agradecimientos}
-\newcaptionname{spanish}{\authorshipname}{Declaración de Autoría}
-\newcaptionname{spanish}{\abbrevname}{Glosario}
-\newcaptionname{spanish}{\byname}{por}
-
-\renewcommand{\lstlistingname}{Algoritmo}% Listing -> Algorithm
-\renewcommand{\lstlistlistingname}{Índice de \lstlistingname s}% List of Listings -> List of Algorithms
-
-\renewcommand{\listtablename}{Índice de Tablas}
-\renewcommand{\tablename}{Tabla} 
+%\newcaptionname{spanish}{\acknowledgementname}{Agradecimientos}
+%\newcaptionname{spanish}{\authorshipname}{Declaración de Autoría}
+%\newcaptionname{spanish}{\abbrevname}{Glosario}
+%\newcaptionname{spanish}{\byname}{por}
+%
+%\renewcommand{\lstlistingname}{Código}% Listing -> Algorithm
+%\renewcommand{\lstlistlistingname}{Índice de \lstlistingname s}% List of Listings -> List of Algorithms
+%
+%\renewcommand{\listtablename}{Índice de Tablas}
+%\renewcommand{\tablename}{Tabla} 
 
 \addtolength{\footnotesep}{2mm} % Espacio adicional en los footnotes
 
@@ -200,12 +158,12 @@ Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONA
 %----------------------------------------------------------------------------------------
 %	LISTA DE CONTENIDOS/FIGURAS/TABLAS
 %----------------------------------------------------------------------------------------
-\renewcommand{\listtablename}{Índice de Tablas}
+\renewcommand{\listtablename}{Índice de Tablas} %TODO eliminar esta línea
 
 \tableofcontents % Prints the main table of contents
-
+%
 \listoffigures % Prints the list of figures
-
+%
 \listoftables % Prints the list of tables
 
 
@@ -223,7 +181,7 @@ Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONA
 
 \pagestyle{thesis} % Return the page headers back to the "thesis" style
 
-\renewcommand{\tablename}{Tabla} 
+%\renewcommand{\tablename}{Tabla} %TODO eliminar esta línea
 
 % Incluir los capítulos como archivos separados desde la carpeta Chapters
 % Descomentar las líneas a medida que se escriben los capítulos
