@@ -492,7 +492,7 @@ breaklinks=true,
 \newcaptionname{spanish}{\byname}{por}
 
 \addto\captionsspanish{%
-	\renewcommand{\listtablename}{\'{I}ndice de Tablas}
+	\renewcommand{\listtablename}{\'{I}ndice de tablas}
 	\renewcommand{\tablename}{Tabla} 
 }
 
