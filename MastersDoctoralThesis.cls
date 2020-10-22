@@ -191,6 +191,7 @@
 
 \def\@title{Memoria técnica de proyecto de Trabajo Final} %TODO ver si se puede agregar el campo con el nombre del autor acá
 
+%TODO Revisar colores de los hipervinculos
 
 \AtBeginDocument{
   \hypersetup{
@@ -198,11 +199,17 @@
     pdfauthor = {\authorname},
     pdfkeywords={\keywordnames},
     pdfsubject={\subjectname}%,
-    colorlinks,
-    linkcolor={red!50!black},
-    citecolor={blue!50!black},
-    urlcolor={blue!80!black}
+    colorlinks=true, % Set to false to disable coloring links
+citecolor=blue, % The color of citations
+linkcolor=black, % The color of references to document elements (sections, figures, etc)
+urlcolor=blue, % The color of hyperlinks (URLs)
+%    colorlinks,
+%    linkcolor={red!50!black},
+%    citecolor={blue!50!black},
+%    urlcolor={blue!80!black},
+    hidelinks
   }
+
 	\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 	\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 	\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -432,10 +439,10 @@ KOMA-script documentation for details.}]{fancyhdr}
 bookmarksopen=true,
 bookmarksopenlevel=0,
 hypertexnames=false,
-%colorlinks=true, % Set to false to disable coloring links
-%citecolor=blue, % The color of citations
-%linkcolor=black, % The color of references to document elements (sections, figures, etc)
-%urlcolor=blue, % The color of hyperlinks (URLs)
+colorlinks=true, % Set to false to disable coloring links
+citecolor=blue, % The color of citations
+linkcolor=black, % The color of references to document elements (sections, figures, etc)
+urlcolor=blue, % The color of hyperlinks (URLs)
 pdfstartview={FitV},
 unicode,
 breaklinks=true,
