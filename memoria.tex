@@ -1,17 +1,4 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Masters/Doctoral Thesis 
-% LaTeX Template
-% Version 2.3 (25/3/16)
-%
-% This template has been downloaded from:
-% http://www.LaTeXTemplates.com
-%
-% Version 2.x major modifications by:
-% Vel (vel@latextemplates.com)
-%
-% This template is based on a template by:
-% Steve Gunn (http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/)
-% Sunil Patel (http://www.sunilpatel.co.uk/thesis-template/)
 %
 % Template license:
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
@@ -34,7 +21,7 @@ singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespac
 %liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
 %toctotoc, % Uncomment to add the main table of contents to the table of contents
 parskip, % Uncomment to add space between paragraphs
-%nohyperref, % Uncomment to not load the hyperref package
+nohyperref, % Uncomment to not load the hyperref package
 headsepline, % Uncomment to get a line under the header
 ]{MastersDoctoralThesis} % The class file specifying the document structure
 
@@ -45,7 +32,16 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 
 \thesistitle{Título del trabajo} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\degree{Especialista en Sistemas Embebidos } % Nombre del grado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
+
+% Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
+\posgrado{Carrera de Especialización en Sistemas Embebidos} 
+%\posgrado{Carrera de Especialización en Internet de las Cosas} 
+%\posgrado{Carrera de Especialización en Intelegencia Artificial}
+%\posgrado{Maestría en Sistemas Embebidos} 
+%\posgrado{Maestría en Internet de las cosas}
+
+%\degree{Especialista en Sistemas Embebidos } % Nombre del grado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
+
 \author{Nombre del Autor} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
 \supervisor{Nombre del Director (pertenencia)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \supname
 \juradoUNO{Nombre del jurado 1 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
@@ -62,22 +58,6 @@ headsepline, % Uncomment to get a line under the header
 \group{{Laboratorio de Sistemas Embebidos}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
 
 
-%\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
-%\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
-%\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
-
-
-%\newcaptionname{spanish}{\acknowledgementname}{Agradecimientos}
-%\newcaptionname{spanish}{\authorshipname}{Declaración de Autoría}
-%\newcaptionname{spanish}{\abbrevname}{Glosario}
-%\newcaptionname{spanish}{\byname}{por}
-%
-%\renewcommand{\lstlistingname}{Código}% Listing -> Algorithm
-%\renewcommand{\lstlistlistingname}{Índice de \lstlistingname s}% List of Listings -> List of Algorithms
-%
-%\renewcommand{\listtablename}{Índice de Tablas}
-%\renewcommand{\tablename}{Tabla} 
-
 \addtolength{\footnotesep}{2mm} % Espacio adicional en los footnotes
 
 \begin{document}
@@ -85,48 +65,6 @@ headsepline, % Uncomment to get a line under the header
 \frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
 
 \pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
-
-%----------------------------------------------------------------------------------------
-%	CARÁTULA
-%----------------------------------------------------------------------------------------
-
-\begin{titlepage}
-\begin{center}
-
-
-\includegraphics[width=.8\textwidth]{./Figures/logoFIUBA.png}
-\vspace{2cm}
-
-\textsc{\huge{Carrera de Especialización en\\ \vspace{5px} Sistemas Embebidos}}
-\vspace{.5cm} % Thesis type
-
-\textsc{\Large Memoria del Trabajo Final}\\[1cm] % Thesis type
-%\vspace{1.5cm}
-{\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
-
-\vfill
-
-\vspace{2cm}
-\LARGE\textbf{Autor:\\
-\authorname}\\ % Author name
-
-\vspace{1.5cm}
-
-\large
-{Director:} \\
-{\supname} % Supervisor name
- 
-\vspace{1cm}
-Jurados:\\	
-\jurunoname\\
-\jurdosname\\
-\jurtresname
-
-\vspace{2cm}
-
-\textit{Este trabajo fue realizado en las Ciudad Autónoma de Buenos Aires,\\ entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
-\end{center}
-\end{titlepage}
 
 
 %----------------------------------------------------------------------------------------

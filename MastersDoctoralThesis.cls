@@ -189,27 +189,27 @@
 
 \RequirePackage{hyperref}
 
-%\makeatletter
+\def\@title{Memoria técnica de proyecto de Trabajo Final} %TODO ver si se puede agregar el campo con el nombre del autor acá
+
+
 \AtBeginDocument{
   \hypersetup{
     pdftitle = {\@title},
     pdfauthor = {\authorname},
     pdfkeywords={\keywordnames},
     pdfsubject={\subjectname}%,
-%    colorlinks,
-%    linkcolor={red!50!black},
-%    citecolor={blue!50!black},
-%    urlcolor={blue!80!black}
-  }
-}
-
-\hypersetup{
     colorlinks,
-    linkcolor={black},
+    linkcolor={red!50!black},
     citecolor={blue!50!black},
     urlcolor={blue!80!black}
   }
-%\makeatother
+	\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+	\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+	\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+	
+}
+
+
 
 %----------------------------------------------------------------------------------------
 
@@ -308,7 +308,8 @@ KOMA-script documentation for details.}]{fancyhdr}
 \newcommand*{\supervisor}[1]{\def\supname{#1}}
 \newcommand*{\thesistitle}[1]{\def\@title{#1}\def\ttitle{#1}}
 \newcommand*{\examiner}[1]{\def\examname{#1}}
-\newcommand*{\degree}[1]{\def\degreename{#1}}
+\newcommand*{\posgrado}[1]{\def\degreename{#1}}
+%\newcommand*{\degree}[1]{\def\degreename{#1}}
 \renewcommand*{\author}[1]{\def\authorname{#1}}
 \newcommand*{\addresses}[1]{\def\addressname{#1}}
 \newcommand*{\university}[1]{\def\univname{#1}}
@@ -324,21 +325,6 @@ KOMA-script documentation for details.}]{fancyhdr}
 \newcommand*{\fechaINICIO}[1]{\def\fechaINICIOname{#1}}
 \newcommand*{\fechaFINAL}[1]{\def\fechaFINALname{#1}}
 
-%----------------------------------------------------------------------------------------
-%	DECLARATION PAGE DESIGN
-%----------------------------------------------------------------------------------------
-
-\newcommand{\authorshipname}{Declaration of Authorship}
-\providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\authorshipname}{Declaration of Authorship} % Declaration of Authorship text for English countries
-\providecaptionname{german,ngerman,austrian,naustrian}{\authorshipname}{Eidesstattliche Erkl\"arung} % Declaration of Authorship text for Germanic countries
-
-\newenvironment{declaration}{
-	\checktoopen
-	\tttypeout{\authorshipname}
-	\thispagestyle{plain}
-	\null\vfil
-	{\noindent\huge\bfseries\authorshipname\par\vspace{10pt}}
-}{}
 
 %----------------------------------------------------------------------------------------
 %	DEDICATION PAGE DESIGN
@@ -354,30 +340,63 @@ KOMA-script documentation for details.}]{fancyhdr}
 }
 
 %----------------------------------------------------------------------------------------
+%	 PORTADA
+%----------------------------------------------------------------------------------------
+
+\AtBeginDocument{
+	\begin{titlepage}
+	\begin{center}
+	
+	
+	\includegraphics[width=.8\textwidth]{./Figures/logoFIUBA.png}
+	\vspace{2cm}
+	
+
+	\textsc{\huge{\degreename}}
+	\vspace{.5cm} 
+	
+	\textsc{\Large Memoria del Trabajo Final}\\[1cm] 
+	
+	{\huge \bfseries \ttitle\par}\vspace{0.4cm} 
+	\vfill
+	
+	\vspace{2cm}
+	\LARGE\textbf{Autor:\\
+	\authorname}\\ % Author name
+	
+	\vspace{1.5cm}
+	
+	\large
+	{Director:} \\
+	{\supname} % Supervisor name
+	 
+	\vspace{1cm}
+	Jurados:\\	
+	\jurunoname\\
+	\jurdosname\\
+	\jurtresname
+	
+	\vspace{2cm}
+	
+	\textit{Este trabajo fue realizado en las Ciudad Autónoma de Buenos Aires,\\ entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
+	\end{center}
+	\end{titlepage}
+}
+
+
+
+%----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE DESIGN
 %----------------------------------------------------------------------------------------
 
-\newcommand{\byname}{by}
-\providecaptionname{german,ngerman,austrian,naustrian}{\byname}{von}
-\providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{by}
 \newenvironment{abstract}{
 	\checktoopen
 	\tttypeout{\abstractname}
 	\null\vfil
 	\thispagestyle{plain}
 	\begin{center}
-	%{\normalsize \MakeUppercase{\univname} \par} % University name in capitals
-	%\bigskip
 	{\huge\textit{\abstractname} \par}
 	\bigskip
-	%{\normalsize \facname \par} % Faculty name
-	%{\normalsize \deptname \par} % Department name
-	%\bigskip
-%	{\normalsize \degreename\par} % Degree name
-	%\bigskip
-	%{\normalsize\bfseries \@title \par} % Thesis title
-	%\medskip
-	%{\normalsize \byname{} \authorname \par} % Author name
 	\bigskip
 	\end{center}
 }
@@ -385,58 +404,6 @@ KOMA-script documentation for details.}]{fancyhdr}
   \vfil\vfil\vfil\null
 }
 
-%----------------------------------------------------------------------------------------
-%	ABBREVIATIONS PAGE DESIGN
-%----------------------------------------------------------------------------------------
-
-\newcommand{\abbrevname}{List of Abbreviations}
-\providecaptionname{english,british,american}{\abbrevname}{List of Abbreviations}
-\providecaptionname{ngerman,german,austrian,naustrian}{\abbrevname}{Abk\"urzungsverzeichnis}
-\NewDocumentEnvironment{abbreviations}{ m }{%
-	\ifbool{nolistspace}{\begingroup\singlespacing}{}
-	\ifbool{listtoc}{\addchap{\abbrevname}}{\addchap*{\abbrevname}}
-	\begin{longtable}{#1}
-}{%
-\end{longtable}
-\addtocounter{table}{-1} % Don't count this table as one of the document tables
-\ifbool{nolistspace}{\endgroup}{}
-}
-
-%----------------------------------------------------------------------------------------
-%	PHYSICAL CONSTANTS PAGE DESIGN
-%----------------------------------------------------------------------------------------
-
-\newcommand{\constantsname}{Physical Constants}
-\providecaptionname{english,british,american}{\constantsname}{Physical Constants}
-\providecaptionname{ngerman,german,austrian,naustrian}{\constantsname}{Physikalische Konstanten}
-
-\NewDocumentEnvironment{constants}{ m }{%
-	\ifbool{nolistspace}{\begingroup\singlespacing}{}
-	\ifbool{listtoc}{\addchap{\constantsname}}{\addchap*{\constantsname}}
-	\begin{longtable}{#1}
-}{%
-\end{longtable}
-\addtocounter{table}{-1} % Don't count this table as one of the document tables
-\ifbool{nolistspace}{\endgroup}{}
-}
-
-%----------------------------------------------------------------------------------------
-%	SYMBOLS PAGE DESIGN
-%----------------------------------------------------------------------------------------
-
-\newcommand{\symbolsname}{List of Symbols}
-\providecaptionname{english,british,american}{\symbolsname}{List of Symbols}
-\providecaptionname{ngerman,german,austrian,naustrian}{\symbolsname}{Symbolverzeichnis}
-
-\NewDocumentEnvironment{symbols}{ m }{%
-	\ifbool{nolistspace}{\begingroup\singlespacing}{}
-	\ifbool{listtoc}{\addchap{\symbolsname}}{\addchap*{\symbolsname}}
-	\begin{longtable}{#1}
-}{%
-\end{longtable}
-\addtocounter{table}{-1} % Don't count this table as one of the document tables
-\ifbool{nolistspace}{\endgroup}{}
-}
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS PAGE DESIGN
@@ -465,10 +432,10 @@ KOMA-script documentation for details.}]{fancyhdr}
 bookmarksopen=true,
 bookmarksopenlevel=0,
 hypertexnames=false,
-colorlinks=true, % Set to false to disable coloring links
-citecolor=blue, % The color of citations
-linkcolor=black, % The color of references to document elements (sections, figures, etc)
-urlcolor=blue, % The color of hyperlinks (URLs)
+%colorlinks=true, % Set to false to disable coloring links
+%citecolor=blue, % The color of citations
+%linkcolor=black, % The color of references to document elements (sections, figures, etc)
+%urlcolor=blue, % The color of hyperlinks (URLs)
 pdfstartview={FitV},
 unicode,
 breaklinks=true,
@@ -492,7 +459,7 @@ breaklinks=true,
 \newcaptionname{spanish}{\byname}{por}
 
 \addto\captionsspanish{%
-	\renewcommand{\listtablename}{\'{I}ndice de Tablas}
+	\renewcommand{\listtablename}{\'{I}ndice de tablas}
 	\renewcommand{\tablename}{Tabla} 
 }
 
