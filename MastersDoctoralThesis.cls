@@ -172,6 +172,45 @@
 \RequirePackage{caption} % Required for customising the captions
 \captionsetup{justification=centerlast,font=small,labelfont=sc,margin=50pt}
 
+\RequirePackage{listings}
+\RequirePackage[utf8]{inputenc} % Required for inputting international characters
+\RequirePackage[T1]{fontenc} % Output font encoding for international characters
+\RequirePackage{palatino} % Use the Palatino font by default
+\RequirePackage[backend=bibtex,natbib=true, style=numeric, sorting=none]{biblatex} % Use the bibtex backend for bibliography
+\RequirePackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\RequirePackage{xcolor}
+\RequirePackage{subcaption}
+
+\addbibresource{references.bib} % The filename of the bibliography
+
+\urlstyle{same}
+\hyphenation{biblatex}
+
+
+\RequirePackage{hyperref}
+
+%\makeatletter
+\AtBeginDocument{
+  \hypersetup{
+    pdftitle = {\@title},
+    pdfauthor = {\authorname},
+    pdfkeywords={\keywordnames},
+    pdfsubject={\subjectname}%,
+%    colorlinks,
+%    linkcolor={red!50!black},
+%    citecolor={blue!50!black},
+%    urlcolor={blue!80!black}
+  }
+}
+
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+  }
+%\makeatother
+
 %----------------------------------------------------------------------------------------
 
 \newcommand{\checktoopen}{% New command to move content to the next page which prints to the next odd page if twosided mode is active  
@@ -200,7 +239,13 @@
 \geometry{
 	headheight=4ex,
 	includehead,
-	includefoot
+	includefoot,
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2cm, % Inner margin
+	outer=3.3cm, % Outer margin
+	bindingoffset=2cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm % Bottom margin
 }
 
 \raggedbottom
@@ -252,6 +297,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \thispagestyle{\blank@p@gestyle}
 \newpage
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
 
 %----------------------------------------------------------------------------------------
 %	DEFINE CUSTOM THESIS INFORMATION COMMANDS
@@ -436,6 +482,29 @@ breaklinks=true,
 }
 
 %----------------------------------------------------------------------------------------
+%	DEFINE NEW CAPTION NAMES
+%----------------------------------------------------------------------------------------
+
+\newcaptionname{spanish}{\lstlistingname}{C\'{o}digo}      %Listing
+\newcaptionname{spanish}{\acknowledgementname}{Agradecimientos}
+\newcaptionname{spanish}{\authorshipname}{Declaración de Autoría}
+\newcaptionname{spanish}{\abbrevname}{Glosario}
+\newcaptionname{spanish}{\byname}{por}
+
+\addto\captionsspanish{%
+	\renewcommand{\listtablename}{\'{I}ndice de Tablas}
+	\renewcommand{\tablename}{Tabla} 
+}
+
+\captionsetup[figure]{labelformat=simple, labelsep=period}
+\captionsetup[table]{labelformat=simple, labelsep=period}
+\captionsetup[lstlisting]{labelformat=simple, labelsep=period}
+
+%----------------------------------------------------------------------------------------
 
 \endinput
 % lazyLizardTracer
+
+
+
+
