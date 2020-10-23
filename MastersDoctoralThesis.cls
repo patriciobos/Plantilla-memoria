@@ -33,15 +33,15 @@
 \RequirePackage{etoolbox}
 \RequirePackage{xparse}
 \newbool{nolistspace}
+\newbool{codirector}
+%\booltrue{codirector}
 \newbool{chapteroneline}
 \newbool{listtoc}
 \newbool{toctoc}
 \newbool{parskip}
-\newbool{hyperrefsupport}
-\booltrue{hyperrefsupport}
 \newbool{headsepline}
 
-\DeclareOption{nohyperref}{\boolfalse{hyperrefsupport}}
+\DeclareOption{codirector}{\booltrue{codirector}}
 \DeclareOption{nolistspacing}{\booltrue{nolistspace}}
 \DeclareOption{liststotoc}{\booltrue{listtoc}}
 \DeclareOption{chapterinoneline}{\booltrue{chapteroneline}}
@@ -149,6 +149,32 @@
 }%
 
 %----------------------------------------------------------------------------------------
+%	DEFINE CUSTOM THESIS INFORMATION COMMANDS
+%----------------------------------------------------------------------------------------
+
+\def\authorname{}
+\def\ttitle{}
+\newcommand*{\director}[1]{\def\dirname{#1}}
+\newcommand*{\codirector}[1]{\def\codirname{#1}}
+\newcommand*{\thesistitle}[1]{\def\@title{#1}\def\ttitle{#1}}
+\newcommand*{\examiner}[1]{\def\examname{#1}}
+\newcommand*{\posgrado}[1]{\def\degreename{#1}}
+\renewcommand*{\author}[1]{\def\authorname{#1}}
+\newcommand*{\addresses}[1]{\def\addressname{#1}}
+\newcommand*{\university}[1]{\def\univname{#1}}
+\newcommand*{\department}[1]{\def\deptname{#1}}
+\newcommand*{\group}[1]{\def\groupname{#1}}
+\newcommand*{\faculty}[1]{\def\facname{#1}}
+\newcommand*{\subject}[1]{\def\subjectname{#1}}
+\newcommand*{\keywords}[1]{\def\keywordnames{#1}}
+%comandos para CESE
+\newcommand*{\juradoUNO}[1]{\def\jurunoname{#1}}
+\newcommand*{\juradoDOS}[1]{\def\jurdosname{#1}}
+\newcommand*{\juradoTRES}[1]{\def\jurtresname{#1}}
+\newcommand*{\fechaINICIO}[1]{\def\fechaINICIOname{#1}}
+\newcommand*{\fechaFINAL}[1]{\def\fechaFINALname{#1}}
+
+%----------------------------------------------------------------------------------------
 %	REQUIRED PACKAGES
 %----------------------------------------------------------------------------------------
 
@@ -186,37 +212,33 @@
 \urlstyle{same}
 \hyphenation{biblatex}
 
+\RequirePackage[
+	colorlinks = true,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}]{hyperref}
 
-\RequirePackage{hyperref}
 
-\def\@title{Memoria técnica de proyecto de Trabajo Final} %TODO ver si se puede agregar el campo con el nombre del autor acá
+%\def\@title{Memoria técnica de proyecto de Trabajo Final} %TODO ver si se puede agregar el campo con el nombre del autor acá
 
 %TODO Revisar colores de los hipervinculos
 
 \AtBeginDocument{
+
+\university{Universidad de Buenos Aires} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+\faculty{{Facultad de Ingeniería}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
+\department{Departamento de Electrónica} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+\group{{Laboratorio de Sistemas Embebidos}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+
+\subject{Memoria del Trabajo Final de la \degreename\hspace{1pc} de la \univname\hspace{1pc} de \authorname} % Your subject area, print it elsewhere with \subjectname
+
   \hypersetup{
-    pdftitle = {\@title},
+    pdftitle = {\ttitle},
     pdfauthor = {\authorname},
     pdfkeywords={\keywordnames},
     pdfsubject={\subjectname}%,
-    colorlinks=true, % Set to false to disable coloring links
-citecolor=blue, % The color of citations
-linkcolor=black, % The color of references to document elements (sections, figures, etc)
-urlcolor=blue, % The color of hyperlinks (URLs)
-%    colorlinks,
-%    linkcolor={red!50!black},
-%    citecolor={blue!50!black},
-%    urlcolor={blue!80!black},
-    hidelinks
   }
-
-	\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-	\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-	\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-	
 }
-
-
 
 %----------------------------------------------------------------------------------------
 
@@ -306,31 +328,8 @@ KOMA-script documentation for details.}]{fancyhdr}
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
 
-%----------------------------------------------------------------------------------------
-%	DEFINE CUSTOM THESIS INFORMATION COMMANDS
-%----------------------------------------------------------------------------------------
 
-\def\authorname{}
-\def\ttitle{}
-\newcommand*{\supervisor}[1]{\def\supname{#1}}
-\newcommand*{\thesistitle}[1]{\def\@title{#1}\def\ttitle{#1}}
-\newcommand*{\examiner}[1]{\def\examname{#1}}
-\newcommand*{\posgrado}[1]{\def\degreename{#1}}
-%\newcommand*{\degree}[1]{\def\degreename{#1}}
-\renewcommand*{\author}[1]{\def\authorname{#1}}
-\newcommand*{\addresses}[1]{\def\addressname{#1}}
-\newcommand*{\university}[1]{\def\univname{#1}}
-\newcommand*{\department}[1]{\def\deptname{#1}}
-\newcommand*{\group}[1]{\def\groupname{#1}}
-\newcommand*{\faculty}[1]{\def\facname{#1}}
-\newcommand*{\subject}[1]{\def\subjectname{#1}}
-\newcommand*{\keywords}[1]{\def\keywordnames{#1}}
-%comandos para CESE
-\newcommand*{\juradoUNO}[1]{\def\jurunoname{#1}}
-\newcommand*{\juradoDOS}[1]{\def\jurdosname{#1}}
-\newcommand*{\juradoTRES}[1]{\def\jurtresname{#1}}
-\newcommand*{\fechaINICIO}[1]{\def\fechaINICIOname{#1}}
-\newcommand*{\fechaFINAL}[1]{\def\fechaFINALname{#1}}
+
 
 
 %----------------------------------------------------------------------------------------
@@ -375,16 +374,21 @@ KOMA-script documentation for details.}]{fancyhdr}
 	
 	\large
 	{Director:} \\
-	{\supname} % Supervisor name
-	 
+	{\dirname} \\% Supervisor name
+	\ifbool{codirector}{% If the nohyperref class option has not been specified
+	{Codirector:} \\
+	{\codirname} % Supervisor name
+	}{\vspace{2pc}%nothing
+	}
+	
 	\vspace{1cm}
 	Jurados:\\	
 	\jurunoname\\
 	\jurdosname\\
 	\jurtresname
 	
-	\vspace{2cm}
-	
+	%\vspace{2cm}
+	\vfill
 	\textit{Este trabajo fue realizado en las Ciudad Autónoma de Buenos Aires,\\ entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
 	\end{center}
 	\end{titlepage}
@@ -432,28 +436,45 @@ KOMA-script documentation for details.}]{fancyhdr}
 
 %----------------------------------------------------------------------------------------
 
-\ifbool{hyperrefsupport}{% If the nohyperref class option has not been specified
-\AfterPackage{biblatex}{ % Load the hyperref package after the biblatex package for compatibility 
-\RequirePackage{hyperref} % Required for customising links and the PDF
-\hypersetup{pdfpagemode={UseOutlines},
-bookmarksopen=true,
-bookmarksopenlevel=0,
-hypertexnames=false,
-colorlinks=true, % Set to false to disable coloring links
-citecolor=blue, % The color of citations
-linkcolor=black, % The color of references to document elements (sections, figures, etc)
-urlcolor=blue, % The color of hyperlinks (URLs)
-pdfstartview={FitV},
-unicode,
-breaklinks=true,
-}
+%\RequirePackage[
+%	pdftitle = {\@title},
+%	colorlinks = true,       
+%    linkcolor = red,          % color of internal links (change box color with linkbordercolor)
+%    citecolor = green,        % color of links to bibliography
+%    filecolor = cyan,         % color of file links
+%    urlcolor = blue        ]{hyperref}
 
-\pdfstringdefDisableCommands{% If there is an explicit linebreak in a section heading (or anything printed to the pdf-bookmarks), it is replaced by a space
-   \let\\\space%
-}
-}
-}{%nothing
-}
+%\ifbool{hyperrefsupport}{% If the nohyperref class option has not been specified
+
+%\AfterPackage{biblatex}{ % Load the hyperref package after the biblatex package for compatibility 
+%\RequirePackage{hyperref} % Required for customising links and the PDF
+%\hypersetup{
+%    bookmarks=true,         % show bookmarks bar?
+%    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+%    pdftoolbar=true,        % show Acrobat’s toolbar?
+%    pdfmenubar=true,        % show Acrobat’s menu?
+%    pdffitwindow=false,     % window fit to page when opened
+%    pdfstartview={FitH},    % fits the width of the page to the window
+%    pdftitle={My title},    % title
+%    pdfauthor={Author},     % author
+%    pdfsubject={Subject},   % subject of the document
+%    pdfcreator={Creator},   % creator of the document
+%    pdfproducer={Producer}, % producer of the document
+%    pdfkeywords={keyword1, key2, key3}, % list of keywords
+%    pdfnewwindow=true,      % links in new PDF window
+%    colorlinks=true,       % false: boxed links; true: colored links
+%    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+%    citecolor=green,        % color of links to bibliography
+%    filecolor=cyan,         % color of file links
+%    urlcolor=magenta        % color of external links
+%}
+%
+%\pdfstringdefDisableCommands{% If there is an explicit linebreak in a section heading (or anything printed to the pdf-bookmarks), it is replaced by a space
+%   \let\\\space%
+%}
+%}
+%}{%nothing
+%}
 
 %----------------------------------------------------------------------------------------
 %	DEFINE NEW CAPTION NAMES
