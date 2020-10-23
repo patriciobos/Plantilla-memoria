@@ -383,7 +383,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\large
 	{Director:} \\
 	{\dirname} \\% Supervisor name
-	\ifbool{codirector}{% If the nohyperref class option has not been specified
+	\ifbool{codirector}{% If the codirector class option has been specified
 	{Codirector:} \\
 	{\codirname} % Supervisor name
 	}{\vspace{2pc}%nothing
