@@ -213,6 +213,12 @@
 \hyphenation{biblatex}
 
 \RequirePackage[
+	bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
 	colorlinks = true,
     linkcolor={red!50!black},
     citecolor={blue!50!black},
@@ -225,6 +231,8 @@
 
 \AtBeginDocument{
 
+\addtolength{\footnotesep}{2mm} % Espacio adicional en los footnotes
+
 \university{Universidad de Buenos Aires} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
 \faculty{{Facultad de Ingeniería}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
 \department{Departamento de Electrónica} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
@@ -236,7 +244,9 @@
     pdftitle = {\ttitle},
     pdfauthor = {\authorname},
     pdfkeywords={\keywordnames},
-    pdfsubject={\subjectname}%,
+    pdfsubject={\subjectname},
+    pdfcreator={Taller de escritura del trabajo final},   % creator of the document
+    pdfproducer={\groupname} % producer of the document
   }
 }
 
@@ -353,11 +363,9 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\begin{titlepage}
 	\begin{center}
 	
-	
 	\includegraphics[width=.8\textwidth]{./Figures/logoFIUBA.png}
 	\vspace{2cm}
 	
-
 	\textsc{\huge{\degreename}}
 	\vspace{.5cm} 
 	
@@ -387,8 +395,8 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\jurdosname\\
 	\jurtresname
 	
-	%\vspace{2cm}
 	\vfill
+	
 	\textit{Este trabajo fue realizado en las Ciudad Autónoma de Buenos Aires,\\ entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
 	\end{center}
 	\end{titlepage}
@@ -436,16 +444,8 @@ KOMA-script documentation for details.}]{fancyhdr}
 
 %----------------------------------------------------------------------------------------
 
-%\RequirePackage[
-%	pdftitle = {\@title},
-%	colorlinks = true,       
-%    linkcolor = red,          % color of internal links (change box color with linkbordercolor)
-%    citecolor = green,        % color of links to bibliography
-%    filecolor = cyan,         % color of file links
-%    urlcolor = blue        ]{hyperref}
 
 %\ifbool{hyperrefsupport}{% If the nohyperref class option has not been specified
-
 %\AfterPackage{biblatex}{ % Load the hyperref package after the biblatex package for compatibility 
 %\RequirePackage{hyperref} % Required for customising links and the PDF
 %\hypersetup{

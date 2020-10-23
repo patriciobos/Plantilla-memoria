@@ -13,7 +13,6 @@
 11pt, % The default document font size, options: 10pt, 11pt, 12pt
 %oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
 %chapterinoneline,% Have the chapter title next to the number in one single line
-%english, % ngerman for German
 spanish,
 singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
 %draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
@@ -21,7 +20,7 @@ singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespac
 %liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
 %toctotoc, % Uncomment to add the main table of contents to the table of contents
 parskip, % Uncomment to add space between paragraphs
-%codirector, % Uncomment to not load the hyperref package
+%codirector, % Uncomment to add a codirector to the title page
 headsepline, % Uncomment to get a line under the header
 ]{MastersDoctoralThesis} % The class file specifying the document structure
 
@@ -43,7 +42,7 @@ headsepline, % Uncomment to get a line under the header
 \author{Nombre del Autor} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
 
 \director{Nombre del Director (pertenencia)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \dirname
-\codirector{Nombre del Codirector (pertenencia)} % El nombre del codirector si lo hubiera, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \codirname
+\codirector{Nombre del Codirector (pertenencia)} % El nombre del codirector si lo hubiera, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \codirname.  Para activar este campo se debe descomentar la opción "codirector" en el comando \documentclass, línea 23.
 
 \juradoUNO{Nombre del jurado 1 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
 \juradoDOS{Nombre del jurado 2 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
@@ -53,12 +52,7 @@ headsepline, % Uncomment to get a line under the header
 \fechaFINAL{diciembre de 2020}
 
 
-\keywords{Sistemas Embebidos, CESE, FIUBA} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
-
-
-\addtolength{\footnotesep}{2mm} % Espacio adicional en los footnotes
-
-
+\keywords{Sistemas Embebidos, FIUBA} % Keywords for your thesis, print it elsewhere with \keywordnames
 
 
 \begin{document}
