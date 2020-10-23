@@ -35,13 +35,15 @@ Notar el uso de las mayúsculas y el punto al final de cada elemento.
 \subsection{Este es el título de una subsección}
 \label{subsec:ejemplo}
 
-Se recomienda no utilizar \textbf{texto en negritas} en ningún párrafo, ni tampoco texto \underline{subrayado}. En cambio sí se debe utilizar \textit{texto en cursiva} para palabras en un idioma extranjero, al menos la primera vez que aparecen en el texto. En el caso de palabras que estamos inventando se deben utilizar ``comillas''. Por ejemplo, un \textit{digital filter} es una especie de ``selector'' que permite separar ciertos componentes armónicos en partícular..
+Se recomienda no utilizar \textbf{texto en negritas} en ningún párrafo, ni tampoco texto \underline{subrayado}. En cambio sí se debe utilizar \textit{texto en itálicas} para palabras en un idioma extranjero, al menos la primera vez que aparecen en el texto. En el caso de palabras que estamos inventando se deben utilizar ``comillas'', así como también para citas textuales. Por ejemplo, un \textit{digital filter} es una especie de ``selector'' que permite separar ciertos componentes armónicos en particular.
 
 La escritura debe ser impersonal. Por ejemplo, no utilizar ``el diseño del firmware lo hice de acuerdo con tal principio'', sino ``el firmware fue diseñado utilizando tal principio''. 
 
 El trabajo es algo que al momento de escribir la memoria se supone que ya está concluido, entonces todo lo que se refiera a hacer el trabajo se narra en tiempo pasado, porque es algo que ya ocurrió. Por ejemplo, "se diseñó el firmware empleando la técnica de test driven development".
 
-En cambio la memoria es algo que está vivo cada vez que el lector la lee. Por eso transcurre siempre en tiempo presente, como por ejemplo "En el presente capítulo se da una visión global sobre las distintas pruebas realizadas y los resultados obtenidos. Se explica el modo en que fueron llevados a cabo los test unitarios y las pruebas del sistema"
+En cambio, la memoria es algo que está vivo cada vez que el lector la lee. Por eso transcurre siempre en tiempo presente, como por ejemplo:
+
+``En el presente capítulo se da una visión global sobre las distintas pruebas realizadas y los resultados obtenidos. Se explica el modo en que fueron llevados a cabo los test unitarios y las pruebas del sistema''.
 
 Se recomienda no utilizar una sección de glosario sino colocar la descripción de las abreviaturas como parte del mismo cuerpo del texto. Por ejemplo, RTOS (\textit{Real Time Operating System}, Sistema Operativo de Tiempo Real) o en caso de considerarlo apropiado mediante notas a pie de página.
 
@@ -49,18 +51,18 @@ Si se desea indicar alguna página web utilizar el siguiente formato de referenc
 
 \subsection{Figuras} 
 
-Al insertar figuras en la memoria se deben considerar determinadas pautas. Para empezar, usar siempre tipografía claramente legible. Luego, tener claro que es incorrecto escribir por ejemplo esto: ``El diseño elegido es un cuadrado, como se ve en la siguiente figura:''
+Al insertar figuras en la memoria se deben considerar determinadas pautas. Para empezar, usar siempre tipografía claramente legible. Luego, tener claro que \textbf{es incorrecto} escribir por ejemplo esto: ``El diseño elegido es un cuadrado, como se ve en la siguiente figura:''
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=.3]{./Figures/cuadradoAzul.png}
+\includegraphics[scale=.45]{./Figures/cuadradoAzul.png}
 \end{figure}
 
-La forma correcta de utilizar una figura es la siguiente: ``Se eligió utilizar un cuadrado azul para el logo, como puede observarse en la figura \ref{fig:cuadradoAzul}''.
+La forma correcta de utilizar una figura es con referencias cruzadas, por ejemplo: ``Se eligió utilizar un cuadrado azul para el logo, como puede observarse en la figura \ref{fig:cuadradoAzul}''.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.3]{./Figures/cuadradoAzul.png}
+	\includegraphics[scale=.45]{./Figures/cuadradoAzul.png}
 	\caption{Ilustración del cuadrado azul que se eligió para el diseño del logo.}
 	\label{fig:cuadradoAzul}
 \end{figure}
@@ -69,43 +71,25 @@ El texto de las figuras debe estar siempre en español, excepto que se decida re
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[scale=.25]{./Figures/word.jpeg}
+	\includegraphics[scale=.3]{./Figures/word.jpeg}
 	\caption{Imagen tomada de la página oficial del procesador\protect\footnotemark.}
 	\label{fig:palabraIngles}
 \end{figure}
 
 \footnotetext{\url{https://goo.gl/images/i7C70w}}
 
-
 La figura y el epígrafe deben conformar una unidad cuyo significado principal pueda ser comprendido por el lector sin necesidad de leer el cuerpo central de la memoria. Para eso es necesario que el epígrafe sea todo lo detallado que corresponda y si en la figura se utilizan abreviaturas entonces aclarar su significado en el epígrafe o en la misma figura.
+
+
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=.37]{./Figures/questionMark.png}
-	\caption{Por qué de pronto aparece esta figura?.}
+	\caption{¿Por qué de pronto aparece esta figura?}
 	\label{fig:questionMark}
 \end{figure}
 
 Nunca colocar una figura en el documento antes de hacer la primera referencia a ella, como se ilustra con la figura \ref{fig:questionMark}, porque sino el lector no comprenderá por qué de pronto aparece la figura en el documento, lo que distraerá su atención.
-
-En la figura \ref{fig:izquierda} y \ref{fig:derecha} se presenta un ejemplo de cómo incluir más de una figura utilizando un entorno \textit{minipage}.
-
-\begin{figure}[htbp]
-  \centering
-  \begin{minipage}[b]{0.47\textwidth}
-    \centering
-     \includegraphics[width=.47\textwidth]{./Figures/questionMark.png}
-	\caption{\protect\raggedright Una imagen a la izquierda.}
-	\label{fig:izquierda}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.47\textwidth}
-    \centering
-     \includegraphics[width=.47\textwidth]{./Figures/questionMark.png}
-	\caption{\protect\raggedright Una imagen a la derecha.}
-	\label{fig:derecha}
-  \end{minipage}
-\end{figure}
 
 Otra posibilidad es utilizar el entorno \textit{subfigure} para incluir más de una figura, como se puede ver en la figura \ref{fig:three graphs}. Notar que se pueden referenciar también las figuras internas individualmente de esta manera: \ref{fig:1de3}, \ref{fig:2de3} y \ref{fig:3de3}.
  
@@ -176,7 +160,7 @@ Para las tablas utilizar el mismo formato que para las figuras, sólo que el ep�
 	\label{tab:peces}
 \end{table}
 
-En cada capítulo se debe reiniciar el número de conteo de las figuras y las tablas, por ejemplo, Fig. 2.1 o Tabla 2.1, pero no se debe reiniciar el conteo en cada sección. Por suerte la plantilla se encarga de esto por nosotros.
+En cada capítulo se debe reiniciar el número de conteo de las figuras y las tablas, por ejemplo, figura 2.1 o tabla 2.1, pero no se debe reiniciar el conteo en cada sección. Por suerte la plantilla se encarga de esto por nosotros.
 
 \subsection{Ecuaciones}
 \label{sec:Ecuaciones}
