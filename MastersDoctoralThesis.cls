@@ -397,7 +397,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 	
 	\vfill
 	
-	\textit{Este trabajo fue realizado en las Ciudad Autónoma de Buenos Aires,\\ entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
+	\textit{Este trabajo fue realizado en la Ciudad Autónoma de Buenos Aires,\\ entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
 	\end{center}
 	\end{titlepage}
 }
