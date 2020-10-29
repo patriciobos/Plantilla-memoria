@@ -160,6 +160,7 @@
 \newcommand*{\examiner}[1]{\def\examname{#1}}
 \newcommand*{\posgrado}[1]{\def\degreename{#1}}
 \renewcommand*{\author}[1]{\def\authorname{#1}}
+\newcommand*{\ciudad}[1]{\def\ciudadname{#1}}
 \newcommand*{\addresses}[1]{\def\addressname{#1}}
 \newcommand*{\university}[1]{\def\univname{#1}}
 \newcommand*{\department}[1]{\def\deptname{#1}}
@@ -397,7 +398,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 	
 	\vfill
 	
-	\textit{Este trabajo fue realizado en la Ciudad Autónoma de Buenos Aires,\\ entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
+	\textit{Este trabajo fue realizado en la \ciudadname,\\ entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
 	\end{center}
 	\end{titlepage}
 }
@@ -443,38 +444,6 @@ KOMA-script documentation for details.}]{fancyhdr}
 }
 
 %----------------------------------------------------------------------------------------
-
-
-%\ifbool{hyperrefsupport}{% If the nohyperref class option has not been specified
-%\AfterPackage{biblatex}{ % Load the hyperref package after the biblatex package for compatibility 
-%\RequirePackage{hyperref} % Required for customising links and the PDF
-%\hypersetup{
-%    bookmarks=true,         % show bookmarks bar?
-%    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
-%    pdftoolbar=true,        % show Acrobat’s toolbar?
-%    pdfmenubar=true,        % show Acrobat’s menu?
-%    pdffitwindow=false,     % window fit to page when opened
-%    pdfstartview={FitH},    % fits the width of the page to the window
-%    pdftitle={My title},    % title
-%    pdfauthor={Author},     % author
-%    pdfsubject={Subject},   % subject of the document
-%    pdfcreator={Creator},   % creator of the document
-%    pdfproducer={Producer}, % producer of the document
-%    pdfkeywords={keyword1, key2, key3}, % list of keywords
-%    pdfnewwindow=true,      % links in new PDF window
-%    colorlinks=true,       % false: boxed links; true: colored links
-%    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
-%    citecolor=green,        % color of links to bibliography
-%    filecolor=cyan,         % color of file links
-%    urlcolor=magenta        % color of external links
-%}
-%
-%\pdfstringdefDisableCommands{% If there is an explicit linebreak in a section heading (or anything printed to the pdf-bookmarks), it is replaced by a space
-%   \let\\\space%
-%}
-%}
-%}{%nothing
-%}
 
 %----------------------------------------------------------------------------------------
 %	DEFINE NEW CAPTION NAMES
