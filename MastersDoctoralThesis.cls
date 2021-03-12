@@ -385,6 +385,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 	{Director:} \\
 	{\dirname} \\% Supervisor name
 	\ifbool{codirector}{% If the codirector class option has been specified
+	\vspace{10px}
 	{Codirector:} \\
 	{\codirname} % Supervisor name
 	}{\vspace{2pc}%nothing
