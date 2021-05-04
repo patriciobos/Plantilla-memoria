@@ -12,23 +12,27 @@
 %----------------------------------------------------------------------------------------
 
 \section{Conclusiones generales }
-
-La idea de esta sección es resaltar cuáles son los principales aportes del trabajo realizado y cómo se podría continuar. Debe ser especialmente breve y concisa. Es buena idea usar un listado para enumerar los logros obtenidos.
-
-Algunas preguntas que pueden servir para completar este capítulo:
-
-\begin{itemize}
-\item ¿Cuál es el grado de cumplimiento de los requerimientos?
-\item ¿Cuán fielmente se puedo seguir la planificación original (cronograma incluido)?
-\item ¿Se manifestó algunos de los riesgos identificados en la planificación? ¿Fue efectivo el plan de mitigación? ¿Se debió aplicar alguna otra acción no contemplada previamente?
-\item Si se debieron hacer modificaciones a lo planificado ¿Cuáles fueron las causas y los efectos?
-\item ¿Qué técnicas resultaron útiles para el desarrollo del proyecto y cuáles no tanto?
-\end{itemize}
+El sistema desarrollado, en concordancia con el objetivo general, conforma una herramienta económica para la prestadora del servicio de energía. Esta herramienta está diseñada para otorgar mayor granularidad de información sobre el estado de operación de las redes, sin implicar cambios significativos de infraestructura. Por otra parte, el análisis de la información suministrada, permite identificar eventos recurrentes, y evaluar sus posibles causas para poder delinear acciones correctivas y/o preventivas para mejorar la calidad de servicio.\\
+Cumplimentando todos los requerimientos planteados por el cliente, y el tiempo planteado en la planificación, se ha logrado el desarrollo exitoso del sistema en todas sus partes: HW, FW, BES; como así también su integración con la red LoRaWAN.\\
+El uso de la red LoRaWAN de acceso público “The Things Network” elegida para el trabajo, ha funcionado durante todo el desarrollo sin problema alguno, demostrando así su buena cobertura y calidad de servicio a nivel global. Aun cuando el autor ha tenido que cambiar su localización geográfica de Europa a Sudamérica para realizar pruebas de laboratorio, la operación del sistema no se ha visto afectada en ningún aspecto.\\
+El HW es capaz de convertir energía de CA proveniente del TI en otra de CC y almacenarla. Los resultados del Capítulo 4, demuestran que el uso de circuitos de \textit{energy harvesting} en conjunto con tecnologías alternativas de acumulación en constante evolución como los SC, podrían ser posibles sustitutos de las baterías litio en aplicaciones autónomas que operen en régimen 24/7 y donde el rango de temperatura de operación necesaria sea mayor.\\
+Las mediciones de valor RMS de corriente realizadas en el laboratorio, simulando la señal del TI con un GS [referencia al ensayo con GS] y luego usando una carga de prueba [referencia al ensayo con carga de prueba], demostraron la linealidad del circuito de medición dentro del rango de medición adoptado.\\
+A partir de los ensayos de consumo en modo deep sleep y autonomía de operación presentados en el capítulo 4, queda demostrado que el patrón “power save loop” ha tenido un impacto significativamente positivo en la gestión de energía del nodo.\\
+El tiempo total de propagación de los datos generados desde el nodo in-situ hacia la red LoRaWAN, recuperación por los BES y presentación en la GUI, es de menos de 5 segundos. Este valor de tiempo de propagación para el reporte de un problema, es considerado excelente en contraste con la situación actual en la provincia de Misiones.\\
+Un conjunto de software con abundante documentación tal como lo es LAMPP, ha ayudado a reducir el tiempo requerido para la puesta en funcionamiento de los BES propios del proyecto y la integración con la red LoRaWAN a través de su API REST.\\
+Durante la etapa de integración entre LoRaWAN y los BES, fue evidente el valor que tiene la unificación del uso del lenguaje de programación Python. Además de su uso para el desarrollo del FW, se lo utilizó para implementar mockups que emulen los datos generados por el HW. Mediante el uso de esta técnica se pudo garantizar un flujo de desarrollo totalmente desacoplado de la necesidad de involucrar el HW, pero sí con una interacción constante entre servicios WEB públicos y privados.\\
 
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
-\section{Próximos pasos}
+\section{Trabajo a futuro}
 
-Acá se indica cómo se podría continuar el trabajo más adelante.
+Cumplidos los requerimientos y finalizado el trabajo propuesto, se han identificado las siguientes áreas de mejoras a futuro tanto en HW como SW:
+
+\begin{itemize}
+	\item Actualizar de manera inalámbrica el firmware (OTA): nuevas versiones del firmware del microcontrolador aportarán nuevas funcionalidades, correcciones o mejoras sobre las ya existentes en nodos desplegados. Sin embargo, desarrollar esta funcionalidad es de alta prioridad antes de que el sistema llegue a una etapa de lanzamiento de producto. De esta manera, se prescindirá de la necesidad de intervenir físicamente cada nodo para actualizarlo.\\
+	\item Modularizar el PCB para realizar mediciones de 3 fases: dado que los sistemas de distribución son trifásicos, el HW deberá también permitir realizar mediciones de corrientes sobre las 3 fases del sistema. Para lograr esto se debería proponer una modularización de la etapa de medición de valor RMS de corriente.\\
+	\item Integrar servicios de mensajería instantánea: si bien la GUI permite de manera rápida identificar sobre un mapa el punto geográfico donde la red presenta un problema o su estado actual de operación, contar con una aplicación similar para dispositivos móviles será de utilidad para el personal encargado de cumplir horarios de guardia.\\
+	
+\end{itemize}
