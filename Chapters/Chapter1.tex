@@ -22,15 +22,6 @@
 \section{Estaciones transformadoras}
 
 Se denomina estación transformadora al conjunto de equipos electromecánicos responsables de convertir la energía eléctrica variando uno o más de sus principales parámetros que son tensión y corriente, a través del componente más importante del conjunto que es el transformador. La finalidad de convertir la energía eléctrica, que puede ser elevando o reduciendo el nivel de tensión, es poder transmitir y distribuir esa energía hacia los receptores que pueden ser consumidores finales tales como residencias familiares o los denominados grandes usuarios por ejemplo industrias.\\
-% TODO: \usepackage{graphicx} required
-%\begin{figure}[h!]
-%	\centering
-%	\includegraphics[width=0.7\linewidth]{Figures/SET_132_04}
-%	\caption[]{Subestación transformadora 13,2 / 0,4 kV a nivel. Imagen tomada por el autor.}
-%	\label{SET_132_04kv}
-%\end{figure} \\
-
-%como la que se presenta en la \ref{SET_132_04kv}
 
 Por convención se denomina Estación Transformadora (E.T.) cuando en el proceso se ven involucrados valores considerados de alta tensión (mayor a 66 kV) y Subestación Transformadora (S.E.T.) en el caso de tensiones menores a 66 kV \citep{AEA:1}.\\
 Para la distribución hacia los consumidores finales, se utilizan las denominadas Subestaciones Transformadoras Aéreas (S.E.T.A.) que convierten la tensión disminuyendo su valor de media a baja tensión.\\
@@ -40,26 +31,26 @@ Para poder obtener energía eléctrica a la salida en óptimas condiciones de ca
 \section{Medidores de energía}
 Llegado el momento de entregar la energía al usuario final, es indispensable cuantificarla para luego comercializarla. Las distribuidoras del servicio utilizan medidores de energía de electromecánicos o electrónicos, que registran en todo momento la energía acumulada que fluye por el mismo.\\
 % TODO: \usepackage{graphicx} required
-\begin{figure}[h]
+\begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/Medicion_corriente_con_TI}
+	\includegraphics[width=0.5\linewidth]{Figures/Medicion_corriente_con_TI}
 	\caption[]{Medición indirecta de corriente empleando transformadores de corriente (TI). Imagen tomada por el autor.}
 	\label{fig:medicioncorrienteconti}
 \end{figure}
-
-La medición de corriente puede ser directa, vinculando los conductores de alimentación de la carga directamente al medidor o indirecta. Una medición indirecta consiste en reducir los valores de corriente de carga a través de transformadores de corriente (TI) y vincular sus secundarios al medidor \ref{fig:medicioncorrienteconti}. Este último método se emplea en casos donde la corriente calculada supera el valor permitido por el medidor de energía, por lo que será necesario multiplicar el valor de la lectura por un coeficiente correspondiente a la relación de transformación del TI.\\  
+La medición de corriente puede ser directa, vinculando los conductores de alimentación de la carga directamente al medidor o indirecta. Una medición indirecta consiste en reducir los valores de corriente de carga a través de transformadores de corriente (TI) y vincular sus secundarios al medidor \ref{fig:medicioncorrienteconti}. Este último método se emplea en casos donde la corriente calculada supera el valor permitido por el medidor de energía, por lo que será necesario multiplicar el valor de la lectura por un coeficiente correspondiente a la relación de transformación del TI.\\
 % TODO: \usepackage{graphicx} required
-\begin{figure}[h!]
+\begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/medidor_digital_con_complemento_gsm}
+	\includegraphics[width=0.5\linewidth]{Figures/medidor_digital_con_complemento_gsm}
 	\caption{Medidor de energia digital con complemento para telemedición mediante GSM. Imagen tomada de \citep{MYEEL}}
 	\label{fig:medidordigitalconcomplementogsm}
 \end{figure}
-En la actualidad muchas prestadoras del servicio eléctrico han adoptado estrategias de medición inteligente similares a la presentada en la \ref{fig:medidordigitalconcomplementogsm}. En este esquema los equipos de medición se reportan a centros de operación en tiempo semi real a través de una red de comunicaciones movil como por ejemplo GSM.\\
-El concepto de telemedición aporta además de lo comercial, valiosa información técnica ya que los centros de operaciones conocen en todo momento el estado del medidor con la posibilidad de detectar fallas o interrupción del servicio eléctrico. 
+En la actualidad algunas prestadoras del servicio eléctrico han adoptado estrategias de medición inteligente similares a la presentada en la figura \ref{fig:medidordigitalconcomplementogsm}. En este esquema los equipos de medición se reportan a centros de operación en tiempo semi real a través de una red de comunicaciones movil como por ejemplo GSM.\\
+El concepto de telemedición aporta además de lo comercial, valiosa información técnica ya que los centros de operaciones conocen en todo momento el estado del medidor con la posibilidad de detectar fallas o interrupción del servicio eléctrico.\\  
 A pesar de tener resultados beneficiosos en lo económico a largo plazo e inmediato en cuanto a calidad del servicio prestado, conlleva una inversión inicial considerable que muchas empresas no están dispuestas a afrontar o no tienen los recursos suficientes para su implementación.\\
 \section{Estado del arte y problematica identificada}
 En Sudamérica, gran parte de las empresas distibuidoras de energía eléctrica y sus tercerizadas basan parte de sus operaciones en el contacto directo con los usuarios finales mediante reclamos para informarse acerca de interrupciones en el servicio de distribución de energía eléctrica. Una vez recibido un reclamo, la prestadora de servicios envía al grupo de operaciones especializado a recorrer el área circundante al cliente y tratar de determinar el motivo de la interrupción del servicio.\\
+
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
