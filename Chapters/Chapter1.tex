@@ -21,53 +21,55 @@
 %----------------------------------------------------------------------------------------
 \section{Estaciones transformadoras}
 
-Se denomina estación transformadora al conjunto de equipos electromecánicos responsables de convertir la energía eléctrica variando uno o más de sus principales parámetros que son tensión y corriente, a través del componente más importante del conjunto que es el transformador. La finalidad de convertir la energía eléctrica, que puede ser elevando o reduciendo el nivel de tensión, es poder transmitir y distribuir esa energía hacia los receptores que pueden ser consumidores finales tales como residencias familiares o los denominados grandes usuarios por ejemplo industrias.\\
+Se denomina estación transformadora al conjunto de equipos electromecánicos responsables de convertir la energía eléctrica variando uno o más de sus principales parámetros, que son tensión y corriente. Esta conversión se logra a través del componente más importante del conjunto, el transformador. La finalidad de convertir la energía eléctrica, que puede ser elevando o reduciendo el nivel de tensión, es poder transmitir y distribuir esa energía hacia los receptores que pueden ser consumidores finales tales como residencias familiares o polos industriales.\\
 
 Por convención se denomina Estación Transformadora (E.T.) cuando en el proceso se ven involucrados valores considerados de alta tensión (mayor a 66 kV) y Subestación Transformadora (S.E.T.) en el caso de tensiones menores a 66 kV \citep{AEA:1}.\\
 Para la distribución hacia los consumidores finales, se utilizan las denominadas Subestaciones Transformadoras Aéreas (S.E.T.A.) que convierten la tensión disminuyendo su valor de media a baja tensión.\\
 
-Para poder obtener energía eléctrica a la salida en óptimas condiciones de calidad y disponibilidad, resulta fundamental administrar y controlar los valores intrínsecos que componen la transmisión y recepción de la misma. Esto se logra a través de instrumentos de medición de tensión y corriente, tanto a la entrada (alta tensión) como a la salida (media tensión) de la conversión. Por otro lado y con el fin de mantener y preservar los equipos electromecánicos se consideran de gran importancia otros valores físicos como ser temperatura y humedad.\\
-
+Para poder obtener energía eléctrica a la salida en óptimas condiciones de calidad y disponibilidad, resulta fundamental administrar y controlar los valores intrínsecos que componen la transmisión y recepción de la misma. Esto se logra a través de instrumentos de medición de tensión y corriente, tanto a la entrada (alta tensión) como a la salida (media tensión) de la conversión. Por otro lado, con el fin de mantener y preservar los equipos electromecánicos se consideran de gran importancia otros valores físicos como temperatura y humedad.\\
 \section{Medidores de energía}
-Llegado el momento de entregar la energía al usuario final, es indispensable cuantificarla para luego comercializarla. Las distribuidoras del servicio utilizan medidores de energía de electromecánicos o electrónicos, que registran en todo momento la energía acumulada que fluye por el mismo.\\
+Llegado el momento de entregar la energía al usuario final, es indispensable cuantificarla para luego comercializarla. Las distribuidoras del servicio utilizan medidores de energía electromecánicos o electrónicos, que registran en todo momento la energía acumulada que fluye por el mismo.\\
+La medición de corriente puede ser directa, vinculando los conductores de alimentación de la carga directamente al medidor o indirecta. Una medición indirecta consiste en reducir los valores de corriente de carga a través de transformadores de corriente (TI) y vincular sus secundarios al medidor \ref{fig:medicioncorrienteconti}. Este último método se emplea en casos donde la corriente calculada supera el valor permitido por el medidor de energía, por lo que es necesario multiplicar el valor de la lectura por un coeficiente correspondiente a la relación de transformación del TI.\\
+
 % TODO: \usepackage{graphicx} required
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\linewidth]{Figures/Medicion_corriente_con_TI}
-	\caption[]{Medición indirecta de corriente empleando transformadores de corriente (TI). Imagen tomada por el autor.}
+	\caption[]{Medición indirecta de corriente empleando transformadores de corriente (TI).\protect\footnotemark}
 	\label{fig:medicioncorrienteconti}
 \end{figure}
-La medición de corriente puede ser directa, vinculando los conductores de alimentación de la carga directamente al medidor o indirecta. Una medición indirecta consiste en reducir los valores de corriente de carga a través de transformadores de corriente (TI) y vincular sus secundarios al medidor \ref{fig:medicioncorrienteconti}. Este último método se emplea en casos donde la corriente calculada supera el valor permitido por el medidor de energía, por lo que será necesario multiplicar el valor de la lectura por un coeficiente correspondiente a la relación de transformación del TI.\\
+\footnotetext{Imagen tomada por el autor}
+
 % TODO: \usepackage{graphicx} required
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\linewidth]{Figures/medidor_digital_con_complemento_gsm}
-	\caption{Medidor de energia digital con complemento para telemedición mediante GSM. Imagen tomada de \citep{MYEEL}}
+	\caption{Medidor de energía digital con complemento para telemedición mediante GSM. Imagen tomada de \citep{MYEEL}}
 	\label{fig:medidordigitalconcomplementogsm}
 \end{figure}
-En la actualidad algunas prestadoras del servicio eléctrico han adoptado estrategias de medición inteligente similares a la presentada en la figura \ref{fig:medidordigitalconcomplementogsm}. En este esquema los equipos de medición se reportan a centros de operación en tiempo semi real a través de una red de comunicaciones movil como por ejemplo GSM.\\
-El concepto de telemedición aporta además de lo comercial, valiosa información técnica ya que los centros de operaciones conocen en todo momento el estado del medidor con la posibilidad de detectar fallas o interrupción del servicio eléctrico.\\  
-A pesar de tener resultados beneficiosos en lo económico a largo plazo e inmediato en cuanto a calidad del servicio prestado, conlleva una inversión inicial considerable que muchas empresas no están dispuestas a afrontar o no tienen los recursos suficientes para su implementación.\\
-\section{Estado del arte y problematica identificada}
-En Sudamérica, gran parte de las empresas distibuidoras de energía eléctrica y sus tercerizadas basan parte de sus operaciones en el contacto directo con los usuarios finales mediante reclamos para informarse acerca de interrupciones en el servicio de distribución de energía eléctrica. Una vez recibido un reclamo, la prestadora de servicios envía al grupo de operaciones especializado a recorrer el área circundante al cliente y tratar de determinar el motivo de la interrupción del servicio.\\
+En la actualidad algunas prestadoras del servicio eléctrico han adoptado estrategias de medición inteligente similares a la presentada en la figura \ref{fig:medidordigitalconcomplementogsm}. En este esquema los equipos de medición se reportan a centros de operación a través de una red de comunicaciones móvil, como por ejemplo GSM.\\
+El concepto de telemedición aporta además de lo comercial, valiosa información técnica, ya que los centros de operaciones conocen en todo momento el estado del medidor con la posibilidad de detectar fallas o la interrupción del servicio eléctrico.\\  
+
+\section{Estado del arte y problemática identificada}
+En Sudamérica, gran parte de las empresas distibuidoras de energía eléctrica y sus tercerizadas, basan parte de sus operaciones en el contacto directo con los usuarios finales mediante reclamos para informarse acerca de interrupciones en el servicio de distribución de energía eléctrica. Una vez recibido un reclamo, la prestadora de servicios envía al grupo de operaciones especializado a recorrer el área circundante al cliente y tratar de determinar el motivo de la interrupción del servicio.\\
 
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/NH_aereo_bt}
-	\caption{Fusible seccionador aereo tipo NH usualmente utilizado en lineas de distribucion de baja tension}
+	\caption{Fusible seccionador aéreo tipo NH usualmente utilizado en lineas de distribución de baja tensión}
 	\label{fig:nh_aereo_bt}
 \end{figure}
-Un hecho común en el nordeste Argentino y particularmente en la provincia de Misiones es la destrucción de fusibles aéreos como el presentado en la \ref{fig:nh_aereo_bt}. Estos fusibles conectados inmediatamente a la salida de baja tension y en serie con las líneas de distribución, cumplen la función de protección por sobrecorriente debido a picos de consumo o cortocircuitos causados por desastres naturales como el de la figura \ref{fig:arbolcaidolineabt}. Los fusibles involucrados actúan de manera correcta autodestruyendose e interrumpiendo el paso de corriente.\\
+Un hecho común en el nordeste Argentino y particularmente en la provincia de Misiones es la destrucción de fusibles aéreos como el presentado en la figura \ref{fig:nh_aereo_bt}. Estos fusibles conectados inmediatamente a la salida de baja tensión y en serie con las líneas de distribución, cumplen la función de protección por sobrecorriente debido a picos de consumo o cortocircuitos causados por desastres naturales como el de la figura \ref{fig:arbolcaidolineabt}. Los fusibles involucrados actúan de manera correcta autodestruyendose e interrumpiendo el paso de corriente.\\
+Este esquema presentado, resulta aún precario y no efectivo en cuanto a la rapidez para determinar la localización geográfica donde se ha generado una falla, lo que resulta en una inferior calidad de servicio prestado al cliente.\\
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/arbol_caido_linea_bt}
 	\caption{Un árbol caído sobre las líneas de distribución aéreas de baja tensión luego de una breve tormenta en la ciudad de Posadas, Misiones. Imagen tomada de \citep{Noticia_MNES}}
 	\label{fig:arbolcaidolineabt}
 \end{figure}
-Este esquema presentado, resulta aún precario y no efectivo en cuanto a la rapidez para determinar la localización geográfica donde se ha generado una falla, resultando así en una inferior calidad de servicio prestada al cliente.\\
 
-Cabe mencionar que la mayoría de las redes de distribución de baja tensión en 380/220V no poseen la capacidad de brindar algún otro servicio agregado. Algunas redes de media (33 kV) y alta tensión (132 kV) las cuales sin embargo, pueden albergar un conjunto de pelos de fibra óptica (OPGW) los cuales pueden ser utilizados para brindar servicios a terceras partes como empresas de telefonía o bien para monitoreo de la red propiamente dicha. Sin embargo, estas OPGW demuestran cierta vulnerabilidad frente a condiciones climáticas extremas tales como descargas atmosféricas y traen acarreadas un alto costo de mantenimiento \citep{ARTICLE:1}.\\
+Cabe mencionar que la mayoría de las redes de distribución de baja tensión en 380/220V no poseen la capacidad de brindar algún otro servicio agregado. Algunas redes de media (33 kV) y alta tensión (132 kV) las cuales sin embargo, pueden albergar un conjunto de pelos de fibra óptica (OPGW) los cuales pueden ser utilizados para brindar servicios a terceras partes como empresas de telefonía o bien para monitoreo de la red propiamente dicha. Sin embargo, estas OPGW demuestran cierta vulnerabilidad frente a condiciones climáticas extremas tales como descargas atmosféricas y por lo tanto tienen un alto costo de mantenimiento \citep{ARTICLE:1}.\\
 \citep{ARTICLE:2} y \citep{ARTICLE:3} comparten una arquitectura de 3 capas: física, red y aplicación para sistemas de smart grid. 
 A partir del entorno donde residirá la aplicación y su objetivo final, surgen diferentes estrategias de control. Así también, la selección de sensores de diferente tipo tales como meteorológicos e infraestructura \citep{ARTICLE:3} o bien de cargas eléctricas que residen dentro de un entorno controlado haciendo uso de redes de diferente tipo \citep{ARTICLE:2}.\\
 Las tecnologías emergentes propias de IoT tales como las redes de comunicación de baja potencia y largo alcance LPWAN \citep{rfc8376}, y las redes tipo malla se analizan y comparan en \citep{ARTICLE:4} como las tecnologías disponibles y viables para dotar de una infraestructura de comunicaciones a las redes de distribución metropolitanas. En \citep{ARTICLE:5} y \citep{Hua} se presentan sistemas de medición de temperatura autónomos utilizando transductores termoeléctricos y electromagnéticos para conversión de energía térmica o electromagnética en energía eléctrica para alimentar la electrónica involucrada y cargar un acumulador.
@@ -83,239 +85,13 @@ Desarrollar un sistema capaz de determinar valores eficaces de corriente alterna
 	\item Desarrollar una electrónica de ultra bajo consumo para maximizar la autonomía de operación del supercapacitor.
 \end{itemize}
 \subsection{Alcances}
-En el presente documento se desarrollan los siguientes temas:
+En el presente proyecto se desarrollan los siguientes temas:
 \begin{itemize}
 	\item Circuito de conversión de energía  basado en rectificadores de alta eficiencia.
 	\item Acumulador de energía basado en supercapacitores
 	\item Patrón de firmware implementado en el microcontrolador para optimizar el uso de energía del acumulador.
 	\item Medición de valor RMS de corriente mediante transformador de corriente.
-	\item Tecnología LoRaWAN
+	\item Tecnología LoRaWAN.
 	\item Recuperación, almacenamiento y presentación de datos generados por los nodos finales.
 \end{itemize}
-Si bien el proyecto es parte de un plan de una PyME del autor, no  es parte del alcance ni se cubren en este documento las etapa de lanzamiento de producto ni creación de la empresa.
-\subsection{Carpetas}
-
-Esta plantilla se distribuye como una único archivo .zip que se puede descomprimir en varios archivos y carpetas. Asimismo, se puede consultar el repositorio git para obtener la última versión de los archivos, \url{https://github.com/patriciobos/Plantilla-CESE.git}. Los nombres de las carpetas son, o pretender ser, auto-explicativos.
-
-\keyword{Appendices} -- Esta es la carpeta donde se deben poner los apéndices. Cada apéndice debe ir en su propio archivo \file{.tex}. Se incluye un ejemplo y una plantilla en la carpeta.
-
-\keyword{Chapters} -- Esta es la carpeta donde se deben poner los capítulos de la memoria. Cada capítulo debe ir un su propio archivo \file{.tex} por separado.  Se ofrece por defecto, la siguiente estructura de capítulos y se recomienda su utilización dentro de lo posible:
-
-\begin{itemize}
-\item Capítulo 1: Introducción general	
-\item Capítulo 2: Introducción específica
-\item Capítulo 3: Diseño e implementación
-\item Capítulo 4: Ensayos y resultados
-\item Capítulo 5: Conclusiones
-
-\end{itemize}
-
-Esta estructura de capítulos es la que se recomienda para las memorias de la especialización.
-
-\keyword{Figures} -- Esta carpeta contiene todas las figuras de la memoria.  Estas son las versiones finales de las imágenes que van a ser incluidas en la memoria.  Pueden ser imágenes en formato \textit{raster}\footnote{\url{https://en.wikipedia.org/wiki/Raster_graphics}} como \file{.png}, \file{.jpg} o en formato vectoriales\footnote{\url{https://en.wikipedia.org/wiki/Vector_graphics}} como \file{.pdf}, \file{.ps}.  Se debe notar que utilizar imágenes vectoriales disminuye notablemente el peso del documento final y acelera el tiempo de compilación por lo que es recomendable su utilización siempre que sea posible.
-
-\subsection{Archivos}
-
-También están incluidos varios archivos, la mayoría de ellos son de texto plano y se puede ver su contenido en un editor de texto. Después de la compilación inicial, se verá que más archivos auxiliares son creados por \ LaTeX{} o BibTeX, pero son de uso interno y no es necesario hacer nada en particular con ellos.  Toda la información necesaria para compilar el documento se encuentra en los archivos \file{.tex}, \file{.bib}, \file{.cls} y en las imágenes de la carpeta Figures.
-
-\keyword{referencias.bib} - este es un archivo importante que contiene toda la información de referencias bibliográficas que se utilizarán para las citas en la memoria en conjunto con BibTeX. Usted puede escribir las entradas bibliográficas en forma manual, aunque existen también programas de gestión de referencias que facilitan la creación y gestión de las referencias y permiten exportarlas en formato BibTeX.  También hay disponibles sitios web como \url{books.google.com} que permiten obtener toda la información necesaria para una cita en formato BibTeX. Ver sección \ref{sec:biblio}
-
-\keyword{MastersDoctoralThesis.cls} -- este es un archivo importante. Es el archivos con la clase que le informa a \LaTeX{} cómo debe dar formato a la memoria. El usuario de la plantilla no debería necesitar modificar nada de este archivo.
-
-\keyword{memoria.pdf} -- esta es su memoria con una tipografía bellamente compuesta (en formato de archivo PDF) creado por \LaTeX{}. Se distribuye con la plantilla y después de compilar por primera vez sin hacer ningún cambio se debería obtener una versión idéntica a este documento.
-
-\keyword{memoria.tex} -- este es un archivo importante. Este es el archivo que tiene que compilar \LaTeX{} para producir la memoria como un archivo PDF. Contiene un marco de trabajo y estructuras que le indican a \LaTeX{} cómo diagramar la memoria.  Está altamente comentado para que se pueda entender qué es lo que realiza cada línea de código y por qué está incluida en ese lugar.  En este archivo se debe completar la información personalizada de las primeras sección según se indica en la sección \ref{sec:FillingFile}.
-
-Archivos que \emph{no} forman parte de la distribución de la plantilla pero que son generados por \LaTeX{} como archivos auxiliares necesarios para la producción de la memoria.pdf son:
-
-\keyword{memoria.aux} -- este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.
-
-\keyword{memoria.bbl} -- este es un archivo auxiliar generado por BibTeX, si se borra BibTeX simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}. Mientras que el archivo \file{.bib} contiene todas las referencias que hay, este archivo \file{.bbl} contine sólo las referencias que han sido citadas y se utiliza para la construcción de la bibiografía.
-
-\keyword{memoria.blg} -- este es un archivo auxiliar generado por BibTeX, si se borra BibTeX simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.
-
-\keyword{memoria.lof} -- este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.  Le indica a \LaTeX{} cómo construir la sección \emph{Lista de Figuras}.
- 
-\keyword{memoria.log} --  este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}. Contiene mensajes de \LaTeX{}. Si se reciben errores o advertencias durante la compilación, se guardan en este archivo \file{.log}.
-
-\keyword{memoria.lot} -- este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.  Le indica a \LaTeX{} cómo construir la sección \emph{Lista de Tablas}.
-
-\keyword{memoria.out} -- este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.
-
-De esta larga lista de archivos, sólo aquellos con la extensión \file{.bib}, \file{.cls} y \file{.tex} son importantes.  Los otros archivos auxiliares pueden ser ignorados o borrados ya que \LaTeX{} y BibTeX los regenerarán durante la compilación.
-
-%----------------------------------------------------------------------------------------
-
-\section{Entorno de trabajo}
-
-Ante de comenzar a editar la plantilla debemos tener un editor \LaTeX{} instalado en nuestra computadora.  En forma análoga a lo que sucede en lenguaje C, que se puede crear y editar código con casi cualquier editor, existen ciertos entornos de trabajo que nos pueden simplificar mucho la tarea.  En este sentido, se recomienda, sobre todo para los principiantes en \LaTeX{} la utilización de TexMaker, un programa gratuito y multi-plantaforma que está disponible tanto para windows como para sistemas GNU/linux.
-
-La versión más reciente de TexMaker es la 4.5 y se puede descargar del siguiente link: \url{http://www.xm1math.net/texmaker/download.html}. Se puede consultar el manual de usuario en el siguiente link: \url{http://www.xm1math.net/texmaker/doc.html}.
- 
-
-\subsection{Paquetes adicionales}
-
-Si bien durante el proceso de instalación de TexMaker, o cualquier otro editor que se haya elegido, se instalarán en el sistema los paquetes básicos necesarios para trabajar con \LaTeX{}, la plantilla de los trabajos de Especialización y Maestría requieren de paquete adicionales.
-
-Se indican a continuación los comandos que se deben introducir en la consola de Ubuntu (ctrl + alt + t) para instalarlos:
-
-\begin{lstlisting}[language=bash]
-  $ sudo apt install texlive-lang-spanish texlive-science 
-  $ sudo apt install texlive-bibtex-extra biber
-  $ sudo apt install texlive texlive-fonts-recommended
-  $ sudo apt install texlive-latex-extra
-\end{lstlisting}
-
-
-\subsection{Configurando TexMaker}
-
-
-Una vez instalado el programa y los paquetes adicionales se debe abrir el archivo memoria.tex con el editor para ver una pantalla similar a la que se puede apreciar en la figura \ref{fig:texmaker}. 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{./Figures/texmaker.png}
-	\caption{Entorno de trabajo de texMaker.}
-	\label{fig:texmaker}
-\end{figure}
-
-Notar que existe una vista llamada Estructura a la izquierda de la interfaz que nos permite abrir desde dentro del programa los archivos individuales de los capítulos.  A la derecha se encuentra una vista con el archivo propiamente dicho para su edición. Hacia la parte inferior se encuentra una vista del log con información de los resultados de la compilación.  En esta última vista pueden aparecen advertencias o \textit{warning}, que normalmente pueden ser ignorados, y los errores que se indican en color rojo y deben resolverse para que se genere el PDF de salida.
-
-Recordar que el archivo que se debe compilar con PDFLaTeX es \file{memoria.tex}, si se tratara de compilar alguno de los capítulos saldría un error.  Para salvar la molestia de tener que cambiar de archivo para compilar cada vez que se realice una modificación en un capítulo, se puede definir el archivo \file{memoria.tex} como ``documento maestro'' yendo al menú opciones -> ``definir documento actual como documento maestro'', lo que permite compilar con PDFLaTeX memoria.tex directamente desde cualquier archivo que se esté modificando . Se muestra esta opción en la figura \ref{fig:docMaestro}.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{./Figures/docMaestro.png}
-	\caption{Definir memoria.tex como documento maestro.}
-	\label{fig:docMaestro}
-\end{figure}
-
-En el menú herramientas se encuentran las opciones de compilación.  Para producir un archivo PDF a partir de un archivo .tex se debe ejecutar PDFLaTeX (el shortcut es F6). Para incorporar nueva bibliografía se debe utilizar la opción BibTeX del mismo menú herramientas (el shortcut es F11).
-
-Notar que para actualizar las tablas de contenidos se debe ejecutar PDFLaTeX dos veces.  Esto se debe a que es necesario actualizar algunos archivos auxiliares antes de obtener el resultado final.  En forma similar, para actualizar las referencias se debe ejecutar primero PDFLaTeX, después BibTeX y finalmente PDFLaTeX dos veces por idénticos motivos.
-
-\section{Personalizando la plantilla, el archivo \file{memoria.tex}}
-\label{sec:FillingFile}
-
-Para personalizar la plantilla se debe incorporar la información propia en los distintos archivos \file{.tex}. 
-
-Primero abrir \file{memoria.tex} con TexMaker (o el editor de su preferencia). Se debe ubicar dentro del archivo el bloque de código titulado \emph{INFORMACIÓN DE LA PORTADA} donde se deben incorporar los primeros datos personales con los que se construirá automáticamente la portada.
-
-
-%----------------------------------------------------------------------------------------
-
-\section{El código del archivo \file{memoria.tex} explicado}
-
-El archivo \file{memoria.tex} contiene la estructura del documento y es el archivo de mayor jerarquía de la memoria.  Podría ser equiparable a la función \emph{main()} de un programa en C, o mejor dicho al archivo fuente .c donde se encuentra definida la función main().
-
-La estructura básica de cualquier documento de \LaTeX{} comienza con la definición de clase del documento, es seguida por un preámbulo donde se pueden agregar funcionalidades con el uso de \texttt{paquetes} (equiparables a bibliotecas de C), y finalmente, termina con el cuerpo del documento, donde irá el contenido de la memoria.
-
-\lstset{%
-  basicstyle=\small\ttfamily,
-  language=[LaTeX]{TeX}
-}
-
-\begin{lstlisting}
-\documentclass{article}  <- Definicion de clase
-\usepackage{listings}	 <- Preambulo
-
-\begin{document}	 <- Comienzo del contenido propio 
-	Hello world!
-\end{document}
-\end{lstlisting}
-
-
-El archivo \file{memoria.tex} se encuentra densamente comentado para explicar qué páginas, secciones y elementos de formato está creando el código \LaTeX{} en cada línea. El código está dividido en bloques con nombres en mayúsculas para que resulte evidente qué es lo que hace esa porción de código en particular. Inicialmente puede parecer que hay mucho código \LaTeX{}, pero es principalmente código para dar formato a la memoria por lo que no requiere intervención del usuario de la plantilla.  Sí se deben personalizar con su información los bloques indicados como:
-
-\begin{itemize}
-	\item Informacion de la memoria
-	\item Resumen
-	\item Agradecimientos
-	\item Dedicatoria
-\end{itemize}
-
-El índice de contenidos, las listas de figura de tablas se generan en forma automática y no requieren intervención ni edición manual por parte del usuario de la plantilla. 
-
-En la parte final del documento se encuentran los capítulos y los apéndices.  Por defecto se incluyen los 5 capítulos propuestos que se encuentran en la carpeta /Chapters. Cada capítulo se debe escribir en un archivo .tex separado y se debe poner en la carpeta \emph{Chapters} con el nombre \file{Chapter1}, \file{Chapter2}, etc\ldots El código para incluir capítulos desde archivos externos se muestra a continuación.
-
-\begin{verbatim}
-	\include{Chapters/Chapter1}
-	\include{Chapters/Chapter2} 
-	\include{Chapters/Chapter3}
-	\include{Chapters/Chapter4} 
-	\include{Chapters/Chapter5} 
-\end{verbatim}
-
-Los apéndices también deben escribirse en archivos .tex separados, que se deben ubicar dentro de la carpeta \emph{Appendices}. Los apéndices vienen comentados por defecto con el caracter \code{\%} y para incluirlos simplemente se debe eliminar dicho caracter.
-
-Finalmente, se encuentra el código para incluir la bibliografía en el documento final.  Este código tampoco debe modificarse. La metodología para trabajar las referencias bibliográficas se desarrolla en la sección \ref{sec:biblio}.
-%----------------------------------------------------------------------------------------
-
-\section{Bibliografía}
-\label{sec:biblio}
-
-Las opciones de formato de la bibliografía se controlan a través del paquete de latex \option{biblatex} que se incluye en la memoria en el archivo memoria.tex.  Estas opciones determinan cómo se generan las citas bibliográficas en el cuerpo del documento y cómo se genera la bibliografía al final de la memoria.
-
-En el preámbulo se puede encontrar el código que incluye el paquete biblatex, que no requiere ninguna modificación del usuario de la plantilla, y que contiene las siguientes opciones:
-
-\begin{lstlisting}
-\usepackage[backend=bibtex,
-	natbib=true, 
-	style=numeric, 
-	sorting=none]
-{biblatex}
-\end{lstlisting}
-
-En el archivo \file{reference.bib} se encuentran las referencias bibliográficas que se pueden citar en el documento.  Para incorporar una nueva cita al documento lo primero es agregarla en este archivo con todos los campos necesario.  Todas las entradas bibliográficas comienzan con $@$ y una palabra que define el formato de la entrada.  Para cada formato existen campos obligatorios que deben completarse. No importa el orden en que las entradas estén definidas en el archivo .bib.  Tampoco es importante el orden en que estén definidos los campos de una entrada bibliográfica. A continuación se muestran algunos ejemplos:
-
-\begin{lstlisting}
-@ARTICLE{ARTICLE:1,
-    AUTHOR="John Doe",
-    TITLE="Title",
-    JOURNAL="Journal",
-    YEAR="2017",
-}
-\end{lstlisting}
-
-
-\begin{lstlisting}
-@BOOK{BOOK:1,
-    AUTHOR="John Doe",
-    TITLE="The Book without Title",
-    PUBLISHER="Dummy Publisher",
-    YEAR="2100",
-}
-\end{lstlisting}
-
-
-\begin{lstlisting}
-@INBOOK{BOOK:2,
-    AUTHOR="John Doe",
-    TITLE="The Book without Title",
-    PUBLISHER="Dummy Publisher",
-    YEAR="2100",
-    PAGES="100-200",
-}
-\end{lstlisting}
-
-
-\begin{lstlisting}
-@MISC{WEBSITE:1,
-    HOWPUBLISHED = "\url{http://example.com}",
-    AUTHOR = "Intel",
-    TITLE = "Example Website",
-    MONTH = "12",
-    YEAR = "1988",
-    URLDATE = {2012-11-26}
-}
-\end{lstlisting}
-
-Se debe notar que los nombres \emph{ARTICLE:1}, \emph{BOOK:1}, \emph{BOOK:2} y \emph{WEBSITE:1} son nombres de fantasía que le sirve al autor del documento para identificar la entrada. En este sentido, se podrían reemplazar por cualquier otro nombre.  Tampoco es necesario poner : seguido de un número, en los ejemplos sólo se incluye como un posible estilo para identificar las entradas.
-
-La entradas se citan en el documento con el comando: 
-
-\begin{verbatim}
-\citep{nombre_de_la_entrada}
-\end{verbatim}
-
-Y cuando se usan, se muestran así: \citep{ARTICLE:1}, \citep{BOOK:1}, \citep{BOOK:2}, \citep{WEBSITE:1}.  Notar cómo se conforma la sección Bibliografía al final del documento. 
+Si bien el proyecto es parte de un plan de creación de una PyME del autor, no es parte del alcance ni se cubren en este documento las etapa de lanzamiento de producto ni creación de la empresa.
