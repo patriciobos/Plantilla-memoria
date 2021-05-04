@@ -24,13 +24,13 @@ parskip, % Uncomment to add space between paragraphs
 headsepline, % Uncomment to get a line under the header
 ]{MastersDoctoralThesis} % The class file specifying the document structure
 
-
-
+\usepackage[backend=bibtex, natbib=true, style=numeric, sorting=none]{biblatex}
+\usepackage{graphicx}
 %----------------------------------------------------------------------------------------
 %	INFORMACIÓN DE LA MEMORIA
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Título del trabajo} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
+\thesistitle{Sistema de sensores autónomos para monitoreo de redes de distribución de baja tensión mediante LoRaWAN} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \posgrado{Carrera de Especialización en Sistemas Embebidos} 
@@ -39,14 +39,14 @@ headsepline, % Uncomment to get a line under the header
 %\posgrado{Maestría en Sistemas Embebidos} 
 %\posgrado{Maestría en Internet de las cosas}
 
-\author{Nombre del autor} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
+\author{Ing Milton Eduardo Sosa} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
 
-\director{Nombre del director (pertenencia)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \dirname
+\director{Marcelo Romeo (UNSaM)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \dirname
 \codirector{Nombre del codirector (pertenencia)} % El nombre del codirector si lo hubiera, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \codirname.  Para activar este campo se debe descomentar la opción "codirector" en el comando \documentclass, línea 23.
 
-\juradoUNO{Nombre del jurado 1 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
-\juradoDOS{Nombre del jurado 2 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
-\juradoTRES{Nombre del jurado 3 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
+\juradoUNO{Gustavo Mercado (UTN-FRM)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
+\juradoDOS{Javier Kolodziej (UNaM-FIO)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
+\juradoTRES{Gerardo Sager (UNLP)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
 
 %\ciudad{Ciudad Autónoma de Buenos Aires}
 \ciudad{ciudad de Mendoza}
@@ -75,9 +75,8 @@ headsepline, % Uncomment to get a line under the header
 %
 %The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
 \centering
-
-El resumen debe escribirse en uno o dos párrafo.  Debe ser breve y conciso sin ningún elemento de formato en el texto como itálicas o negrita. Tampoco se deben usar siglas ni acrónimos que no resulten obvios para un lector promedio de la memoria, ni referencias bibliográficas o notas al pie de página.  No debe faltar qué es lo que se hizo/logró, qué importancia/valor tiene el proyecto/resultado, qué va a encontrar el lector en la memoria y qué contenidos de la especialización/maestría se aplicaron en el proyecto.
-
+En la presente memoria se describe el desarrollo e implementación de un sistema cuya función es determinar valores eficaces de corriente alterna en sistemas metropolitanos de distribución de energía eléctrica en baja tensión. Ademas, es capaz de reportar estados a un centro de operaciones mediante el uso de una red LoRaWAN de acceso público e implementa el uso de tecnologías alternativas de acumulación de energía.\\
+El sistema desarrollado otorga mayor granularidad de información sobre el estado de operación de las redes, brindando información valiosa sobre eventos recurrentes, en pro de delinear acciones correctivas y/o preventivas para mejorar la calidad de servicio.
 \end{abstract}
 
 %----------------------------------------------------------------------------------------

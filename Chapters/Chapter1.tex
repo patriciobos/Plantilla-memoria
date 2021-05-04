@@ -1,5 +1,4 @@
 % Chapter 1
-
 \chapter{Introducción general} % Main chapter title
 
 \label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
@@ -20,31 +19,68 @@
 %\section{Introducción}
 
 %----------------------------------------------------------------------------------------
-\section{Aprendiendo \LaTeX{}}
+\section{Estaciones transformadoras}
 
-\LaTeX{} no es \textsc{WYSIWYG} (What You See is What You Get), a diferencia de los procesadores de texto como Microsoft Word o Pages de Apple o incluso LibreOffice en el mundo open-source. En lugar de ello, un documento escrito para \LaTeX{} es en realidad un archivo de texto simple o llano que \emph{no contiene formato} . Nosotros le decimos a \LaTeX{} cómo deseamos que se aplique el formato en el documento final escribiendo comandos simples entre el texto, por ejemplo, si quiero usar texto en itálicas para dar énfasis, escribo \verb|\it{texto}| y pongo el texto que quiero en itálicas entre medio de las llaves. Esto significa que \LaTeX{} es un lenguaje del tipo \enquote{mark-up}, muy parecido a HTML.
+Se denomina estación transformadora al conjunto de equipos electromecánicos responsables de convertir la energía eléctrica variando uno o más de sus principales parámetros que son tensión y corriente, a través del componente más importante del conjunto que es el transformador. La finalidad de convertir la energía eléctrica, que puede ser elevando o reduciendo el nivel de tensión, es poder transmitir y distribuir esa energía hacia los receptores que pueden ser consumidores finales tales como residencias familiares o los denominados grandes usuarios por ejemplo industrias.\\
+% TODO: \usepackage{graphicx} required
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[width=0.7\linewidth]{Figures/SET_132_04}
+%	\caption[]{Subestación transformadora 13,2 / 0,4 kV a nivel. Imagen tomada por el autor.}
+%	\label{SET_132_04kv}
+%\end{figure} \\
 
-\subsection{Una introducción (no tan corta) a \LaTeX{}}
+%como la que se presenta en la \ref{SET_132_04kv}
 
-Si sos nuevo en \LaTeX{}, hay un muy buen libro electrónico - disponible gratuitamente en Internet como un archivo PDF - llamado, \enquote{A (not so short) Introduction to \LaTeX{}}. El título del libro es generalmente acortado a simplemente \emph{lshort}. Puede descargar la versión más reciente en inglés (ya que se actualiza de vez en cuando) desde aquí:
-\url{http://www.ctan.org/tex-archive/info/lshort/english/lshort.pdf}
+Por convención se denomina Estación Transformadora (E.T.) cuando en el proceso se ven involucrados valores considerados de alta tensión (mayor a 66 kV) y Subestación Transformadora (S.E.T.) en el caso de tensiones menores a 66 kV\citep{AEA:1}.\\
+Para la distribución hacia los consumidores finales, se utilizan las denominadas Subestaciones Transformadoras Aéreas (S.E.T.A.) que convierten la tensión disminuyendo su valor de media a baja tensión.\\
 
-Se puede encontrar la versión en español en la lista en esta página: \url{http://www.ctan.org/tex-archive/info/lshort/}
+Para poder obtener energía eléctrica a la salida en óptimas condiciones de calidad y disponibilidad, resulta fundamental administrar y controlar los valores intrínsecos que componen la transmisión y recepción de la misma. Esto se logra a través de instrumentos de medición de tensión y corriente, tanto a la entrada (alta tensión) como a la salida (media tensión) de la conversión. Por otro lado y con el fin de mantener y preservar los equipos electromecánicos se consideran de gran importancia otros valores físicos como ser temperatura y humedad.\\
 
-\subsubsection{Una subsubsección}
+\section{Medidores de energía}
+Llegado el momento de entregar la energía al usuario final, es indispensable cuantificar la misma con el fin de comercializar. Las distribuidoras del servicio utilizan medidores de energía de electromecánicos o electrónicos, que registran en todo momento la energía acumulada que fluye por el mismo.\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/Medicion_corriente_con_TI}
+	\caption[]{Medición indirecta de corriente empleando transformadores de corriente (TI). Imagen tomada por el autor.}
+	\label{fig:medicioncorrienteconti}
+\end{figure}
 
-Acá tiene un ejemplo de una ``subsubsección'' que es el cuarto nivel de ordenamiento del texto, después de capítulo, sección y subsección.  Como se puede ver, las subsubsecciones no van numeradas en el cuerpo del documento ni en el índice.  El formato está definido por la plantilla y no debe ser modificado.
+La medición de corriente puede ser directa, vinculando los conductores de alimentación de la carga directamente al medidor o indirecta. Una medición indirecta consiste en reducir los valores de corriente de carga a través de transformadores de corriente (TI) y vinculando sus secundarios a la medición \ref{fig:medicioncorrienteconti}. Este último método se emplea en casos donde la corriente calculada supera el valor permitido por el medidor de energía, por lo que finalmente será necesario multiplicar el valor de la lectura por un coeficiente correspondiente a la relación de transformación del TI.\\  
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/medidor_digital_con_complemento_gsm}
+	\caption{Medidor de energia digital con complemento para telemedición mediante GSM. Imagen tomada de \citep{MYEEL}}
+	\label{fig:medidordigitalconcomplementogsm}
+\end{figure}
+En la actualidad muchas prestadoras del servicio eléctrico han adoptado estrategias de medición inteligente similares a la presentada en la \ref{fig:medidordigitalconcomplementogsm}. En este esquema los equipos de medición se reportan a centros de operación en tiempo semi real a través de una red de comunicaciones movil como por ejemplo GSM.\\
+El concepto de telemedición aporta además de lo comercial, valiosa información técnica ya que los centros de operaciones conocen en todo momento el estado del medidor con la posibilidad de detectar fallas o interrupción del servicio eléctrico. Sin embargo, esto conlleva una inversión inicial considerable que muchas empresas no están dispuestas a afrontar o no tienen los recursos suficientes como para implementar, a pesar de tener resultados beneficiosos en lo económico a largo plazo e inmediato en cuanto a calidad del servicio prestado.
 
-\subsection{Guía matemática rápida para \LaTeX{}}
 
-Si estás escribiendo un documento con mucho contenido matemático, entonces es posible que desees leer el documento de la AMS (American Mathematical Society) llamado, \enquote{A Short Math Guide for \LaTeX{}}. Se puede encontrar en línea en el siguiente link: \url{http://www.ams.org/tex/amslatex.html} en la sección \enquote{Additional Documentation} hacia la parte inferior de la página.
+\section{Estado del arte y problematica identificada}
+En Sudamérica, gran parte de las empresas distibuidoras de energía eléctrica y sus tercerizadas basan parte de sus operaciones en el contacto directo con los usuarios finales mediante reclamos para informar acerca de interrupciones en el servicio de distribución de energía eléctrica. Una vez recibido un reclamo, la prestadora de servicios envía al grupo de operaciones especializado a recorrer el área circundante al cliente y tratar de determinar el motivo de la interrupción del servicio.
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/NH_aereo_bt}
+	\caption{Fusible seccionador aereo tipo NH usualmente utilizado en lineas de distribucion de baja tension}
+	\label{fig:nh_aereo_bt}
+\end{figure}
+Un hecho común en el nordeste Argentino y particularmente en la provincia de Misiones es la destrucción de fusibles aéreos como el presentado en la \ref{fig:nh_aereo_bt}. Estos fusible conectados inmediatamente a la salida de baja tension y en serie con las líneas de distribución, cumplen la función de protección por sobrecorriente debido a picos de consumo durante un determinado periodo de tiempo o cortocircuitos causados por desastres naturales como el visto en la \ref{fig:arbolcaidolineabt}. Los fusibles involucrados actúan de manera correcta autodestruyendose e interrumpiendo el paso de corriente.\\
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/arbol_caido_linea_bt}
+	\caption{Un árbol caído sobre las líneas de distribución aéreas de baja tensión luego de una breve tormenta en la ciudad de Posadas, Misiones. Imagen tomada de \citep{Noticia_MNES}}
+	\label{fig:arbolcaidolineabt}
+\end{figure}
+Este esquema presentado, resulta aún precario y no efectivo en cuanto a la rapidez para determinar la localización geográfica donde se ha generado una falla, resultando así en una inferior calidad de servicio prestada al cliente.\\
 
-
-%----------------------------------------------------------------------------------------
-
-\section{Utilizando esta plantilla}
-
-Si estás familiarizado con \LaTeX{}, entonces podés explorar la estructura de directorios de esta plantilla y proceder a personalizarla agregando tu información en el bloque \emph{INFORMACIÓN DE LA PORTADA} en el archivo \file{memoria.tex}.  
+Cabe mencionar que la mayoría de las redes de distribución de baja tensión en 380/220V no poseen la capacidad de brindar algún otro servicio agregado. Algunas redes de media (33 kV) y alta tensión (132 kV) las cuales sin embargo, pueden albergar un conjunto de pelos de fibra óptica (OPGW) los cuales pueden ser utilizados para brindar servicios a terceras partes como empresas de telefonía o bien para monitoreo de la red propiamente dicha. Sin embargo, estas OPGW demuestran cierta vulnerabilidad frente a condiciones climáticas extremas tales como descargas atmosféricas y traen acarreadas un alto costo de mantenimiento \citep{ARTICLE:1}.\\
+\citep{ARTICLE:2} y \citep{ARTICLE:3} comparten una arquitectura de 3 capas: física, red y aplicación para sistemas de smart grid. 
+A partir del entorno donde residirá la aplicación y su objetivo final, surgen diferentes estrategias de control. Así también, la selección de sensores de diferente tipo tales como meteorológicos e infraestructura \citep{ARTICLE:3} o bien de cargas eléctricas que residen dentro de un entorno controlado haciendo uso de redes de diferente tipo \citep{ARTICLE:2}.\\
+Las tecnologías emergentes propias de IoT tales como las redes de comunicación de baja potencia y largo alcance LPWAN \citep{rfc8376}, y las redes tipo malla se analizan y comparan en \citep{ARTICLE:4} como las tecnologías disponibles y viables para dotar de una infraestructura de comunicaciones a las redes de distribución metropolitanas. En \citep{ARTICLE:5} y [11] se presentan sistemas de medición de temperatura autónomos utilizando transductores termoeléctricos y electromagnéticos para conversión de energía térmica o electromagnética en energía eléctrica para la alimentar la electrónica involucrada y cargar un acumulador.
 
 Se puede continuar luego modificando el resto de los archivos siguiendo los lineamientos que se describen en la sección \ref{sec:FillingFile} en la página \pageref{sec:FillingFile}.
 
@@ -55,8 +91,25 @@ Si sos nuevo en \LaTeX{}, se recomienda que continúes leyendo el documento ya q
 
 %----------------------------------------------------------------------------------------
 
-\section{Qué incluye esta plantilla}
-
+\section{Objetivos y alcance}
+\subsection{Objetivo general}
+Desarrollar un sistema capaz de determinar valores eficaces de corriente alterna en sistemas metropolitanos de distribución de energía eléctrica en baja tensión y reportar estados a un centro de operaciones a través de una red LoRaWAN de acceso público.\\
+\subsection{Objetivos específicos}
+\begin{itemize}
+	\item Evaluar el uso de un supercapacitor como reemplazo de una batería convencional.\\
+	\item Desarrollar una electrónica de ultra bajo consumo para maximizar la autonomía de operación del supercapacitor.
+\end{itemize}
+\subsection{Alcances}
+En el presente documento se desarrollan los siguientes temas:
+\begin{itemize}
+	\item Circuito de conversión de energía  basado en rectificadores de alta eficiencia.
+	\item Acumulador de energía basado en supercapacitores
+	\item Patrón de firmware implementado en el microcontrolador para optimizar el uso de energía del acumulador.
+	\item Medición de valor RMS de corriente mediante transformador de corriente.
+	\item Tecnología LoRaWAN
+	\item Recuperación, almacenamiento y presentación de datos generados por los nodos finales.
+\end{itemize}
+Si bien el proyecto es parte de un plan de una PyME del autor, no  es parte del alcance ni se cubren en este documento las etapa de lanzamiento de producto ni creación de la empresa.
 \subsection{Carpetas}
 
 Esta plantilla se distribuye como una único archivo .zip que se puede descomprimir en varios archivos y carpetas. Asimismo, se puede consultar el repositorio git para obtener la última versión de los archivos, \url{https://github.com/patriciobos/Plantilla-CESE.git}. Los nombres de las carpetas son, o pretender ser, auto-explicativos.
