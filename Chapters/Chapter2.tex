@@ -26,14 +26,14 @@ En este capítulo se presentan los requerimientos acordados con el cliente y los
 			\item Otorgar 5 Volts a la salida.
 			\item Ser capaz de otorgar 300 miliamperes a la salida.
 		\end{enumerate}
-		\item El transformador de corriente debe:
+		\item El transformador de corriente (TI) debe:
 		\begin{enumerate}%[label*=\arabic*.]
 			\item Ser de tipo núcleo partido.
 			\item Admitir 100 Amperes de corriente en el circuito primario y un máximo 5 Amperes en el circuito secundario.
 		\end{enumerate}
 		\item \label{req_relay} El relay encargado de cambiar el modo de operación debe:
 		\begin{enumerate}%[label*=\arabic*.]
-			\item Ser de tipo doble invesor sin retención.
+			\item Ser de tipo doble inversor sin retención.
 			\item Su bobina debe poder energizarse con 5V o menos.
 			\item Soportar al menos 5 Amperes de corriente por los contactos.
 		\end{enumerate} 
@@ -47,7 +47,7 @@ En este capítulo se presentan los requerimientos acordados con el cliente y los
 		\item Antes configurarse en modo ocioso, debe desenergizar la etapa de medición de corriente y el módulo de comunicaciones con el objeto de ahorrar energía.
 	\end{enumerate}
 	
-	\item Grupo de requerimientos asociados con los BES
+	\item Grupo de requerimientos asociados con los servicios de backend (BES)
 	\label{requerimientos_backend}
 	\begin{enumerate}
 		\item Todos los servicios deben poder correr en una Raspberry Pi 3.
@@ -79,7 +79,7 @@ El diagrama de bloques del HW a instalar \textit{in situ} es presentado en la fi
 	\item Circuito de selección de modo: un relay (RL) y su circuito de mando controlarán a que etapa del nodo se conectarán los terminales del TI.
 	\item Etapa de rectificación, acumulación de energía y elevación de tensión: compuesta por rectificador de onda completa, una etapa de filtrado y acumulación y un circuito elevador de tensión.
 	\item Etapa de medición de valor RMS de corriente: un chip dedicado toma la señal de tensión generada en bornes del resistor shunt y calcula el valor RMS. A su salida entrega un valor proporcional de tensión DC.
-	\item Microcontrolador (MC): ejecutar la lógica de negocios que rige el comportamiento del nodo, digitalizar mediciones y transmitir datos a la red LoRaWAN.
+	\item Microcontrolador (MC): ejecuta la lógica de negocios que rige el comportamiento del nodo, digitalizar mediciones y transmitir datos a la red LoRaWAN.
 \end{enumerate}
 Por otro lado, el sistema también implica el desarrollo y puesta en funcionamiento de un conjunto de servicios de \textit{backend} (BES) propios del proyecto que cumplen las funciones de:
 \begin{itemize}
@@ -88,7 +88,7 @@ Por otro lado, el sistema también implica el desarrollo y puesta en funcionamie
 	\item Presentación de los datos al usuario final mediante una interfaz gráfica de usuario (GUI).
 \end{itemize}
 % TODO: \usepackage{graphicx} required
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/diagrama_de_bloques_de_BES}
 	\caption{Diagrama de bloques del FW implementado en el MC y su interacción con la red LoRaWAN y los BES privados del sistema.}
@@ -98,7 +98,7 @@ El requisito \ref{requerimiento_LORAWAN} impuso el uso de una red LoRaWAN como c
 Las mediciones son tomadas por el HW y transmitidas hacia la red LoRaWAN para luego interactuar con los BES privados que se encargan de recuperar, almacenar y presentar los datos al usuario final.
 Una interfaz gráfica de como la presentada en la figura \ref{fig:guirequeridaporelcliente}, se encarga de presentar al usuario final los últimos datos adquiridos por cada nodo. De esta manera, se puede identificar de manera simple mediante un punto verde o rojo sobre el mapa si la línea monitoreada presenta un problema.
 % TODO: \usepackage{graphicx} required
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/GUI_requerida_por_el_cliente}
 	\caption{Ejemplo de interfaz gráfica de usuario requerida por el cliente para presentar los últimos datos recuperados por cada nodo en la ciudad de Posadas, Misiones.}
@@ -107,13 +107,19 @@ Una interfaz gráfica de como la presentada en la figura \ref{fig:guirequeridapo
 
 \section{Detalle del hardware}
 \subsection{Transformador de corriente}
+Un transformador de corriente o intensidad (TI) es un dispositivo de medición utilizado para producir en su devanado secundario una corriente diferente y proporcional a la que circula por su devanado primario.\\
+El principio de operación de un TI no es diferente al de un transformador de potencia convencional. A diferencia de uno de potencia, el devanado primario puede ser de una sola vuelta sobre un núcleo ferromagnético como se ve en la Imagen \ref{fig:dibujomedicionti}. El devanado secundario suele tener un número mayor de vueltas alrededor del núcleo que depende de que tanto se debe reducir la corriente.\\
+Muchos TI tienen una relación estándar de 5 Amperes en el secundario, por ejemplo un TI 200/5 significa que cuando por el primario fluyen 200 amperes en el secundario solo fluyen 5. Es decir, el TI tiene una relación de transformación de corriente N de 40 veces.\\
+Mediante esta técnica, pequeños instrumentos pueden monitorear grandes valores de corriente manteniendo una distancia segura de las líneas de alta tensión.
+
 % TODO: \usepackage{graphicx} required
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/dibujo_medicion_TI}
-	\caption{Circuito de medicion indirecta de corriente mediante un TI.\citep{hioki}}
+	\caption{Circuito de medición indirecta de corriente mediante un TI.\citep{hioki}}
 	\label{fig:dibujomedicionti}
 \end{figure}
+
 
 \subsection{Circuito de selección}
 A partir del lineamiento de que el TI debe estar conectado a la entrada del rectificador por defecto y al resistor shunt al energizarse la bobina del RL, el número y la disposición de los contactos fue un factor relevante al momento de elegir la mejor opción. La variante comercial que cumplió con los requisitos \ref{req_relay} es la producida por la firma Hongfa modelo HF115F/005-2ZS4A presentada en la figura \ref{fig:relay}.
@@ -137,8 +143,8 @@ A partir del lineamiento de que el TI debe estar conectado a la entrada del rect
 \end{figure}
 
 \subsection{Conversión de energía}
-Para obtener una tensión continua a partir una alterna generada por el TI, es necesario implementar un puente rectificador de onda completa.\\
-En la actualidad la mayoria de los circuitos rectificadores de onda completa se basan en diodos de silicio de bajo costo. Sin embargo, un diodo de silicio posee una caída de tensión tipica de 0,7 V. Esta caída de tension se traduce en pérdidas por efecto Joule y es relevante en dispositivos donde la conversión, acumulación y gestión de energía es critica. Por lo tanto, se desea maximizar la transferencia de tensión y potencia entre entrada y salida del puente rectificador.\\
+Para obtener una tensión continua a partir de una alterna generada por el TI, es necesario implementar un puente rectificador de onda completa.\\
+En la actualidad la mayoría de los circuitos rectificadores de onda completa se basan en diodos de silicio de bajo costo. Sin embargo, un diodo de silicio posee una caída de tensión típica de 0,7 V. Esta caída de tensión se traduce en pérdidas por efecto Joule y es relevante en dispositivos donde la conversión, acumulación y gestión de energía es crítica. Por lo tanto, se desea maximizar la transferencia de tensión y potencia entre entrada y salida del puente rectificador.\\
 (Yilmaz, Mehmet) analiza técnicas de rectificación de onda completa con diferentes tipos de diodos, como así también un arreglo de transistores MOSFET pasivo y activo. Las caídas de tensión simuladas entre la entrada y salida entre un puente rectificador de diodos de silicio y uno pasivo basado en MOSFETs se comparan en la figura \ref{fig:comparacion_diodos_vs_MOSFET}.\\
 Al comparar las simulaciones expuestas en las figuras \ref{fig:onda_rectificador_diodos} y \ref{fig:onda_rectificador_MOSFET} se aprecia que la caída de tensión generada por el rectificador basado en MOSFET al entrar en conducción es menor que uno hecho con diodos, por lo tanto también la potencia disipada en forma de calor.\\
 \begin{figure}
@@ -175,12 +181,12 @@ Al comparar las simulaciones expuestas en las figuras \ref{fig:onda_rectificador
 	\label{fig:comparacion_diodos_vs_MOSFET}
 \end{figure}
 
-
 \subsection{Supercapacitor como acumulador de energía}
 La decisión de optar por un banco de supercapacitores (SC) como reemplazo total de una batería, se basa principalmente en el entorno donde operará el nodo HW. Diferencias entre una batería y un SC de interés para este proyecto, se plasman en la tabla \ref{tab:batteria_vs_supercap}.\\
 Datos meteorológicos de la provincia de Misiones presentados en \citep{historico_temperaturas}, acusan temperaturas por encima de 30 C durante el periodo de septiembre a marzo. A diferencia de un SC que posee un rango de temperaturas de operación desde los -40 C hasta 70 C \citep{datasheet_supercap}, condiciones por encima de 35 grados son nocivas para una batería y generan el deterioro prematuro de sus componentes\citep{MA2018653}.\\
-Es importante remarcar que la densidad de energía que pueden almacenar también es diferente, una batería tiene una densidad de energía 60 veces mayor que un SC. Sin embargo, para esta aplicacion puntual no represento un factor importante a la hora de elegir el acumulador.\\
-Por ultimo, en ciclo carga es mas complejo en el caso de una batería. Las etapas de su curva de carga deben ser respetados según sean a corriente o tensión constante. Esto trae acarreado implementar una electrónica adicional encargada de gestiónar estos 2 parámetros. En un capacitor, la curva de carga está definida por un circuito RC serie \citep{ceraolo2014fundamentals}.\\ 
+Es importante remarcar que la densidad de energía que pueden almacenar también es diferente, una batería tiene una densidad de energía 60 veces mayor que un SC. Sin embargo, para esta aplicación puntual no representó un factor importante a la hora de elegir el acumulador.\\
+Por ultimo, en ciclo carga es mas complejo en el caso de una batería. Las etapas de su curva de carga deben ser respetados según sean a corriente o tensión constante. Esto trae acarreado implementar una electrónica adicional encargada de gestionar estos 2 parámetros. En un capacitor, la curva de carga está definida por un circuito RC serie \citep{ceraolo2014fundamentals}.\\ 
+%\begin{verbatim}
 \begin{table}
 	\centering
 	\caption{Comparativa entre una batería y un supercapacitor para este proyecto}
@@ -195,6 +201,56 @@ Por ultimo, en ciclo carga es mas complejo en el caso de una batería. Las etapa
 	\end{tabular}
 	\label{tab:batteria_vs_supercap}
 \end{table}
+%\end{verbatim}
+
+\subsection{Elevación de tensión mediante un conversor DC/DC }
+Para proveer al MC, y el resto de la electrónica asociada de una tensión DC fija y constante, se ha optado por emplear un módulo comercial DC/DC ya existente en el mercado y es presentado en la figura \ref{fig:dcdcboost}.\\
+Su topología interna es \textit{boost} o elevador de tensión. En el HW del sistema, cumple la función de llevar la tensión variable del SC conectado a su entrada a una fija de 5V. 
+A su entrada admite tensiones variables desde 0.9V hasta 5V y puede otorgar hasta 500 miliamperes de corriente a la salida.
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/dcdc_boost}
+	\caption{Módulo comercial DC/DC en topología boost utilizado para alimentar la electrónica}
+	\label{fig:dcdcboost}
+\end{figure}
+
+
+\subsection{Microcontrolador y firmware}
+El MC es el ente encargado de ejecutar la lógica de negocios acorde a la tarea que debe cumplir el HW. En el mercado existe una amplia gama de fabricantes de placas de desarrollo que permiten acelerar la etapa de prototipado y validación de diseño.\\
+La placa de desarrollo elegida para el prototipo fue la LoPy 4 producida la firma Pycom y se presenta en la figura \ref{fig:lopy4} . En su interior alberga un ESP32, 8 Megabytes de memoria flash, transceptores de radio LoRa y 802.11 y un regulador de tensión.\\
+El lenguaje de programación del LoPy4 es Micropython \citep{micropy}, un lenguaje de alto nivel lanzado por primera vez en el año 2014. Desde su lanzamiento y hasta la fecha de desarrollo de este trabajo, se presenta como una variante de Python atractiva para prototipar de firmware sobre microcontroladores utilizando el paradigma de programación orientada a objetos.
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/lopy4}
+	\caption{Placa de desarrollo LoPy 4 \citep{lopy4}}
+	\label{fig:lopy4}
+\end{figure}
+
+
+\section{Detalle del software}
+\subsection{Red LoRaWAN}
+% TODO: \usepackage{graphicx} required
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/arq_lorawan}
+	\caption{Arquitectura de una red LoRaWAN y sus posibles integraciones con terceras partes.}
+	\label{fig:arqlorawan}
+\end{figure}
+
+\subsection{Motor de base de datos}
+Una base de datos almacena la información de manera ordenada en tablas o estructuras de datos. Las distintas aplicaciones pueden ejecutar consultas para solicitar la parte de esos datos que necesiten en ese momento.\\
+Las bases de datos más utilizadas para aplicaciones web son las basadas en un modelo relacional, también conocidas como bases de datos SQL (Structured Query Language). Sin embargo, en años recientes se han popularizado las llamadas bases de datos NoSQL. Estas últimas están orientadas a documentos y almacena información de un mismo tipo en la forma de clave-valor.\\
+Por su naturaleza, este proyecto parece indicado para utilizar NoSQL, ya que solo almacena registros de un tipo y no necesita crear relaciones complicadas entre distintas tablas de datos.\\
+En principio se pensó en utilizar Elasticsearch, un servidor de búsqueda de texto basado en documentos JSON. Parecía el candidato ideal, ya que además de ser libre, se integraba perfectamente con Grafana, la herramienta para el desarrollo de la interfaz gráfica elegida.
+Sin embargo, en las primeras pruebas llevadas a cabo se pudo apreciar que el consumo de memoria y procesamiento eran muy elevadas si se lo implementaba en un hardware modesto como las Raspberry Pi. Finalmente se optó por utilizar MariaDB, una base de datos del tipo SQL, también libre, con menos demanda de recursos y muy popular en aplicaciones web.\\
+
+\subsection{Interfaz gráfica de usuario}
+Una vez recuperados los datos de la red LoRaWAN y almacenados en la DB, una GUI presenta al usuario final del centro de operaciones los datos recolectados por cada nodo.\\
+Para la presentación de la información se optó por Grafana. Grafana es una aplicación web de código abierto para el análisis y visualización de datos, en especial datos temporales.
+Grafana se adaptó muy bien a las necesidades del proyecto. Para mejorar aun más la experiencia del usuario se complementa Grafana con “Worldmap Panel”, un complemento que permite mostrar información temporal sobre un mapa. Esta información se presenta como círculos en las coordenadas donde se encuentra ubicado el nodo que genera la información.
+
 
 \subsection{Uso de mayúscula inicial para los título de secciones}
 Si en el texto se hace alusión a diferentes partes del trabajo referirse a ellas como capítulo, sección o subsección según corresponda. Por ejemplo: ``En el capítulo \ref{Chapter1} se explica tal cosa'', o ``En la sección \ref{sec:ejemplo} se presenta lo que sea'', o ``En la subsección \ref{subsec:ejemplo} se discute otra cosa''.
