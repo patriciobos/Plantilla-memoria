@@ -3,7 +3,7 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-En este capítulo se presentan los requerimientos acordados con el cliente y los recursos de hardware (HW) y software (SW) utilizados para el desarrollo de trabajo. Se describen en las partes implementadas del HW, los servicios integrados de backend (BES) y solamente algunos aspectos relevantes del firmware (FW) que interactúa con el hardware. En el capítulo 3 se abarca la lógica de negocios implementada en el FW del microcontrolador.\\
+En este capítulo se presentan los requerimientos acordados con el cliente y los recursos de \textit{hardware} (HW) y \textit{software} (SW) utilizados para el desarrollo de trabajo. Se describen en las partes implementadas del HW, los servicios integrados de \textit{backend} (BES) y solamente algunos aspectos relevantes del \textit{firmware} (FW) que interactúa con el hardware. En el capítulo 3 se abarca la lógica de negocios implementada en el FW del microcontrolador.\\
 \section{Requerimientos acordados con el cliente}
 \label{sec:requerimientos}
 \begin{enumerate}
@@ -51,7 +51,7 @@ En este capítulo se presentan los requerimientos acordados con el cliente y los
 	\label{requerimientos_backend}
 	\begin{enumerate}
 		\item Todos los servicios deben poder correr en una Raspberry Pi 3.
-		\item El software de los BES se desarrollará en lenguaje Python.
+		\item El \textit{software} de los BES se desarrollará en lenguaje Python.
 		\item Recuperar los datos de la red LoRaWAN.\label{requerimiento_LORAWAN}
 		\item Almacenar los datos en una tabla de MySQL.
 		\item GUI basada en Grafana.
@@ -185,7 +185,7 @@ Al comparar las simulaciones expuestas en las figuras \ref{fig:onda_rectificador
 La decisión de optar por un banco de supercapacitores (SC) como reemplazo total de una batería, se basa principalmente en el entorno donde operará el nodo HW. Diferencias entre una batería y un SC de interés para este proyecto, se plasman en la tabla \ref{tab:batteria_vs_supercap}.\\
 Datos meteorológicos de la provincia de Misiones presentados en \citep{historico_temperaturas}, acusan temperaturas por encima de 30 C durante el periodo de septiembre a marzo. A diferencia de un SC que posee un rango de temperaturas de operación desde los -40 C hasta 70 C \citep{datasheet_supercap}, condiciones por encima de 35 grados son nocivas para una batería y generan el deterioro prematuro de sus componentes\citep{MA2018653}.\\
 Es importante remarcar que la densidad de energía que pueden almacenar también es diferente, una batería tiene una densidad de energía 60 veces mayor que un SC. Sin embargo, para esta aplicación puntual no representó un factor importante a la hora de elegir el acumulador.\\
-Por ultimo, en ciclo carga es mas complejo en el caso de una batería. Las etapas de su curva de carga deben ser respetados según sean a corriente o tensión constante. Esto trae acarreado implementar una electrónica adicional encargada de gestionar estos 2 parámetros. En un capacitor, la curva de carga está definida por un circuito RC serie \citep{ceraolo2014fundamentals}.\\ 
+Por último, el ciclo de carga es más complejo en el caso de una batería. Las etapas de su curva de carga deben ser respetados según sean a corriente o tensión constante. Esto trae acarreado implementar una electrónica adicional encargada de gestionar estos 2 parámetros. En un capacitor, la curva de carga está definida por un circuito RC serie \citep{ceraolo2014fundamentals}.\\ 
 %\begin{verbatim}
 \begin{table}
 	\centering
@@ -194,7 +194,7 @@ Por ultimo, en ciclo carga es mas complejo en el caso de una batería. Las etapa
 		\hline
 		\multicolumn{1}{c}{}                                                  & Batería         & Supercapacitor                                                                         \\ 
 		\hline
-		\begin{tabular}[c]{@{}l@{}}Densidad de \\energía (Wh/Kg)\end{tabular} & 265             & 3.9                                                                                    \\
+		\begin{tabular}[c]{@{}l@{}}Densidad de \\energía (Wh/Kg)\end{tabular} & 265             & 3,9                                                                                    \\
 		\begin{tabular}[c]{@{}l@{}}Rango de \\temperatura (C)\end{tabular}    & 15 a 35         & -40 a 70                                                                               \\
 		Gestión de carga                                                      & V o I constante & \begin{tabular}[c]{@{}c@{}}Determinado por un\\circuito RC serie \citep{ceraolo2014fundamentals}\end{tabular}  \\
 		\hline
@@ -205,8 +205,8 @@ Por ultimo, en ciclo carga es mas complejo en el caso de una batería. Las etapa
 
 \subsection{Elevación de tensión mediante un conversor DC/DC }
 Para proveer al MC, y el resto de la electrónica asociada de una tensión DC fija y constante, se ha optado por emplear un módulo comercial DC/DC ya existente en el mercado y es presentado en la figura \ref{fig:dcdcboost}.\\
-Su topología interna es \textit{boost} o elevador de tensión. En el HW del sistema, cumple la función de llevar la tensión variable del SC conectado a su entrada a una fija de 5V. 
-A su entrada admite tensiones variables desde 0.9V hasta 5V y puede otorgar hasta 500 miliamperes de corriente a la salida.
+Su topología interna es \textit{boost} o elevador de tensión. En el HW del sistema, cumple la función de llevar la tensión variable del SC conectado a su entrada a una fija de 5 V. 
+A su entrada admite tensiones variables desde 0,9 V hasta 5 V y puede otorgar hasta 500 miliamperes de corriente a la salida.
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
@@ -219,7 +219,7 @@ A su entrada admite tensiones variables desde 0.9V hasta 5V y puede otorgar hast
 \subsection{Microcontrolador y firmware}
 El MC es el ente encargado de ejecutar la lógica de negocios acorde a la tarea que debe cumplir el HW. En el mercado existe una amplia gama de fabricantes de placas de desarrollo que permiten acelerar la etapa de prototipado y validación de diseño.\\
 La placa de desarrollo elegida para el prototipo fue la LoPy 4 producida la firma Pycom y se presenta en la figura \ref{fig:lopy4} . En su interior alberga un ESP32, 8 Megabytes de memoria flash, transceptores de radio LoRa y 802.11 y un regulador de tensión.\\
-El lenguaje de programación del LoPy4 es Micropython \citep{micropy}, un lenguaje de alto nivel lanzado por primera vez en el año 2014. Desde su lanzamiento y hasta la fecha de desarrollo de este trabajo, se presenta como una variante de Python atractiva para prototipar de firmware sobre microcontroladores utilizando el paradigma de programación orientada a objetos.
+El lenguaje de programación del LoPy4 es Micropython \citep{micropy}, un lenguaje de alto nivel lanzado por primera vez en el año 2014. Desde su lanzamiento y hasta la fecha de desarrollo de este trabajo, se presenta como una variante de Python atractiva para prototipar FW sobre microcontroladores utilizando el paradigma de programación orientada a objetos.
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
@@ -231,12 +231,25 @@ El lenguaje de programación del LoPy4 es Micropython \citep{micropy}, un lengua
 
 \section{Detalle del software}
 \subsection{Red LoRaWAN}
+LoRaWAN (Long Range Wide Area Network) es un protocolo de control de acceso al medio (MAC - \textit{Medium Acces Control}) definido por \textit{LoRa Aliance} \citep{lora_alliance}. Tiene por objeto permitir la conexión de nodos de baja potencia (generalmente alimentados a batería y sin capacidad de manejo de protocolos de enrutamiento por ejemplo TCP/IP) con aplicaciones finales conectadas a Internet mediante una conexión inalámbrica de largo alcance utilizando modulación LoRa.
+Las puertas de enlace (GW - \textit{gateways}), están conectados al servidor central mediante conexiones IP (Internet Protocol) estándar cumpliendo la función de puente, es decir, convierte los paquetes de radiofrecuencia (RF) en paquetes IP y viceversa \ref{fig:arqlorawan}.\\
+El protocolo LoRaWAN no es un protocolo IP, por lo tanto, los paquetes del mismo necesitan de un enrutamiento y procesamiento correspondiente antes de ser entregados a la aplicación final.\\
+La figura \ref{fig:sensor-gw-architecture-lora} presenta la topología tipo ``estrella de estrellas`` que adopta una red LoRaWAN. En ella los GW retransmiten los mensajes recibidos de los nodos finales hacia un servidor central. La comunicación inalámbrica entre nodos y GW aprovecha las características propias de la capa física, permitiendo así enlaces de un nodo hacia uno o más \textit{gateways}.\\
+
 % TODO: \usepackage{graphicx} required
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/arq_lorawan}
+	\includegraphics[width=0.9\linewidth]{Figures/arq_lorawan_2}
 	\caption{Arquitectura de una red LoRaWAN y sus posibles integraciones con terceras partes.}
 	\label{fig:arqlorawan}
+\end{figure}
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{Figures/sensor-gw-architecture-lora}
+	\caption{Topología de una red LoRaWAN y la interacción entre los diferentes miembros}
+	\label{fig:sensor-gw-architecture-lora}
 \end{figure}
 
 \subsection{Motor de base de datos}
@@ -278,7 +291,7 @@ Notar el uso de las mayúsculas y el punto al final de cada elemento.
 
 Se recomienda no utilizar \textbf{texto en negritas} en ningún párrafo, ni tampoco texto \underline{subrayado}. En cambio sí se debe utilizar \textit{texto en itálicas} para palabras en un idioma extranjero, al menos la primera vez que aparecen en el texto. En el caso de palabras que estamos inventando se deben utilizar ``comillas'', así como también para citas textuales. Por ejemplo, un \textit{digital filter} es una especie de ``selector'' que permite separar ciertos componentes armónicos en particular.
 
-La escritura debe ser impersonal. Por ejemplo, no utilizar ``el diseño del firmware lo hice de acuerdo con tal principio'', sino ``el firmware fue diseñado utilizando tal principio''. 
+La escritura debe ser impersonal. Por ejemplo, no utilizar ``el diseño del FW lo hice de acuerdo con tal principio'', sino ``el firmware fue diseñado utilizando tal principio''. 
 
 El trabajo es algo que al momento de escribir la memoria se supone que ya está concluido, entonces todo lo que se refiera a hacer el trabajo se narra en tiempo pasado, porque es algo que ya ocurrió. Por ejemplo, "se diseñó el firmware empleando la técnica de test driven development".
 
