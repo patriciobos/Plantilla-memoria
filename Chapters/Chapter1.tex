@@ -40,35 +40,34 @@ La medición de corriente puede ser directa, vinculando los conductores de alime
 \end{figure}
 \footnotetext{Imagen tomada por el autor}
 
+En la actualidad algunas prestadoras del servicio eléctrico han adoptado estrategias de medición inteligente similares a la presentada en la figura \ref{fig:medidordigitalconcomplementogsm}. En este esquema los equipos de medición se reportan a centros de operación a través de una red de comunicaciones móvil, como por ejemplo GSM.\\
 % TODO: \usepackage{graphicx} required
-\begin{figure}
+\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.5\linewidth]{Figures/medidor_digital_con_complemento_gsm}
+	\includegraphics[width=0.4\linewidth]{Figures/medidor_digital_con_complemento_gsm}
 	\caption{Medidor de energía digital con complemento para telemedición mediante GSM. Imagen tomada de \citep{MYEEL}}
 	\label{fig:medidordigitalconcomplementogsm}
-\end{figure}
-En la actualidad algunas prestadoras del servicio eléctrico han adoptado estrategias de medición inteligente similares a la presentada en la figura \ref{fig:medidordigitalconcomplementogsm}. En este esquema los equipos de medición se reportan a centros de operación a través de una red de comunicaciones móvil, como por ejemplo GSM.\\
+\end{figure}\\
 El concepto de telemedición aporta además de lo comercial, valiosa información técnica, ya que los centros de operaciones conocen en todo momento el estado del medidor con la posibilidad de detectar fallas o la interrupción del servicio eléctrico.\\  
 
 \section{Estado del arte y problemática identificada}
 En Sudamérica, gran parte de las empresas distibuidoras de energía eléctrica y sus tercerizadas, basan parte de sus operaciones en el contacto directo con los usuarios finales mediante reclamos para informarse acerca de interrupciones en el servicio de distribución de energía eléctrica. Una vez recibido un reclamo, la prestadora de servicios envía al grupo de operaciones especializado a recorrer el área circundante al cliente y tratar de determinar el motivo de la interrupción del servicio.\\
-
+Un hecho común en el nordeste Argentino y particularmente en la provincia de Misiones es la destrucción de fusibles aéreos como el presentado en la figura \ref{fig:nh_aereo_bt}. Estos fusibles conectados inmediatamente a la salida de baja tensión y en serie con las líneas de distribución, cumplen la función de protección por sobrecorriente debido a picos de consumo o cortocircuitos causados por desastres naturales como el de la figura \ref{fig:arbolcaidolineabt}.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/NH_aereo_bt}
 	\caption{Fusible seccionador aéreo tipo NH usualmente utilizado en lineas de distribución de baja tensión}
 	\label{fig:nh_aereo_bt}
-\end{figure}
-Un hecho común en el nordeste Argentino y particularmente en la provincia de Misiones es la destrucción de fusibles aéreos como el presentado en la figura \ref{fig:nh_aereo_bt}. Estos fusibles conectados inmediatamente a la salida de baja tensión y en serie con las líneas de distribución, cumplen la función de protección por sobrecorriente debido a picos de consumo o cortocircuitos causados por desastres naturales como el de la figura \ref{fig:arbolcaidolineabt}. Los fusibles involucrados poseen un elemento conductor en su interior por el cual circula la corriente de servicio. Dicho componente se funde al ser sometido a corrientes de falla o sobrecorrientes, interrumpiendo así el suministro.\\
+\end{figure}\\
+Los fusibles involucrados poseen un elemento conductor en su interior por el cual circula la corriente de servicio. Dicho componente se funde al ser sometido a corrientes de falla o sobrecorrientes, interrumpiendo así el suministro.\\
 Este esquema presentado, resulta aún precario y no efectivo en cuanto a la rapidez para determinar la localización geográfica donde se ha generado una falla, lo que resulta en una inferior calidad de servicio prestado al cliente.\\
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/arbol_caido_linea_bt}
+	\includegraphics[width=0.9\linewidth]{Figures/arbol_caido_linea_bt}
 	\caption{Un árbol caído sobre las líneas de distribución aéreas de baja tensión luego de una breve tormenta en la ciudad de Posadas, Misiones. Imagen tomada de \citep{Noticia_MNES}}
 	\label{fig:arbolcaidolineabt}
 \end{figure}
-
 Cabe mencionar que la mayoría de las redes de distribución de baja tensión en 380/220V no poseen la capacidad de brindar algún otro servicio agregado. Como una manera de previsión a la necesidad de montar servicios adicionales a las redes de transmisión de media y alta tensión (33 kV y 132 kV), a las redes propias de transmisión de energía, se adiciona una infraestructura de fibra óptica por medio de un cable de guarda aéreo compuesto de acuerdo a estándares de IEEE (OPGW - Optical Fiber Composite Overhead Ground Wire-). Ésta instalación combina las funciones de conexión a tierra y de comunicaciones, estableciendo una estructura tubular de varios pares de fibras ópticas en el mismo, rodeadas por capas de hilos de aluminio y acero. La parte conductora del cable sirve para unir las puestas a tierra de las estructuras adyacentes, protegiendo a estas de las descargas atmosféricas.\\
 Las fibras ópticas dentro del cable se utilizan para la transmisión de datos a alta velocidad, ya sea para uso propio del sistema eléctrico de protección y control de la línea de transmisión, para la comunicación de voz y datos, o pueden ser alquilados o vendidos a terceros para servir como una interconexión de fibra de alta velocidad entre diferentes ciudades. En ciertas ocasiones, frente a condiciones climáticas extremas éstas instalaciones muestran cierta vulnerabilidad, conllevando a un elevado costo de mantenimiento \citep{ARTICLE:1}.\\
 Lu, Liang, Li y Guo \citep{ARTICLE:1} y Sosa y Sosa \citep{ARTICLE:2}, comparten la aplicación de un modelo de arquitectura de 3 capas para los sistemas smart grid: física, red y aplicación. Definiendo donde residirá la aplicación y su objetivo final, surgen diferentes estrategias de control a ser implementadas. De la misma manera, la selección de sensores de diferente tipo (meteorológicos, estructurales, operacionales, etc.) residen en entornos controlados, los cuales se establecen mediante el despliegue e implementación de redes de diferente tecnología y modos de comunicación.\\
@@ -94,4 +93,4 @@ En el presente proyecto se desarrollan los siguientes temas:
 	\item Tecnología LoRaWAN.
 	\item Recuperación, almacenamiento y presentación de datos generados por los nodos finales.
 \end{itemize}
-Si bien el proyecto es parte de un plan de creación de una PyME del autor, no es parte del alcance ni se cubren en este documento las etapa de lanzamiento de producto ni creación de la empresa.
+Si bien el proyecto es parte de un plan de creación de una PyME del autor, no es parte del alcance ni se cubren en este documento las etapas de lanzamiento de producto ni creación de la empresa.
