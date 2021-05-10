@@ -128,6 +128,45 @@ Adicionalmente el módulo elegido, aporta simpleza al esquemático final y un ra
  \end{figure}\\
 De esta manera las diferentes etapas de 3,3 V y 5 V se energizan unicamente cuando el MC pone en estado alto el pin \textit{ON} a la entrada del LS.\\
  
+\subsection{Transformador de Intensidad}
+Teniendo en cuenta que el comisionamiento debe realizarse sobre redes ya existentes y operativas, no resulta práctico utilizar un TI de núcleo sólido. Un TI de tipo nucleo partido como el presentado en la figura del ti  permite sortear el problema de interrumpir el cable a monitorear para enhebrarlo por el primario facilitar notablemente su comisionamiento o remoción.\\
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=.7\textwidth]{./Figures/ti_abierto}
+		\caption{}
+		\label{fig:ti_abierto}
+	\end{subfigure}
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=.7\textwidth]{./Figures/ti_dimensiones}
+		\caption{}
+		\label{fig:ti_dimensiones}
+	\end{subfigure}
+	\caption{TI de tipo nucleo partido y sus dimenensiones. Imágenes tomadas de \citep{ct_hobut}}
+	\label{fig:ti_mosaico}
+\end{figure}\\
+En base al requerimiento de corriente mínima admisible en circuito primario del TI, se eligió uno fabricado por la empresa Howard Butler Ltd modelo CTSCM40-200/5 y sus características se presentan en la \ref{tabla_caracteristicas_ti}.\\ 
+
+\begin{table}
+	\centering
+	\caption{Características del CTSCM40-200/5 \citep{ct_hobut}}
+	\begin{tabular}{lc} 
+		\hline
+		\multicolumn{1}{c}{Parametro}                                                       & \begin{tabular}[c]{@{}c@{}}Valor\\maximo~\end{tabular}  \\ 
+		\hline
+		Burden (VA)                                                                         & 2,5                                                     \\
+		\begin{tabular}[c]{@{}l@{}}Corriente sobre el\\circuito primario (A)\end{tabular}   & 200                                                     \\
+		\begin{tabular}[c]{@{}l@{}}Corriente sobre~el\\circuito secundario (A)\end{tabular} & 5                                                       \\
+		\begin{tabular}[c]{@{}l@{}}Relacion de \\transformacion (N)\end{tabular}            & 40                                                      \\
+		\begin{tabular}[c]{@{}l@{}}Rango de~\\frecuencia (Hz)\end{tabular}                  & 50 - 60                                                 \\
+		Clase                                                                               & 1                                                       \\
+		\hline
+	\end{tabular}\label{tabla_caracteristicas_ti}
+\end{table}
+
 \section{Firmware implementado}
 
 \section{Servicios de Backend}
