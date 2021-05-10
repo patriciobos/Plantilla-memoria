@@ -102,6 +102,31 @@ Los SC, se presentan en la figura \ref{fig:imagensupercap} como un módulo únic
 Al tratarse de una capacitancia total considerablemente mayor que la de un capacitor habitual, almacenará también más energía. El SC puede entonces cumplir la función de acumular energía para mantener operativa la electrónica en caso de que se interrumpa la conversión de energía.\\
 Adicionalmente el módulo elegido, aporta simpleza al esquemático final y un rango de temperatura de operación mayor que una solución que además incluya una batería \citep{PORCARELLI20141671}.\\
 
+ \subsection{Circuito de detección de cortes}
+ Una de las funcionalidades relevantes del HW, es detectar interrupciones en la distribución de energía debido a razones tales como sobrecarga en la línea o desastres naturales.\\
+ El circuito detector de cortes propuesto en Figura detector está basado en un comparador TLV3691 de la firma Texas Instruments. Su salida, se encarga de generar una interrupcion (IRQ) por flanco ascendente y despertar al MC.\\
+ % TODO: \usepackage{graphicx} required
+ \begin{figure}[h]
+ 	\centering
+ 	\includegraphics[width=0.7\linewidth]{Figures/cto_detector_cortes}
+ 	\caption{Circuito utilizado como detector de cortes.}
+ 	\label{fig:ctodetectorcortes}
+ \end{figure}\\
+ Como referencia para generar la señal IRQ, se toma un valor de 1,65 V obtenido a partir de un divisor resistivo formado por \textit{R16} y \textit{R17}. Este divisor resistivo puede ser reemplazado por un potenciómetro en caso de ser necesario.\\
+ La salida del puente rectificador se conecta al detector mediante el diodo \textit{D6}. A continuación los capacitores \textit{C23} y \textit{C24} filtran el rizado presente en la señal resultando en una señal de continua a la entrada no inversora del comparador.\\
+ En el caso de que ocurra un corte en la línea de distribución, la corriente que circule por \textit{D6} es nula y los capacitores se descargan a través de \textit{R18}. Al bajar su tensión por debajo de 1,65 V, la salida se pondrá en alto y la IRQ será atendida por el FW del MC.\\
+ 
+ \subsection{Circuito de apagado y encendido mediante load switch}
+ Con el objeto de lograr un mínimo consumo en estado ocioso, es necesario desenergizar toda electrónica asociada al HW que se encuentre en desuso, con excepcion del MC y el circuito detector de la figura \ref{fig:ctodetectorcortes}.\\
+ Para interrupcion la alimentacion de manera electrónica, se adoptaron dos circuitos independientes basados en un \textit{load switch} (LS) FPF2100 y se presentan en la figura \ref{fig:ctoloadswitch}.
+ % TODO: \usepackage{graphicx} required
+ \begin{figure}[h]
+ 	\centering
+ 	\includegraphics[width=0.7\linewidth]{Figures/cto_load_switch}
+ 	\caption{Circuito de encendido y apagado de las diferentes etapas de HW empleando un load switch FPF2100 \citep{fpf2100}.}
+ 	\label{fig:ctoloadswitch}
+ \end{figure}\\
+De esta manera las diferentes etapas de 3,3 V y 5 V se energizan unicamente cuando el MC pone en estado alto el pin \textit{ON} a la entrada del LS.\\
  
 \section{Firmware implementado}
 
