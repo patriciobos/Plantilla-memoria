@@ -7,7 +7,7 @@ En este capítulo se presentan los requerimientos acordados con el cliente y los
 \section{Requerimientos acordados con el cliente}
 \label{sec:requerimientos}
 \begin{enumerate}
-	\item Grupo de requerimientos asociados con hardware
+	\item Grupo de requerimientos asociados con \textit{hardware}
 	\begin{enumerate}
 		\item El dispositivo deberá ser de tipo \textit{plug and play}.
 		\item El circuito impreso no deberá ocupar un volumen mayor a 10x10x5 cm.
@@ -19,7 +19,7 @@ En este capítulo se presentan los requerimientos acordados con el cliente y los
 			\item Integrar un módulo de comunicaciones LoRa.
 		\end{enumerate}
 		\item Deberá tener al menos 12 horas de autonomía de funcionamiento.
-		\item Bajo consumo en modo ocioso: el consumo del hardware en total, no deberá superar los 5 mA cuando no está midiendo ni transmitiendo.
+		\item Bajo consumo en modo ocioso: el consumo del \textit{hardware} en total, no deberá superar los 5 mA cuando no está midiendo ni transmitiendo.
 		\item El circuito elevador de tensión DC-DC deberá:
 		\begin{enumerate}%[label*=\arabic*.]
 			\item Funcionar con tensiones menores a 2V en la entrada.
@@ -40,7 +40,7 @@ En este capítulo se presentan los requerimientos acordados con el cliente y los
 		\item Debe funcionar de manera independiente a la frecuencia de operación de la red 50/60 Hz.
 		\item Debe funcionar de manera independiente a la tensión de fase del sistema de distribución 110/220 Voltios.
 	\end{enumerate}
-	\item Grupo de requerimientos asociados con el firmware
+	\item Grupo de requerimientos asociados con el \textit{firmware}
 	\begin{enumerate}
 		\item Debe manejar un módulo de comunicación LoRa y protocolo LoRaWAN.
 		\item Deberá tener un porcentaje de cobertura de tests unitarios del 60\% como mínimo.
@@ -244,10 +244,10 @@ La figura \ref{fig:sensor-gw-architecture-lora} presenta la topología tipo ``es
 
 \subsection{Motor de base de datos}
 Una base de datos (DB - \textit{Database}) almacena la información de manera ordenada en tablas o estructuras de datos. Las distintas aplicaciones pueden ejecutar consultas para solicitar la parte de esos datos que necesiten en ese momento.\\
-Las bases de datos más utilizadas para aplicaciones web son las basadas en un modelo relacional, también conocidas como bases de datos SQL (Structured Query Language). Sin embargo, en años recientes se han popularizado las llamadas bases de datos NoSQL. Estas últimas están orientadas a documentos y almacena información de un mismo tipo en la forma de clave-valor.\\
+Las bases de datos más utilizadas para aplicaciones \textit{web} son las basadas en un modelo relacional, también conocidas como bases de datos SQL (Structured Query Language). Sin embargo, en años recientes se han popularizado las llamadas bases de datos NoSQL. Estas últimas están orientadas a documentos y almacena información de un mismo tipo en la forma de clave-valor.\\
 Por su naturaleza, este proyecto parece indicado para utilizar NoSQL, ya que solo almacena registros de un tipo y no necesita crear relaciones complicadas entre distintas tablas de datos.\\
 En principio se pensó en utilizar \textit{Elasticsearch} \citep{elasticsearch}, un servidor de búsqueda de texto basado en documentos JSON. Parecía el candidato ideal, ya que además de ser libre, se integraba perfectamente con Grafana, la herramienta para el desarrollo de la interfaz gráfica elegida \citep{grafana}.\\
-Sin embargo, en las primeras pruebas llevadas a cabo se pudo apreciar que el consumo de memoria y procesamiento eran muy elevadas si se lo implementaba en un hardware modesto como las \textit{Raspberry Pi} \citep{raspi}. Finalmente se optó por utilizar MariaDB \citep{mariadb}, una base de datos del tipo SQL, también libre, con menos demanda de recursos y muy popular en aplicaciones web.\\
+Sin embargo, en las primeras pruebas llevadas a cabo se pudo apreciar que el consumo de memoria y procesamiento eran muy elevadas si se lo implementaba en un \textit{hardware} modesto como las \textit{Raspberry Pi} \citep{raspi}. Finalmente se optó por utilizar MariaDB \citep{mariadb}, una base de datos del tipo SQL, también libre, con menos demanda de recursos y muy popular en aplicaciones \textit{web}.\\
 
 \subsection{Interfaz gráfica de usuario}
 Una vez recuperados los datos de la red LoRaWAN y almacenados en la DB, una GUI presenta al usuario final del centro de operaciones los datos recolectados por cada nodo.\\
@@ -259,5 +259,5 @@ Una interfaz gráfica como la presentada en la figura \ref{fig:guirequeridaporel
 	\caption{Ejemplo de interfaz gráfica de usuario requerida por el cliente para presentar los últimos datos recuperados por cada nodo en la ciudad de Posadas, Misiones.}
 	\label{fig:guirequeridaporelcliente}
 \end{figure}\\
-Para la presentación de la información se optó por Grafana, una aplicación web de código abierto para el análisis y visualización de datos, en especial datos temporales \citep{grafana}.\\
+Para la presentación de la información se optó por Grafana, una aplicación \textit{web} de código abierto para el análisis y visualización de datos, en especial datos temporales \citep{grafana}.\\
 Grafana se adaptó muy bien a las necesidades del proyecto. Para mejorar aun más la experiencia del usuario se complementa con \textit{Worldmap Panel}, un \textit{plug in} que permite mostrar información temporal sobre un mapa. Esta información se presenta como círculos en las coordenadas donde se encuentra ubicado el nodo que genera la información.\\
