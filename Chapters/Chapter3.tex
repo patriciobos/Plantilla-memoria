@@ -57,8 +57,7 @@ En la figura \ref{fig:ctoselecciondemodo} se implementó el RL sin retención pr
 Cada vez que se desea tomar una medición de corriente, el MC enciende la bobina del relay y conecta el TI al circuito de medición de valor RMS. Al \\
 
 \subsection{Puente rectificador de onda completa}
-Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la FIGURA TESIS YILMAZ. Con el objeto de reducir el espacio ocupado en el PCB, se optó por utilizar un chip DMHC3025 en encapsulado SOIC-8 [REFERENCIA A DATASHEET].\\
-El encapsulado de la \ref{fig:esquematicointernorctificadormosfet} alberga un puente H formado dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicacion son presentadas en la tabla \ref{tabla_transistores_rectificador}.
+Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la figura \ref{fig:rect_MOSFET}. Con el objeto de reducir el espacio ocupado en el PCB, se optó por utilizar un chip DMHC3025 en encapsulado SOIC-8 [REFERENCIA A DATASHEET]. El encapsulado presentado en la \ref{fig:esquematicointernorctificadormosfet} alberga un puente H formado dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicacion son presentadas en la tabla \ref{tabla_transistores_rectificador}.
 \begin{table}[h]
 	\centering
 	\caption{Características eléctricas de los transistores que forman parte del rectificador de onda completa.}
@@ -76,19 +75,32 @@ El encapsulado de la \ref{fig:esquematicointernorctificadormosfet} alberga un pu
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/esquematico_interno_rctificador_mosfet}
+	\includegraphics[width=0.8\linewidth]{Figures/esquematico_interno_rctificador_mosfet}
 	\caption{Pinout y esquematico interno del DMHC3025 [referencia al datasheet].}
 	\label{fig:esquematicointernorctificadormosfet}
 \end{figure}
-El circuito final implementado encargado de la recitificacion y filtrado de la tension DC a la salida se presenta en la figura \ref{fig:ctorectificacionfiltrado}. Dos diodos zener \textit{D1} y \textit{D2} en antiparalelo protegen el a los transistores  de picos de sobretensión recortando la onda a 27 V para cada semiciclo.\\
+El circuito final implementado encargado de la recitificacion y filtrado de la tension DC a la salida se presenta en la figura \ref{fig:ctorectificacionfiltrado}. Dos diodos zener \textit{D1} y \textit{D2} en antiparalelo protegen el a los transistores  de picos de sobretensión recortando la onda a 27 V para cada semiciclo de la onda senoidal a la entrada.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/cto_rectificacion_filtrado}
+	\includegraphics[width=0.8\linewidth]{Figures/cto_rectificacion_filtrado}
 	\caption{Etapa de rectificacion, filtrado y acumulacion implementada.}
 	\label{fig:ctorectificacionfiltrado}
 \end{figure}\\
-A su salida, un conjunto de capacitores cerámicos \textit{C5}, \textit{C6} y \textit{C7} filtran ruido de alta frecuencia para luego acumular toda la energía en el SC conectado a J5.\\
+A su salida, un conjunto de capacitores cerámicos \textit{C5}, \textit{C6} y \textit{C7} filtran ruido de alta frecuencia para luego acumular toda la energía en el SC conectado a \textit{J5}.\\
+
+\subsection{Acumulador de energía basado en supercapacitores}
+A la salida del rectificador de onda completa de la figura \ref{fig:ctorectificacionfiltrado}, se conecta en la bornera \textit{J5} un banco de dos SC de 500 F x 2,7 V en serie con una capacitancia equivalente de 250F x 5,4 V.\\
+Los SC, se presentan en la figura \ref{fig:imagensupercap} como un módulo único donde ya se encuentran montados sobre una placa con una electrónica adicional de protección. El circuito de protección, se encarga de limitar la tensión en sus bornes a 2,5 V y disipar la potencia excedente.\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/imagen_supercap}
+	\caption{Banco de SC de 250 F x 5,4 V utilizado como acumulador.}
+	\label{fig:imagensupercap}
+\end{figure}\\
+Al tratarse de una capacitancia total considerablemente mayor que la de un capacitor habitual, almacenará también más energía. El SC puede entonces cumplir la función de acumular energía para mantener operativa la electrónica en caso de que se interrumpa la conversión de energía.\\
+Adicionalmente el módulo elegido, aporta simpleza al esquemático final y un rango de temperatura de operación mayor que una solución que además incluya una batería \citep{PORCARELLI20141671}.\\
 
  
 \section{Firmware implementado}
