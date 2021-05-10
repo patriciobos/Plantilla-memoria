@@ -43,6 +43,53 @@
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 \section{Detalle del hardware por etapas}
+\subsection{Circuito de selección de modo}
+Considerando el caso límite donde el nivel del acumulador es bajo y el MC ordena al relay (RL) con retención cambiar su estado, la energía necesaria para excitar al RL puede generar una caída de tensión significativa en el acumulador y resultar en un circuito totalmente desenergizado sin posibilidad de volver a entrar en operación a no ser mediante la intervención humana.\\
+Un caso extremo como el mencionado, implica que el HW posea un mecanismo para restablecer su operación tras largos periodos de tiempo aun después de haberse vaciado el acumulador.\\
+En la figura \ref{fig:ctoselecciondemodo} se implementó el RL sin retención presentado en \ref{fig:relay} y su circuito de mando. Los terminales del TI, se encuentran conectados por defecto a la etapa de conversión y acumulacion de energía (terminales \textit{NC1} y \textit{NC2}). Una vez que la tensión en bornes del acumulador alcanza el valor de mínimo para que el conversor DC/DC entre en operación, también la electrónica sin la necesidad de una intervención externa.\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/cto_seleccion_de_modo}
+	\caption{circuito selector de modo basado en el relay HF115-005-2ZS4}
+	\label{fig:ctoselecciondemodo}
+\end{figure}\\
+Cada vez que se desea tomar una medición de corriente, el MC enciende la bobina del relay y conecta el TI al circuito de medición de valor RMS. Al \\
+
+\subsection{Puente rectificador de onda completa}
+Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la FIGURA TESIS YILMAZ. Con el objeto de reducir el espacio ocupado en el PCB, se optó por utilizar un chip DMHC3025 en encapsulado SOIC-8 [REFERENCIA A DATASHEET].\\
+El encapsulado de la \ref{fig:esquematicointernorctificadormosfet} alberga un puente H formado dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicacion son presentadas en la tabla \ref{tabla_transistores_rectificador}.
+\begin{table}[h]
+	\centering
+	\caption{Características eléctricas de los transistores que forman parte del rectificador de onda completa.}
+	\begin{tabular}{cc} 
+		\hline
+		\textbf{\textbf{Parámetro}} & \begin{tabular}[c]{@{}c@{}}\textbf{}\\\textbf{\textbf{Valor máximo}}\end{tabular}  \\ 
+		\hline
+		Rds                         & 25 miliohms                                                                        \\
+		Id                          & 6 A                                                                                \\
+		Vdss                        & 30 V                                                                               \\
+		\hline
+	\end{tabular}\label{tabla_transistores_rectificador}
+\end{table}
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/esquematico_interno_rctificador_mosfet}
+	\caption{Pinout y esquematico interno del DMHC3025 [referencia al datasheet].}
+	\label{fig:esquematicointernorctificadormosfet}
+\end{figure}
+El circuito final implementado encargado de la recitificacion y filtrado de la tension DC a la salida se presenta en la figura \ref{fig:ctorectificacionfiltrado}. Dos diodos zener \textit{D1} y \textit{D2} en antiparalelo protegen el a los transistores  de picos de sobretensión recortando la onda a 27 V para cada semiciclo.\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/cto_rectificacion_filtrado}
+	\caption{Etapa de rectificacion, filtrado y acumulacion implementada.}
+	\label{fig:ctorectificacionfiltrado}
+\end{figure}\\
+A su salida, un conjunto de capacitores cerámicos \textit{C5}, \textit{C6} y \textit{C7} filtran ruido de alta frecuencia para luego acumular toda la energía en el SC conectado a J5.\\
+
  
 \section{Firmware implementado}
 
