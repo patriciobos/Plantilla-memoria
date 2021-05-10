@@ -251,8 +251,6 @@ Sin embargo, en las primeras pruebas llevadas a cabo se pudo apreciar que el con
 
 \subsection{Interfaz gráfica de usuario}
 Una vez recuperados los datos de la red LoRaWAN y almacenados en la DB, una GUI presenta al usuario final del centro de operaciones los datos recolectados por cada nodo.\\
-Para la presentación de la información se optó por Grafana, una aplicación web de código abierto para el análisis y visualización de datos, en especial datos temporales \citep{grafana}.
-Grafana se adaptó muy bien a las necesidades del proyecto. Para mejorar aun más la experiencia del usuario se complementa con \textit{Worldmap Panel}, un \textit{plug in} que permite mostrar información temporal sobre un mapa. Esta información se presenta como círculos en las coordenadas donde se encuentra ubicado el nodo que genera la información.\\
 Una interfaz gráfica como la presentada en la figura \ref{fig:guirequeridaporelcliente}, se encarga de presentar al usuario final los últimos datos adquiridos por cada nodo. De esta manera, se puede identificar de manera simple mediante un punto verde o rojo sobre el mapa si la línea monitoreada presenta un problema.
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
@@ -260,4 +258,6 @@ Una interfaz gráfica como la presentada en la figura \ref{fig:guirequeridaporel
 	\includegraphics[width=0.7\linewidth]{Figures/GUI_requerida_por_el_cliente}
 	\caption{Ejemplo de interfaz gráfica de usuario requerida por el cliente para presentar los últimos datos recuperados por cada nodo en la ciudad de Posadas, Misiones.}
 	\label{fig:guirequeridaporelcliente}
-\end{figure}
+\end{figure}\\
+Para la presentación de la información se optó por Grafana, una aplicación web de código abierto para el análisis y visualización de datos, en especial datos temporales \citep{grafana}.
+Grafana se adaptó muy bien a las necesidades del proyecto. Para mejorar aun más la experiencia del usuario se complementa con \textit{Worldmap Panel}, un \textit{plug in} que permite mostrar información temporal sobre un mapa. Esta información se presenta como círculos en las coordenadas donde se encuentra ubicado el nodo que genera la información.\\
