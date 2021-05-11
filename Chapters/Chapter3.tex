@@ -224,6 +224,18 @@ El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional
 \end{figure}
 Calibrada la ganacia del amplificador mediante una tension constante a la entrada \textit{IN+} y el potenciometro \textit{POT1}, la salida se encuentra lista para ser conectada a la entrada \textit{AIN0} del ADC.\\
 
+\subsection{Monitoreo de tensión en bornes del acumulador}
+La tensión máxima a la que puede llegar el acumulador de la figura \ref{fig:imagensupercap} es 5V, este valor de tensión es mayor que el máximo admitido por las entradas del ADC. Para obtener una senal de tension apta y equivalente a la tension en bornes del acumulador, es necesario atenuar la tension maxima a medir a una tension de 3,3V o menos.\\
+El divisor resistivo formado por \textit{R4} y \textit{R5} implementado en el circuito de la Figura divisor resistivo SC, es una solucion efectiva para atenuar una senal de tension DC. De esta manera un valor de 5V en bornes del acumulador, representaria como maximo 2,5V a la entrada del ADC.\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/cto_divisor_resistivo}
+	\caption{Divisor resistivo utilizado para medir la tension en bornes del SC.}
+	\label{fig:ctodivisorresistivo}
+\end{figure}
+
+
 
 \section{Firmware implementado}
 \label{seccion_firmware}
