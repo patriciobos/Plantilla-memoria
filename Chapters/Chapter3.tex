@@ -249,6 +249,18 @@ Las señales correspondientes al valor RMS de corriente y tensión en bornes del
 
 \section{Firmware implementado}
 \label{seccion_firmware}
+\subsection{Lógica de negocios y patrón arquitectónico adoptado}
+Cada HW tomará una medición y la transmitirá de manera periódica. Al momento de su comisionamiento, el hardware se encontrará en modo conversión y acumulación por defecto.\\
+Para lograr la lógica de negocios se adoptó el patrón arquitectónico de la figura \ref{fig:patronpowersaveloop}, resultante de una combinación entre un sistema reactivo y un bucle de ahorro de energía.\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/patron_power_save_loop}
+	\caption{Patrón adoptado para la implementación de la lógica de negocios del FW.}
+	\label{fig:patronpowersaveloop}
+\end{figure}
+Al entrar en operación, el MC verificará que la tensión en bornes del acumulador sea suficiente antes de enviar su primer reporte de estado. Seguidamente, entrará en modo ahorro de energía o \textit{deep sleep} durante un lapso de tiempo determinado hasta cumplir el periodo.\\
+Si durante el modo \textit{deep sleep} ocurre un corte en el suministro de energía, la señal IRQ generada por el circuito de la figura \ref{fig:ctodetectorcortes} hará que el sistema se restablezca, realice una medición, transmita y nuevamente vuelva a modo ahorro de energía.\\
 
 \section{Servicios de Backend}
 \label{seccion_bes}
