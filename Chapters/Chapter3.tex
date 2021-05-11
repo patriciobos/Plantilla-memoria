@@ -1,6 +1,8 @@
 \chapter{Diseño e implementación} % Main chapter title
-
 \label{Chapter3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+En este capitulo se detalla el HW desarrollado en etapas con un enfoque individual a cada etapa. Se presentan circuitos esquematicos correspondientes al circuito implementado para cada etapa individual y su rol en el sistema. 
+La subseccion \ref{seccion_firmware} expone el patron \textit{power save loop} adoptado en la logica de negocios, los perifericos del MC con los cuales interactua y la rutina de interrupcion que atiende al generarse un corte.
+Por ultimo, la seccion \ref{seccion_bes} da al lector detalle acerca de la integracion entre la red LoRaWAN y los servicios adoptados para este proyecto.
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -167,9 +169,67 @@ En base al requerimiento de corriente mínima admisible en circuito primario del
 	\end{tabular}\label{tabla_caracteristicas_ti}
 \end{table}
 
+\subsection{Circuito de medición de valor RMS de corriente y acondicionamiento de señal}
+Para medir corriente mediante un TI, es primero necesario convertir la intensidad en una señal de tensión representativa y partir de esta ahí calcular su valor RMS. Un resistor shunt de 0,1 Ohms con encapsulado TO-220-2 fue adoptado para convertir la corriente del secundario del TI en una señal de tensión apta para realizar su medicion RMS.\\
+En el mercado existen circuitos integrados (CI) dedicados a cumplir esta tarea, estos funcionan generalmente otorgando una tension DC a la salida proporcional al valor RMS de la tension a la entrada. Una tabla comparativa resaltando el ancho de banda, la tensión pico a pico máxima admitida a sus entradas y tensión de operación de los posibles candidatos a utilizar en este proyecto se elaboró en la tabla \ref{tabla_chip_rms}\\
+\begin{table}[h]
+	\centering
+	\caption{Tabla comparativa de chips aptos para medicion RMS}
+	\begin{tabular}{cccc} 
+		\hline
+		Modelo                                & \begin{tabular}[c]{@{}c@{}}Ancho de Banda\\(BW)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Vpp\\(max)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Tension de\\operacion (max)\end{tabular}  \\ 
+		\hline
+		AD636 \citep{ad636}                                & 1,5 MHz                                                      & 283 mV                                             & 5 V                                                                  \\
+		\textcolor[rgb]{0.2,0.2,0.2}{LH0091}\citep{lh0091}  & 2 MHz                                                        & +/- 15 V                                           & 22 V                                                                 \\
+		\textcolor[rgb]{0.2,0.2,0.2}{LTC1966}\citep{ltc1966} & 800 kHz                                                      & +/- 1 V                                            & 5,5 V                                                                \\
+		\hline
+	\end{tabular}\label{tabla_chip_rms}
+\end{table}
+Por disponibilidad del autor al momento del ensayo se eligió el LTC1966 de la firma Linear Technologies.\\
+El CI posee dos entradas \textit{IN1} e \textit{IN2} que se conectan a la señal tensión generada en bornes del shunt representado por \textit{R6} en el esquemático Figura RMS. A su salida \textit{VOUT}, otorga una tensión DC proporcional al valor RMS de la señal senoidal inyectada entre \textit{IN1} e \textit{IN2}.\\
+Siend el valor máximo de un semiciclo de una onda senoidal en la entrada de 500 mV, el valor eficaz de esa señal de entrada y esperado a la salida del IC es
+\begin{equation}
+	Vrms=\frac{Vmax}{\sqrt{2}}=\frac{500}{\sqrt{2}}= 353,55 mV
+\end{equation}
+Los capacitores \textit{C10} y \textit{C12} se encargan de realizar el promedio y filtrar el posible ruido de alta frecuencia.\\
+\textit{C9} y \textit{C11} filtran la tensión de alimentación que energiza al CI.\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/cto_medidor_rms}
+	\caption{Circuito medidor de valor RMS implementado usando el LTC1966.}
+	\label{fig:ctomedidorrms}
+\end{figure}
+Dado que las mediciones a realizar se harán en líneas de distribución que operen a 50 Hz o 60 Hz, se ajustó la etapa de filtrado de la señal de entrada. Adoptada una impedancia de entrada de 8 Megaohms entre los pines IN1 e IN2 el capacitor C8 en serie forma un filtro pasa alto (HPF).\\
+La frecuencia de corte (fc) adoptada por el autor para este HPF es de 5 Hz, por lo tanto
+\begin{equation}
+	fc = \frac{1}{2.\pi.R.C}\rightarrow\frac{1}{2.\pi.R.fc}\\
+\end{equation}
+\begin{equation}
+	C=\frac{1}{2.\pi.8x10^6.5}=3,978x10^{-9} F
+\end{equation}
+El valor comercial más próximo adoptado para \textit{C8} fue entonces 3,9 nanofaradios.\\
+Antes de conectar la señal de salida del LTC1966 es necesario amplificarla de modo que el fondo de escala de la medición tenga como máximo la misma tensión de alimentación que el ADC (3,3 V).\\
+El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional MCP6001U \citep{mcp6001} en configuración amplificador no inversor. La ganancia de amplificacion \textit{A} del arreglo esta definida por
+\begin{equation}
+	A=\frac{R7+Pot1+R8}{R7}
+\end{equation}
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/cto_op_amp}
+	\caption{Circuito amplificador de la senal de salida del LTC1966.}
+	\label{fig:ctoopamp}
+\end{figure}
+Calibrada la ganacia del amplificador mediante una tension constante a la entrada \textit{IN+} y el potenciometro \textit{POT1}, la salida se encuentra lista para ser conectada a la entrada \textit{AIN0} del ADC.\\
+
+
 \section{Firmware implementado}
+\label{seccion_firmware}
 
 \section{Servicios de Backend}
+\label{seccion_bes}
 
 \section{Integraci\'{o}n de la red LoRaWAN}
 
