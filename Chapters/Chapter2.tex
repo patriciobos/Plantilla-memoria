@@ -31,7 +31,7 @@ El requisito \ref{requerimiento_LORAWAN} impuso el uso de una red LoRaWAN como p
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\linewidth]{Figures/diagrama_de_bloques_de_BES}
-	\caption{Diagrama de bloques del firmware implementado en el MC y su interacción con la red LoRaWAN y los servicios de backend privados del sistema.}
+	\caption{Diagrama de bloques del firmware implementado en el microcontrolador y su interacción con la red LoRaWAN y los servicios de backend privados del sistema.}
 	\label{fig:diagramadebloquesdebes}
 \end{figure}\\
 Las mediciones son tomadas por el hardware y transmitidas hacia la red LoRaWAN para luego interactuar con los servicios de backend privados que se encargan de recuperar, almacenar y presentar los datos al usuario final.\\
@@ -208,7 +208,7 @@ Su topología interna es \textit{boost} o elevador de tensión. En el hardware d
 A su entrada admite tensiones variables desde 0,9 V hasta 5 V y puede otorgar hasta 500 miliamperes de corriente a la salida.
 
 \subsection{Microcontrolador y firmware}
-El MC es el ente encargado de ejecutar la lógica de negocios acorde a la tarea que debe cumplir el hardware. En el mercado existe una amplia gama de fabricantes de placas de desarrollo que permiten acelerar la etapa de prototipado y validación de diseño.\\
+El microcontrolador es el ente encargado de ejecutar la lógica de negocios acorde a la tarea que debe cumplir el hardware. En el mercado existe una amplia gama de fabricantes de placas de desarrollo que permiten acelerar la etapa de prototipado y validación de diseño.\\
 La placa de desarrollo elegida para el prototipo fue la LoPy 4 producida por la firma Pycom que se presenta en la figura \ref{fig:lopy4} . En su interior alberga un ESP32, 8 Megabytes de memoria flash, transceptores de radio LoRa y 802.11 y un regulador de tensión.\\
 \begin{figure}[h]
 	\centering
