@@ -3,7 +3,7 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-En este capítulo se presentan los requerimientos acordados con el cliente y los recursos de \textit{hardware} (HW) y \textit{software} (SW) utilizados para el desarrollo del trabajo. Se describen en las partes implementadas del HW, los servicios integrados de \textit{backend} (BES) y solamente algunos aspectos relevantes del \textit{firmware} (FW) que interactúa con el HW.\\
+En este capítulo se presentan los requerimientos acordados con el cliente y los recursos de hardware (HW) y \textit{software} (SW) utilizados para el desarrollo del trabajo. Se describen en las partes implementadas del HW, los servicios integrados de \textit{backend} (BES) y solamente algunos aspectos relevantes del \textit{firmware} (FW) que interactúa con el HW.\\
 \section{Diagrama de bloques general del sistema}
 El diagrama de bloques del HW a instalar \textit{in situ} es presentado en la figura \ref{fig:diagramadebloquesdelhw} y consta de cuatro bloques:
 \begin{figure}[h!]
@@ -51,7 +51,7 @@ Las mediciones son tomadas por el HW y transmitidas hacia la red LoRaWAN para lu
 			\item Integrar un módulo de comunicaciones LoRa.
 		\end{enumerate}
 		\item Deberá tener al menos 12 horas de autonomía de funcionamiento.
-		\item Bajo consumo en modo ocioso: el consumo del \textit{hardware} en total, no deberá superar los 5 mA cuando no está midiendo ni transmitiendo.
+		\item Bajo consumo en modo ocioso: el consumo del hardware en total, no deberá superar los 5 mA cuando no está midiendo ni transmitiendo.
 		\item El circuito elevador de tensión DC-DC deberá:
 		\begin{enumerate}%[label*=\arabic*.]
 			\item Funcionar con tensiones menores a 2 V en la entrada.
@@ -91,7 +91,7 @@ Las mediciones son tomadas por el HW y transmitidas hacia la red LoRaWAN para lu
 	
 	\item Grupo de requerimientos asociados con ensayos de integración y \textit{end-to-end}:
 	\begin{enumerate}
-		\item El banco de ensayos de \textit{hardware} debe contar con una carga fantasma de al menos 10 Amperes y permitir realizar interrupciones de corriente de manera programada mediante una computadora adicional tipo Raspberry Pi o de manera manual.
+		\item El banco de ensayos de hardware debe contar con una carga fantasma de al menos 10 Amperes y permitir realizar interrupciones de corriente de manera programada mediante una computadora adicional tipo Raspberry Pi o de manera manual.
 		\item Los BES deben estar operativos al momento de realizar los ensayos.
 		\item Se debe contar con un gateway de acceso a una red LoRaWAN como por ejemplo \textit{The Things Network}.
 	\end{enumerate}
@@ -245,7 +245,7 @@ Una base de datos almacena la información de manera ordenada en tablas o estruc
 Las bases de datos más utilizadas para aplicaciones \textit{web} son las basadas en un modelo relacional, también conocidas como bases de datos SQL (Structured Query Language). Sin embargo, en años recientes se han popularizado las llamadas bases de datos no relacionales o NoSQL. Estas últimas están orientadas a documentos y almacenan información de un mismo tipo en la forma de clave-valor.\\
 Por su naturaleza, este proyecto parece indicado para utilizar una base de datos no relacional. Ya que solo almacena registros de un tipo y no necesita crear relaciones complejas entre distintas tablas de datos.\\
 En principio se pensó en utilizar \textit{Elasticsearch} \citep{elasticsearch}, un servidor de búsqueda de texto basado en documentos JSON. Se trata de una herramienta open source que se integra con Grafana, la herramienta para el desarrollo de la interfaz gráfica \citep{grafana}.\\
-Sin embargo, en las primeras pruebas llevadas a cabo se pudo apreciar que el consumo de memoria y procesamiento eran muy elevados si se lo implementaba en un \textit{hardware} de bajas prestaciones como las \textit{Raspberry Pi} \citep{raspi}. Finalmente, se optó por utilizar MariaDB \citep{mariadb}, una base de datos del tipo SQL, también open source, con menos demanda de recursos y muy popular en aplicaciones \textit{web}.\\
+Sin embargo, en las primeras pruebas llevadas a cabo se pudo apreciar que el consumo de memoria y procesamiento eran muy elevados si se lo implementaba en un hardware de bajas prestaciones como las \textit{Raspberry Pi} \citep{raspi}. Finalmente, se optó por utilizar MariaDB \citep{mariadb}, una base de datos del tipo SQL, también open source, con menos demanda de recursos y muy popular en aplicaciones \textit{web}.\\
 
 \subsection{Interfaz gráfica de usuario}
 Una vez recuperados los datos de la red LoRaWAN y almacenados en la base de datos, la interfaz de usuario del sistema presenta al usuario final del centro de operaciones los datos recolectados por cada nodo.\\
