@@ -31,10 +31,10 @@ El requisito \ref{requerimiento_LORAWAN} impuso el uso de una red LoRaWAN como p
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\linewidth]{Figures/diagrama_de_bloques_de_BES}
-	\caption{Diagrama de bloques del FW implementado en el MC y su interacción con la red LoRaWAN y los BES privados del sistema.}
+	\caption{Diagrama de bloques del FW implementado en el MC y su interacción con la red LoRaWAN y los servicios de backend privados del sistema.}
 	\label{fig:diagramadebloquesdebes}
 \end{figure}\\
-Las mediciones son tomadas por el HW y transmitidas hacia la red LoRaWAN para luego interactuar con los BES privados que se encargan de recuperar, almacenar y presentar los datos al usuario final.\\
+Las mediciones son tomadas por el HW y transmitidas hacia la red LoRaWAN para luego interactuar con los servicios de backend privados que se encargan de recuperar, almacenar y presentar los datos al usuario final.\\
 
 \section{Requerimientos acordados con el cliente}
 \label{sec:requerimientos}
@@ -83,7 +83,7 @@ Las mediciones son tomadas por el HW y transmitidas hacia la red LoRaWAN para lu
 	\label{requerimientos_backend}
 	\begin{enumerate}
 		\item Todos los servicios deben poder correr en una Raspberry Pi 3.
-		\item El software de los BES se desarrollará en lenguaje Python.
+		\item El software de los servicios de backend se desarrollará en lenguaje Python.
 		\item Recuperar los datos de la red LoRaWAN.\label{requerimiento_LORAWAN}
 		\item Almacenar los datos en una tabla de MySQL.
 		\item Interfaz gr\'{a}fica de usuario basada en Grafana.
@@ -92,7 +92,7 @@ Las mediciones son tomadas por el HW y transmitidas hacia la red LoRaWAN para lu
 	\item Grupo de requerimientos asociados con ensayos de integración y \textit{end-to-end}:
 	\begin{enumerate}
 		\item El banco de ensayos de hardware debe contar con una carga fantasma de al menos 10 Amperes y permitir realizar interrupciones de corriente de manera programada mediante una computadora adicional tipo Raspberry Pi o de manera manual.
-		\item Los BES deben estar operativos al momento de realizar los ensayos.
+		\item Los servicios de backend deben estar operativos al momento de realizar los ensayos.
 		\item Se debe contar con un gateway de acceso a una red LoRaWAN como por ejemplo \textit{The Things Network}.
 	\end{enumerate}
 \end{enumerate}
