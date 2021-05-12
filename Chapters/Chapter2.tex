@@ -31,7 +31,7 @@ El requisito \ref{requerimiento_LORAWAN} impuso el uso de una red LoRaWAN como p
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\linewidth]{Figures/diagrama_de_bloques_de_BES}
-	\caption{Diagrama de bloques del firmware implementado en el microcontrolador y su interacción con la red LoRaWAN y los servicios de backend privados del sistema.}
+	\caption{Diagrama de bloques del firmware implementado y su interacción con la red LoRaWAN y los servicios de backend.}
 	\label{fig:diagramadebloquesdebes}
 \end{figure}\\
 Las mediciones son tomadas por el hardware y transmitidas hacia la red LoRaWAN para luego interactuar con los servicios de backend privados que se encargan de recuperar, almacenar y presentar los datos al usuario final.\\
@@ -58,10 +58,10 @@ Las mediciones son tomadas por el hardware y transmitidas hacia la red LoRaWAN p
 			\item Otorgar 5 V a la salida.
 			\item Ser capaz de otorgar 300 mA a la salida.
 		\end{enumerate}
-		\item El transformador de corriente (TI) debe:
+		\item El transformador de corriente debe:
 		\begin{enumerate}%[label*=\arabic*.]
 			\item Ser de tipo núcleo partido.
-			\item Admitir 100 A de corriente en el circuito primario y un máximo 5 Amperes en el circuito secundario.
+			\item Admitir 100 A de corriente en el circuito primario y un máximo de 5 A en el circuito secundario.
 		\end{enumerate}
 		\item \label{req_relay} El relay encargado de cambiar el modo de operación debe:
 		\begin{enumerate}%[label*=\arabic*.]
@@ -91,7 +91,7 @@ Las mediciones son tomadas por el hardware y transmitidas hacia la red LoRaWAN p
 	
 	\item Grupo de requerimientos asociados con ensayos de integración y \textit{end-to-end}:
 	\begin{enumerate}
-		\item El banco de ensayos de hardware debe contar con una carga fantasma de al menos 10 Amperes y permitir realizar interrupciones de corriente de manera programada mediante una computadora adicional tipo Raspberry Pi o de manera manual.
+		\item El banco de ensayos de hardware debe contar con una carga fantasma de al menos 10 A y permitir realizar interrupciones de corriente de manera programada mediante una computadora adicional tipo Raspberry Pi o de manera manual.
 		\item Los servicios de backend deben estar operativos al momento de realizar los ensayos.
 		\item Se debe contar con un gateway de acceso a una red LoRaWAN como por ejemplo \textit{The Things Network}.
 	\end{enumerate}
@@ -101,13 +101,13 @@ Las mediciones son tomadas por el hardware y transmitidas hacia la red LoRaWAN p
 \section{Detalle del hardware}
 \subsection{Transformador de corriente}
 Un transformador de corriente o intensidad (TI) es un dispositivo de medición utilizado para producir en su devanado secundario una corriente diferente y proporcional a la que circula por su devanado primario.\\
-El principio de operación de un TI no es diferente al de un transformador de potencia convencional. A diferencia de uno de potencia, el devanado primario puede ser de una sola vuelta sobre un núcleo ferromagnético como se ve en la figura \ref{fig:dibujomedicionti}. El devanado secundario suele tener un número mayor de vueltas alrededor del núcleo que depende de que tanto se debe reducir la corriente.\\
-Muchos TI tienen una relación estándar de 5 Amperes en el secundario, por ejemplo un TI 200/5 significa que cuando por el primario fluyen 200 amperes en el secundario solo fluyen 5 A. Es decir, el TI tiene una relación de transformación de corriente N de 40 veces.\\
+El principio de operación de un transformador de corriente no es diferente al de un transformador de potencia convencional. A diferencia de uno de potencia, el devanado primario puede ser de una sola vuelta sobre un núcleo ferromagnético como se ve en la figura \ref{fig:dibujomedicionti}. El devanado secundario suele tener un número mayor de vueltas alrededor del núcleo que depende de que tanto se debe reducir la corriente.\\
+Muchos transformadores de corriente tienen una relación estándar de 5 A en el secundario, por ejemplo un transformador de corriente 200/5 significa que cuando por el primario fluyen 200 A en el secundario solo fluyen 5 A. Es decir, el transformador de corriente tiene una relación de transformación de corriente N de 40 veces.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\linewidth]{Figures/dibujo_medicion_TI}
-	\caption{Circuito de medición indirecta de corriente mediante un TI \citep{hioki}.}
+	\caption{Circuito de medición indirecta de corriente mediante un transformador de corriente \citep{hioki}.}
 	\label{fig:dibujomedicionti}
 \end{figure}\\
 Mediante esta técnica, pequeños instrumentos pueden monitorear grandes valores de corriente manteniendo una distancia segura de las líneas de alta tensión.
@@ -205,7 +205,7 @@ Para proveer al microcontrolador y al resto de la electrónica asociada una tens
 	\label{fig:dcdcboost}
 \end{figure}\\
 Su topología interna es \textit{boost} o elevador de tensión. En el hardware del sistema, cumple la función de llevar la tensión variable del supercapacitor conectado a su entrada a una fija de 5 V. 
-A su entrada admite tensiones variables desde 0,9 V hasta 5 V y puede otorgar hasta 500 miliamperes de corriente a la salida.
+A su entrada admite tensiones variables desde 0,9 V hasta 5 V y puede otorgar hasta 500 mA de corriente a la salida.
 
 \subsection{Microcontrolador y firmware}
 El microcontrolador es el ente encargado de ejecutar la lógica de negocios acorde a la tarea que debe cumplir el hardware. En el mercado existe una amplia gama de fabricantes de placas de desarrollo que permiten acelerar la etapa de prototipado y validación de diseño.\\
