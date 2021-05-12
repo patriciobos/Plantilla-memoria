@@ -3,7 +3,7 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-En este capítulo se presentan los requerimientos acordados con el cliente y los recursos de hardware (HW) y software (SW) utilizados para el desarrollo del trabajo. Se describen en las partes implementadas del HW, los servicios integrados de \textit{backend} (BES) y solamente algunos aspectos relevantes del firmware (FW) que interactúa con el HW.\\
+En este capítulo se presentan los requerimientos acordados con el cliente y los recursos de hardware (HW) y software (SW) utilizados para el desarrollo del trabajo. Se describen en las partes implementadas del HW, los servicios integrados de backend (BES) y solamente algunos aspectos relevantes del firmware (FW) que interactúa con el HW.\\
 \section{Diagrama de bloques general del sistema}
 El diagrama de bloques del HW a instalar \textit{in situ} es presentado en la figura \ref{fig:diagramadebloquesdelhw} y consta de cuatro bloques:
 \begin{figure}[h!]
@@ -18,7 +18,7 @@ El diagrama de bloques del HW a instalar \textit{in situ} es presentado en la fi
 	\item Etapa de medición de valor RMS de corriente: un chip dedicado toma la señal de tensión generada en bornes del resistor shunt y calcula el valor RMS. A su salida entrega un valor proporcional de tensión DC.
 	\item Microcontrolador: ejecuta la lógica de negocios que rige el comportamiento del nodo, digitaliza mediciones y transmite datos a la red LoRaWAN.
 \end{enumerate}
-Por otro lado, el sistema también implicó el desarrollo y puesta en funcionamiento de un conjunto de servicios de \textit{backend} (BES) propios del proyecto que cumplen las funciones de:
+Por otro lado, el sistema también implicó el desarrollo y puesta en funcionamiento de un conjunto de servicios de backend (BES) propios del proyecto que cumplen las funciones de:
 \begin{itemize}
 	\item Recuperación de datos de la red LoRaWAN.
 	\item Almacenamiento en una base de datos.
