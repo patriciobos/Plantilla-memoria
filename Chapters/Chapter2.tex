@@ -174,8 +174,8 @@ Yilmaz \citep{Yilmaz} analiza técnicas de rectificación de onda completa con d
 Al comparar las simulaciones expuestas en las figuras \ref{fig:onda_rectificador_diodos} y \ref{fig:onda_rectificador_MOSFET} se aprecia que la caída de tensión generada por el rectificador basado en MOSFET al entrar en conducción es menor que uno hecho con diodos y por lo tanto también la potencia disipada en forma de calor.\\
 
 \subsection{Supercapacitor como acumulador de energía}
-La decisión de optar por un banco de supercapacitores como reemplazo total de una batería, se basa principalmente en el entorno donde operará el nodo hardware. Las diferencias entre una batería y un SC de interés para este proyecto, son plasmadas en la tabla \ref{tab:batteria_vs_supercap}.\\
-Los datos meteorológicos de la provincia de Misiones presentados en \citep{historico_temperaturas}, muestran temperaturas por encima de 30 \textdegree C durante el período de septiembre a marzo. A diferencia de un SC que posee un rango de temperaturas de operación desde los -40 \textdegree C hasta 70 \textdegree C \citep{datasheet_supercap}, condiciones por encima de 35 \textdegree C resultan nocivas para una batería y generan el deterioro prematuro de sus componentes\citep{MA2018653}.\\
+La decisión de optar por un banco de supercapacitores como reemplazo total de una batería, se basa principalmente en el entorno donde operará el nodo hardware. Las diferencias entre una batería y un supercapacitor de interés para este proyecto, son plasmadas en la tabla \ref{tab:batteria_vs_supercap}.\\
+Los datos meteorológicos de la provincia de Misiones presentados en \citep{historico_temperaturas}, muestran temperaturas por encima de 30 \textdegree C durante el período de septiembre a marzo. A diferencia de un supercapacitor que posee un rango de temperaturas de operación desde los -40 \textdegree C hasta 70 \textdegree C \citep{datasheet_supercap}, condiciones por encima de 35 \textdegree C resultan nocivas para una batería y generan el deterioro prematuro de sus componentes\citep{MA2018653}.\\
 %\begin{verbatim}
 \begin{table}[h]
 	\centering
@@ -192,7 +192,7 @@ Los datos meteorológicos de la provincia de Misiones presentados en \citep{hist
 	\label{tab:batteria_vs_supercap}
 \end{table}\\
 %\end{verbatim}
-Es importante remarcar que la densidad de energía que pueden almacenar también es diferente, una batería tiene una densidad de energía 60 veces mayor que un SC. Sin embargo, para esta aplicación puntual no representó un factor importante a la hora de elegir el acumulador.\\
+Es importante remarcar que la densidad de energía que pueden almacenar también es diferente, una batería tiene una densidad de energía 60 veces mayor que un supercapacitor. Sin embargo, para esta aplicación puntual no representó un factor importante a la hora de elegir el acumulador.\\
 Por último, el ciclo de carga es más complejo en el caso de una batería. Las etapas de su curva de carga deben ser respetadas según sean a corriente o tensión constante. Esto trae acarreado implementar una electrónica adicional encargada de gestionar estos 2 parámetros. En un capacitor, la curva de carga está definida por un circuito RC serie \citep{ceraolo2014fundamentals}.\\ 
 
 \subsection{Elevación de tensión mediante un conversor DC/DC }
@@ -204,7 +204,7 @@ Para proveer al microcontrolador y al resto de la electrónica asociada una tens
 	\caption{Módulo comercial DC/DC en topología boost utilizado para alimentar la electrónica.}
 	\label{fig:dcdcboost}
 \end{figure}\\
-Su topología interna es \textit{boost} o elevador de tensión. En el hardware del sistema, cumple la función de llevar la tensión variable del SC conectado a su entrada a una fija de 5 V. 
+Su topología interna es \textit{boost} o elevador de tensión. En el hardware del sistema, cumple la función de llevar la tensión variable del supercapacitor conectado a su entrada a una fija de 5 V. 
 A su entrada admite tensiones variables desde 0,9 V hasta 5 V y puede otorgar hasta 500 miliamperes de corriente a la salida.
 
 \subsection{Microcontrolador y firmware}
