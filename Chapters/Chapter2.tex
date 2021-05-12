@@ -3,13 +3,13 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-En este capítulo se presentan los requerimientos acordados con el cliente y los recursos de hardware y software utilizados para el desarrollo del trabajo. Se describen en las partes implementadas del HW, los servicios integrados de backend y solamente algunos aspectos relevantes del firmware que interactúa con el HW.\\
+En este capítulo se presentan los requerimientos acordados con el cliente y los recursos de hardware y software utilizados para el desarrollo del trabajo. Se describen en las partes implementadas del hardware, los servicios integrados de backend y solamente algunos aspectos relevantes del firmware que interactúa con el hardware.\\
 \section{Diagrama de bloques general del sistema}
-El diagrama de bloques del HW a instalar \textit{in situ} es presentado en la figura \ref{fig:diagramadebloquesdelhw} y consta de cuatro bloques:
+El diagrama de bloques del hardware a instalar \textit{in situ} es presentado en la figura \ref{fig:diagramadebloquesdelhw} y consta de cuatro bloques:
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Figures/diagrama_de_bloques_del_HW}
-	\caption{Diagrama de bloques del HW para el nodo a instalar \textit{in situ}.}
+	\caption{Diagrama de bloques del hardware para el nodo a instalar \textit{in situ}.}
 	\label{fig:diagramadebloquesdelhw}
 \end{figure}
 \begin{enumerate}
@@ -34,7 +34,7 @@ El requisito \ref{requerimiento_LORAWAN} impuso el uso de una red LoRaWAN como p
 	\caption{Diagrama de bloques del firmware implementado en el MC y su interacción con la red LoRaWAN y los servicios de backend privados del sistema.}
 	\label{fig:diagramadebloquesdebes}
 \end{figure}\\
-Las mediciones son tomadas por el HW y transmitidas hacia la red LoRaWAN para luego interactuar con los servicios de backend privados que se encargan de recuperar, almacenar y presentar los datos al usuario final.\\
+Las mediciones son tomadas por el hardware y transmitidas hacia la red LoRaWAN para luego interactuar con los servicios de backend privados que se encargan de recuperar, almacenar y presentar los datos al usuario final.\\
 
 \section{Requerimientos acordados con el cliente}
 \label{sec:requerimientos}
@@ -174,7 +174,7 @@ Yilmaz \citep{Yilmaz} analiza técnicas de rectificación de onda completa con d
 Al comparar las simulaciones expuestas en las figuras \ref{fig:onda_rectificador_diodos} y \ref{fig:onda_rectificador_MOSFET} se aprecia que la caída de tensión generada por el rectificador basado en MOSFET al entrar en conducción es menor que uno hecho con diodos y por lo tanto también la potencia disipada en forma de calor.\\
 
 \subsection{Supercapacitor como acumulador de energía}
-La decisión de optar por un banco de supercapacitores como reemplazo total de una batería, se basa principalmente en el entorno donde operará el nodo HW. Las diferencias entre una batería y un SC de interés para este proyecto, son plasmadas en la tabla \ref{tab:batteria_vs_supercap}.\\
+La decisión de optar por un banco de supercapacitores como reemplazo total de una batería, se basa principalmente en el entorno donde operará el nodo hardware. Las diferencias entre una batería y un SC de interés para este proyecto, son plasmadas en la tabla \ref{tab:batteria_vs_supercap}.\\
 Los datos meteorológicos de la provincia de Misiones presentados en \citep{historico_temperaturas}, muestran temperaturas por encima de 30 \textdegree C durante el período de septiembre a marzo. A diferencia de un SC que posee un rango de temperaturas de operación desde los -40 \textdegree C hasta 70 \textdegree C \citep{datasheet_supercap}, condiciones por encima de 35 \textdegree C resultan nocivas para una batería y generan el deterioro prematuro de sus componentes\citep{MA2018653}.\\
 %\begin{verbatim}
 \begin{table}[h]
@@ -204,11 +204,11 @@ Para proveer al microcontrolador y al resto de la electrónica asociada una tens
 	\caption{Módulo comercial DC/DC en topología boost utilizado para alimentar la electrónica.}
 	\label{fig:dcdcboost}
 \end{figure}\\
-Su topología interna es \textit{boost} o elevador de tensión. En el HW del sistema, cumple la función de llevar la tensión variable del SC conectado a su entrada a una fija de 5 V. 
+Su topología interna es \textit{boost} o elevador de tensión. En el hardware del sistema, cumple la función de llevar la tensión variable del SC conectado a su entrada a una fija de 5 V. 
 A su entrada admite tensiones variables desde 0,9 V hasta 5 V y puede otorgar hasta 500 miliamperes de corriente a la salida.
 
 \subsection{Microcontrolador y firmware}
-El MC es el ente encargado de ejecutar la lógica de negocios acorde a la tarea que debe cumplir el HW. En el mercado existe una amplia gama de fabricantes de placas de desarrollo que permiten acelerar la etapa de prototipado y validación de diseño.\\
+El MC es el ente encargado de ejecutar la lógica de negocios acorde a la tarea que debe cumplir el hardware. En el mercado existe una amplia gama de fabricantes de placas de desarrollo que permiten acelerar la etapa de prototipado y validación de diseño.\\
 La placa de desarrollo elegida para el prototipo fue la LoPy 4 producida por la firma Pycom que se presenta en la figura \ref{fig:lopy4} . En su interior alberga un ESP32, 8 Megabytes de memoria flash, transceptores de radio LoRa y 802.11 y un regulador de tensión.\\
 \begin{figure}[h]
 	\centering
