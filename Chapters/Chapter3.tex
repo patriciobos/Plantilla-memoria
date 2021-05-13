@@ -54,10 +54,10 @@ En la figura \ref{fig:ctoselecciondemodo} se implementó el relay sin retención
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\linewidth]{Figures/cto_seleccion_de_modo}
-	\caption{circuito selector de modo basado en el relay HF115-005-2ZS4.}
+	\caption{Circuito selector de modo basado en el relay HF115-005-2ZS4.}
 	\label{fig:ctoselecciondemodo}
 \end{figure}\\
-Cada vez que se desea tomar una medición de corriente, el microcontrolador enciende la bobina del relay y conecta el trnasformador de corriente al circuito de medición de valor RMS.\\
+Cada vez que se desea tomar una medición de corriente, el microcontrolador enciende la bobina del relay y conecta el transformador de corriente al circuito de medición de valor RMS.\\
 
 \subsection{Puente rectificador de onda completa}
 Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la figura \ref{fig:rect_MOSFET}. Con el objeto de reducir el espacio ocupado en el circuito impreso, se optó por utilizar un chip DMHC3025 \citep{dmhc3025}. El encapsulado SOIC-8 presentado en la \ref{fig:esquematicointernorctificadormosfet} alberga un puente H formado dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicación son presentadas en la tabla \ref{tabla_transistores_rectificador}.
@@ -65,7 +65,7 @@ Para el prototipo desarrollado en este trabajo, se replicó el circuito rectific
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Figures/esquematico_interno_rctificador_mosfet}
-	\caption{Pinout y esquemáticos interno del DMHC3025 \citep{dmhc3025}.}
+	\caption{Pinout y esquemático interno del DMHC3025 \citep{dmhc3025}.}
 	\label{fig:esquematicointernorctificadormosfet}
 \end{figure}
 \begin{table}[h]
@@ -82,7 +82,7 @@ Para el prototipo desarrollado en este trabajo, se replicó el circuito rectific
 	\end{tabular}\label{tabla_transistores_rectificador}
 \end{table}
 
-El circuito final implementado encargado de la recitificacion y filtrado de la tensión DC a la salida se presenta en la figura \ref{fig:ctorectificacionfiltrado}. Dos diodos zener D1 y D2 en antiparalelo protegen a los transistores de sobretensión recortando la onda a 27 V para cada semiciclo de la onda senoidal a la entrada.\\
+El circuito final implementado encargado de la rectificación y filtrado de la tensión DC a la salida se presenta en la figura \ref{fig:ctorectificacionfiltrado}. Dos diodos zener D1 y D2 en antiparalelo protegen a los transistores de sobretensión recortando la onda a 27 V para cada semiciclo de la onda senoidal a la entrada.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
@@ -99,7 +99,7 @@ Los supercapacitores, se presentan en la figura \ref{fig:imagensupercap} como un
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/imagen_supercap}
-	\caption{Banco de supercapacitor de 250 F x 5,4 V utilizado como acumulador.}
+	\caption{Banco de supercapacitores de 500 F x 2,7 V utilizado como acumulador.}
 	\label{fig:imagensupercap}
 \end{figure}\\
 Al tratarse de una capacitancia total considerablemente mayor que la de un capacitor habitual, almacenará también más energía. El supercapacitor puede entonces cumplir la función de acumular energía para mantener operativa la electrónica en caso de que se interrumpa la conversión de energía.\\
@@ -107,12 +107,12 @@ Adicionalmente el módulo elegido, aporta simpleza al esquemático final y un ra
 
  \subsection{Circuito de detección de cortes}
  Una de las funcionalidades relevantes del hardware, es detectar interrupciones en la distribución de energía debido a razones tales como sobrecarga en la línea o desastres naturales.\\
- El circuito detector de cortes propuesto en \ref{fig:ctodetectorcortes} está basado en un comparador TLV3691 de la firma Texas Instruments. Su salida se encarga de generar una interrupción que despierta al microcontrolador.\\
+ El circuito detector de cortes propuesto en \ref{fig:ctodetectorcortes} está basado en un comparador TLV3691 de la firma Texas Instruments \citep{tlv3691}. Su salida se encarga de generar una interrupción que despierta al microcontrolador.\\
    % TODO: \usepackage{graphicx} required
  \begin{figure}[h]
  	\centering
- 	\includegraphics[width=0.8\linewidth]{Figures/cto_detector_cortes}
- 	\caption{Circuito utilizado como detector de cortes.}
+ 	\includegraphics[width=0.9\linewidth]{Figures/cto_detector_cortes}
+ 	\caption{Circuito detector de cortes basado en el TLV3691 \citep{tlv3691}.}
  	\label{fig:ctodetectorcortes}
  \end{figure}
  Como referencia para generar la señal de interrupción, se toma un valor de 1,65 V obtenido a partir de un divisor resistivo formado por R16 y R17. Este arreglo puede ser reemplazado por un potenciómetro en caso de ser necesario.\\
@@ -172,7 +172,7 @@ Basado en el requerimiento \ref{requerimientos_corriente_ti}, se eligió uno fab
 
 \subsection{Circuito de medición de valor RMS de corriente y acondicionamiento de señal}
 Para medir corriente mediante un transformador de intensidad, primero es necesario convertir la intensidad en una señal de tensión representativa y partir de esta ahí calcular su valor RMS. Un resistor shunt de 0,1 $\Omega$ con encapsulado TO-220-2 fue adoptado para convertir la corriente del secundario del transformador de intensidad en una señal de tensión apta para realizar su medición RMS.\\
-En el mercado existen circuitos integrados dedicados para realizar la medicion RMS de señales. Generalmente otorgan una tensión DC a la salida proporcional al valor RMS de la tensión a la entrada.\\
+En el mercado existen circuitos integrados dedicados para realizar la medición RMS de señales. Generalmente otorgan una tensión DC a la salida proporcional al valor RMS de la tensión a la entrada.\\
 Una tabla comparativa resaltando el ancho de banda, la tensión pico a pico máxima admitida a sus entradas y tensión de operación de los posibles candidatos a utilizar en este proyecto se elaboró en la tabla \ref{tabla_chip_rms}\\
 \begin{table}[h]
 	\centering
@@ -189,8 +189,9 @@ Una tabla comparativa resaltando el ancho de banda, la tensión pico a pico máx
 \end{table}\\
 Por disponibilidad del autor al momento del ensayo se eligió el LTC1966 de la firma Linear Technologies \citep{ad636}.\\
 El LTC1966 posee dos entradas IN1 e IN2 que se conectan a la señal tensión generada en bornes del shunt representado por R6 en el esquemático \ref{fig:ctomedidorrms}. A su salida VOUT, otorga una tensión DC proporcional al valor RMS de la señal senoidal inyectada entre IN1 e IN2.\\
-Siendo 500 mV el valor de pico de un semiciclo de una onda senoidal en la entrada, el valor eficaz de esa señal de entrada y esperado a la salida del IC es
+Siendo 500 mV el valor de pico de un semiciclo de una onda senoidal en la entrada, el valor eficaz de esa señal de entrada y esperado a la salida del circuito integrado esta dado por la ecuación \ref{eq_vmax}.
 \begin{equation}
+	\label{eq_vmax}
 	Vrms=\frac{Vmax}{\sqrt{2}}=\frac{500}{\sqrt{2}}= 353,55 mV
 \end{equation}
 Los capacitores C10 y C12 se encargan de realizar el promedio y filtrar el posible ruido de alta frecuencia.\\
@@ -202,17 +203,18 @@ C9 y C11 filtran la tensión de alimentación que energiza al circuito integrado
 	\caption{Circuito medidor de valor RMS implementado con el LTC1966.}
 	\label{fig:ctomedidorrms}
 \end{figure}\\
-Dado que las mediciones a realizar se harán en líneas de distribución que operen a 50 Hz o 60 Hz, se ajustó la etapa de filtrado de la señal de entrada. Con una impedancia de entrada de 8 Megaohms entre los pines IN1 e IN2 el capacitor C8 en serie forma un filtro pasa alto (HPF).\\
-La frecuencia de corte (fc) adoptada por el autor para este HPF es de 5 Hz, por lo tanto
+Dado que las mediciones a realizar se harán en líneas de distribución que operen a 50 Hz o 60 Hz, se ajustó la etapa de filtrado de la señal de entrada. Con una impedancia de entrada de 8 Megaohms entre los pines IN1 e IN2 el capacitor C8 en serie forma un filtro pasa alto.\\
+La frecuencia de corte (fc) adoptada por el autor para este filtro es de 5 Hz, y el valor de capacitancia quedó determinado por la ecuación \ref{eq_capacitor_hpf}.
 \begin{equation}
 	fc = \frac{1}{2.\pi.R.C}\rightarrow\frac{1}{2.\pi.R.fc}\\
 \end{equation}
 \begin{equation}
+	\label{eq_capacitor_hpf}
 	C=\frac{1}{2.\pi.{8x10^6}.5}=3,978x10^{-9} F
 \end{equation}
 El valor comercial más próximo adoptado para C8 fue 3,9 nF.\\
-La señal de salida del LTC1966 es del orden de los mV. Para poder digitalizarla con un conversor analogico digital es necesario amplificarla de modo que el fondo de escala de la medición tenga como máximo la misma tensión de alimentación que el conversor (3,3 V).\\
-El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional MP6001U \citep{mcp6001} en configuración amplificador no inversor. La ganancia A del arreglo est\'{a} definida por la ecuacion \ref{eq:ganancia}.
+La señal de salida del LTC1966 es del orden de los mV. Para poder digitalizarla con un conversor analógico-digital es necesario amplificarla de modo que el fondo de escala de la medición tenga como máximo la misma tensión de alimentación que el conversor (3,3 V).\\
+El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional MP6001U \citep{mcp6001} en configuración amplificador no inversor. La ganancia A del arreglo est\'{a} definida por la ecuación \ref{eq:ganancia}.
 \begin{equation}
 \label{eq:ganancia}
 	A=\frac{R7+Pot1+R8}{R7}
@@ -225,11 +227,11 @@ El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional
 	\caption{Circuito amplificador de la señal de salida del LTC1966.}
 	\label{fig:ctoopamp}
 \end{figure}
-El ajuste de la ganancia del amplificador, se realiz\'{o} mediante una tensión de 353,55 mV constante a la entrada IN+ y variando el potenciómetro POT1 hasta que la salida alcance 3,3 V. FInalizado el ajuste, la salida se encuentra lista para ser conectada a la entrada del conversor analógico digital.\\
+El ajuste de la ganancia del amplificador, se realiz\'{o} mediante una tensión de 353,55 mV constante a la entrada IN+ y variando el potenciómetro POT1 hasta que la salida alcance 3,3 V. Finalizado el ajuste, la salida se encuentra lista para ser conectada a la entrada del conversor analógico digital.\\
 
 \subsection{Monitoreo de tensión en bornes del acumulador}
-La tensión máxima a la que puede llegar el acumulador de la figura \ref{fig:imagensupercap} es 5V, este valor de tensión es mayor que el máximo admitido por las entradas del conversor analogico digital (3,3 V). Para obtener una señal de tensión apta y equivalente a la tensión en bornes del acumulador, es necesario atenuar la tensión máxima a medir a una tensión de 3,3V o menos.\\
-El divisor resistivo formado por R4 y R5 presentado de la figura \ref{fig:ctodivisorresistivo}, es una solución efectiva para atenuar una señal de tensión DC. De esta manera un valor de tension de 5 V en bornes del acumulador, representa como máximo 2,5V a la entrada del conversor analogico digital.\\
+La tensión máxima a la que puede llegar el acumulador de la figura \ref{fig:imagensupercap} es 5 V, este valor de tensión es mayor que el máximo admitido por las entradas del conversor analógico-digital (3,3 V). Para obtener una señal de tensión apta y equivalente a la tensión en bornes del acumulador, es necesario atenuar la tensión máxima a medir a una tensión de 3,3 V o menos.\\
+El divisor resistivo formado por R4 y R5 presentado de la figura \ref{fig:ctodivisorresistivo}, es una solución efectiva para atenuar una señal de tensión DC. De esta manera un valor de tensión de 5 V en bornes del acumulador, representa como máximo 2,5V a la entrada del conversor analógico-digital.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
@@ -240,15 +242,16 @@ El divisor resistivo formado por R4 y R5 presentado de la figura \ref{fig:ctodiv
 
 \subsection{Etapa de conversión analógica digital}
 Las señales correspondientes a la tensión en bornes del supercapacitor, y valor RMS de corriente son analógicas. Por este motivo, es necesario digitalizar las señales para que luego puedan ser transmitidas por el módulo de comunicaciones.\\
-Para esto, se adoptó el chip ADS1015 de la firma Texas Instruments presentado en figura \ref{fig:ctoadc}. El ADS1015 consiste en un conversor analógico digital de 12 bits de resolución, 3,3 V de tensión de alimentación, interfaz de comunicaciones I2C, 4 canales de entrada, tensión de referencia interna y amplificador de ganancia programable.\\
+Para esto, se adoptó el chip ADS1015 de la firma Texas Instruments \citep{ads1015} en el esquematico de la figura \ref{fig:ctoadc}. 
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Figures/cto_adc}
-	\caption{Etapa de conversion analogico-digital basada en ADS1015.}
+	\caption{Etapa de conversión analógico-digital basada en el ADS1015.}
 	\label{fig:ctoadc}
 \end{figure}\\
-Las señales correspondientes al valor RMS de corriente y tensión en bornes del supercapacitor se conectan a las entradas AIN0 y AIN3 del chip respectivamente. Las  restantes entradas AIN1 y AIN2, se conectaron a una tira de pines para agregar de manera opcional otros 2 módulos de medición de corriente.\\
+El ADS1015 consiste en un conversor analógico digital de 12 bits de resolución, 3,3 V de tensión de alimentación, interfaz de comunicaciones I2C, 4 canales de entrada, tensión de referencia interna y amplificador de ganancia programable.\\
+Las señales correspondientes al valor RMS de corriente y tensión en bornes del supercapacitor se conectan a las entradas AIN0 y AIN3 del chip respectivamente. Las restantes entradas AIN1 y AIN2, se conectaron a una tira de pines para agregar de manera opcional otros 2 módulos de medición de corriente.\\
 
 
 \section{Firmware implementado}
@@ -266,36 +269,36 @@ Para lograr la lógica de negocios se adoptó el patrón arquitectónico de la f
 Al entrar en operación, el microcontrolador verificará que la tensión en bornes del supercapacitor sea suficiente antes de enviar su primer reporte de estado. Seguidamente, entrará en modo ahorro de energía o \textit{deep sleep} durante un lapso de tiempo determinado hasta cumplir el periodo.\\
 Si durante el modo \textit{deep sleep} ocurre un corte en el suministro de energía, la señal generada por el circuito de la figura \ref{fig:ctodetectorcortes} hará que el sistema se restablezca, realice una medición, transmita y nuevamente vuelva a modo ahorro de energía.\\
 
-\subsection{ Inicialización de periféricos}
+\subsection{Inicialización de periféricos}
 Esta es la primera tarea que se ejecutará cada vez que ocurra se repite el ciclo.
 La tabla \ref{tabla_pines} presenta la función asignada de cada pin físico de la placa de desarrollo LoPy 4, dirección y periférico interno del microcontrolador asociado.\\
 \begin{table}[h!]
 	\centering
-	\caption{Pines de la placa LoPy4 utilizados y los perifericos del ESP32 asociados.}
+	\caption{Pines de la placa LoPy4 utilizados y los periféricos del ESP32 asociados.}
 	\begin{tabular}{ccccc} 
 		\hline
 		\begin{tabular}[c]{@{}c@{}}Pin\\(LoPy4)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Puerto\\(ESP32)\end{tabular} & Dirección                                               & \begin{tabular}[c]{@{}c@{}}Periférico\\asociado\end{tabular} & Comentarios                                                                 \\ 
 		\hline
 		2                                                    & P0\_RX0                                                 & entrada                                                 & UART0                                                        & 115200 bps                                                                  \\
 		3                                                    & P0\_TX0                                                 & salida                                                  & UART0                                                        & 115200 bps                                                                  \\
-		10                                                   & P8                                                      & entrada                                                 & GPIO                                                         & \begin{tabular}[c]{@{}c@{}}IRQ por flanco \\ascendente\end{tabular}         \\
+		10                                                   & P8                                                      & entrada                                                 & GPIO                                                         & \begin{tabular}[c]{@{}c@{}}IRQ por flanco \\ascendente.\end{tabular}         \\
 		11                                                   & P9                                                      & \begin{tabular}[c]{@{}c@{}}entrada\\salida\end{tabular} & I2C                                                          & SDA                                                                         \\
 		12                                                   & P10                                                     & salida                                                  & I2C                                                          & SCL                                                                         \\
-		13                                                   & P11                                                     & salida                                                  & GPIO                                                         & \begin{tabular}[c]{@{}c@{}}Control del load \\switch de 3,3 V\end{tabular}  \\
-		14                                                   & P12                                                     & salida                                                  & GPIO                                                         & \begin{tabular}[c]{@{}c@{}}Control del load \\switch de 5 V\end{tabular}    \\
+		13                                                   & P11                                                     & salida                                                  & GPIO                                                         & \begin{tabular}[c]{@{}c@{}}Control del \textit{load} \\\textit{switch} de 3,3 V.\end{tabular}  \\
+		14                                                   & P12                                                     & salida                                                  & GPIO                                                         & \begin{tabular}[c]{@{}c@{}}Control del \textit{load} \\\textit{switch} de 5 V.\end{tabular}    \\
 		\hline
 	\end{tabular} 	\label{tabla_pines}
 \end{table}
 
 \subsection{Medición}
-Al cumplirse el periodo de ahorro de energia o ocurrir una interrupcion, esta función del firmware pone en alto los pines 13 y 14 con el fin de activar los \textit{load switch} de 3,3 V y 5 V para configurar el hardware en modo medición.\\
-El realy cambia de estado y conecta el transformador de intensidad al shunt de medición. La etapa de medicion de valor RMS formada por los circuitos de las figuras \ref{fig:ctomedidorrms} y \ref{fig:ctoopamp}, otorgan a la entrada del conversor una tensión DC filtrada y acondicionada lista para ser digitalizada.\\
+Al cumplirse el periodo de ahorro de energía u ocurrir una interrupción, esta función del firmware pone en alto los pines 13 y 14 con el fin de activar los \textit{load switch} de 3,3 V y 5 V para configurar el hardware en modo medición.\\
+El relay cambia de estado y conecta el transformador de intensidad al shunt de medición. La etapa de medición de valor RMS formada por los circuitos de las figuras \ref{fig:ctomedidorrms} y \ref{fig:ctoopamp}, otorgan a la entrada del conversor una tensión DC filtrada y acondicionada lista para ser digitalizada.\\
 La comunicación con el conversor se realiza a través del periférico de comunicaciones I2C. Una biblioteca de libre acceso lista para interactuar con el ADS1015, se utiliza para tomar 10 valores consecutivos de la señal de interés y almacenarlos en un arreglo. Finalmente se calcula su media aritmética.
 El mismo método se invoca para digitalizar la tensión correspondiente al supercapacitor otorgada por el circuito de la figura \ref{fig:ctodivisorresistivo}.
 
 \subsection{Compresión de las mediciones y transmisión a través de LoRa}\label{compresion_lecturas}
 Con el objeto de optimizar el tiempo de aire requerido para realizar la transmisión de los datos a la red LoRaWAN, se deben comprimir las lecturas como un conjunto consecutivo de 48 bits.\\
-La porcion de codigo presentada en \ref{codigo_compresion}, realiza la compresion de las 4 mediciones recibidas como un arreglo mediante corrimiento de 12 bits para finalmente retornar un valor de 48 bits equivalente a la carga util.\\
+La porción de código presentada en \ref{codigo_compresion}, realiza la compresión de las 4 mediciones recibidas como un arreglo mediante corrimiento de 12 bits para finalmente retornar un valor de 48 bits equivalente a la carga útil.\\
 
 \begin{lstlisting}[label=codigo_compresion,caption=Función encargada de comprimir las 4 lecturas de 12 bits.]
 def compress_analog_reading_payload(self, mediciones):
@@ -332,17 +335,17 @@ else:
 Finalizada la creación de la carga útil, se transmite a la red LoRaWAN mediante el transceptor embebido en la misma placa.\\
 Una biblioteca provista por Pycom se encarga de gestionar la interacción con las capas superiores del protocolo LoRaWAN para autenticarse y acceder a la red.\\
 
-\subsection{Modo ahorro de energia e interrupciones}
-Antes de configurarse en modo ahorro de energía, se habilita la interrupcion por flanco ascendente en el pin físico 10. La señal conectada a este pin, es la salida del circuito de la figura \ref{fig:ctodetectorcortes}.
-La funcion asociado a la interrupción, genera una señal de restablecimiento del sistema y el ciclo de la figura \ref{fig:patronpowersaveloop} se repite.\\
-En caso de que no exista una interrupcion, el microcontrolador permanecera en modo ahorro de energia durante 5 minutos y se restablecera debido al \textit{timeout} generado.\\
+\subsection{Modo ahorro de energía e interrupciones}
+Antes de configurarse en modo ahorro de energía, se habilita la interrupción por flanco ascendente en el pin físico 10. La señal conectada a este pin, es la salida del circuito de la figura \ref{fig:ctodetectorcortes}.
+La funcion asociada a la interrupción, genera una señal de restablecimiento del sistema y el ciclo de la figura \ref{fig:patronpowersaveloop} se repite.\\
+En caso de que no exista una interrupción, el microcontrolador permanecerá en modo ahorro de energía durante 5 minutos y se restablecerá debido al \textit{timeout} generado.\\
 
 \section{Servicios de Backend}
 \label{seccion_bes}
 
 \subsection{Integraci\'{o}n de la red LoRaWAN}
 Al recibir la red LoRaWAN la carga útil generada por cada nodo, es necesario realizar el camino inverso al descrito en \ref{compresion_lecturas}.\\
-\textit{The Things Network} provee una herramienta dedicada llamada \textit{payload format decoder}. Con esta herramienta cada vez que un paquete de un nodo llega, el decodificador lo procesa y separa cada lectura como clave de un elemento JSON (figura \ref{fig:payloaddecoder}) antes de realizar el envio a los servicios de backend.\\
+\textit{The Things Network} provee una herramienta dedicada llamada \textit{payload format decoder}. Con esta herramienta cada vez que un paquete de un nodo llega, el decodificador lo procesa y separa cada lectura como clave de un elemento JSON (figura \ref{fig:payloaddecoder}) antes de realizar el env\'{i}o a los servicios de backend.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
@@ -355,6 +358,6 @@ En el servidor web de los servicios de backend, se encuentra un script PHP (ver 
 
 \subsection{Base de Datos}
 
-\subsection{GUI basada en Grafana}
-Como único contratiempo se puede mencionar la dificultad que tiene grafana de manejar muestras temporales si no se utiliza la misma zona horaria que el sistema operativo. En este proyecto se prefirió guardar la información, en la base de datos en formato UTC para aumentar la compatibilidad y poder desplegar el sistema en cualquier lugar del mundo, independientemente de la zona horaria local.\\
+\subsection{Interfaz gráfica basada en Grafana}
+Como único contratiempo se puede mencionar la dificultad que tiene Grafana de manejar muestras temporales si no se utiliza la misma zona horaria que el sistema operativo. En este proyecto se prefirió guardar la información, en la base de datos en formato UTC para aumentar la compatibilidad y poder desplegar el sistema en cualquier lugar del mundo, independientemente de la zona horaria local.\\
 Para subsanar las diferencias entre la base de datos y Grafana se generaron manualmente las consultas SQL agregando el parámetro zona horaria.
