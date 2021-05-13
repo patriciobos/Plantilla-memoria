@@ -212,8 +212,9 @@ La frecuencia de corte (fc) adoptada por el autor para este HPF es de 5 Hz, por 
 \end{equation}
 El valor comercial más próximo adoptado para C8 fue 3,9 nF.\\
 La señal de salida del LTC1966 es del orden de los mV. Para poder digitalizarla con un conversor analogico digital es necesario amplificarla de modo que el fondo de escala de la medición tenga como máximo la misma tensión de alimentación que el conversor (3,3 V).\\
-El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional MP6001U \citep{mcp6001} en configuración amplificador no inversor. La ganancia A del arreglo est\'{a} definida por la ecuacion
+El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional MP6001U \citep{mcp6001} en configuración amplificador no inversor. La ganancia A del arreglo est\'{a} definida por la ecuacion \ref{eq:ganancia}.
 \begin{equation}
+\label{eq:ganancia}
 	A=\frac{R7+Pot1+R8}{R7}
 \end{equation}
 
@@ -265,14 +266,95 @@ Para lograr la lógica de negocios se adoptó el patrón arquitectónico de la f
 Al entrar en operación, el microcontrolador verificará que la tensión en bornes del supercapacitor sea suficiente antes de enviar su primer reporte de estado. Seguidamente, entrará en modo ahorro de energía o \textit{deep sleep} durante un lapso de tiempo determinado hasta cumplir el periodo.\\
 Si durante el modo \textit{deep sleep} ocurre un corte en el suministro de energía, la señal generada por el circuito de la figura \ref{fig:ctodetectorcortes} hará que el sistema se restablezca, realice una medición, transmita y nuevamente vuelva a modo ahorro de energía.\\
 
-\subsection{ Asignación e inicialización de periféricos}
+\subsection{ Inicialización de periféricos}
+Esta es la primera tarea que se ejecutará cada vez que ocurra se repite el ciclo.
+La tabla \ref{tabla_pines} presenta la función asignada de cada pin físico de la placa de desarrollo LoPy 4, dirección y periférico interno del microcontrolador asociado.\\
+\begin{table}[h!]
+	\centering
+	\caption{Pines de la placa LoPy4 utilizados y los perifericos del ESP32 asociados.}
+	\begin{tabular}{ccccc} 
+		\hline
+		\begin{tabular}[c]{@{}c@{}}Pin\\(LoPy4)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Puerto\\(ESP32)\end{tabular} & Dirección                                               & \begin{tabular}[c]{@{}c@{}}Periférico\\asociado\end{tabular} & Comentarios                                                                 \\ 
+		\hline
+		2                                                    & P0\_RX0                                                 & entrada                                                 & UART0                                                        & 115200 bps                                                                  \\
+		3                                                    & P0\_TX0                                                 & salida                                                  & UART0                                                        & 115200 bps                                                                  \\
+		10                                                   & P8                                                      & entrada                                                 & GPIO                                                         & \begin{tabular}[c]{@{}c@{}}IRQ por flanco \\ascendente\end{tabular}         \\
+		11                                                   & P9                                                      & \begin{tabular}[c]{@{}c@{}}entrada\\salida\end{tabular} & I2C                                                          & SDA                                                                         \\
+		12                                                   & P10                                                     & salida                                                  & I2C                                                          & SCL                                                                         \\
+		13                                                   & P11                                                     & salida                                                  & GPIO                                                         & \begin{tabular}[c]{@{}c@{}}Control del load \\switch de 3,3 V\end{tabular}  \\
+		14                                                   & P12                                                     & salida                                                  & GPIO                                                         & \begin{tabular}[c]{@{}c@{}}Control del load \\switch de 5 V\end{tabular}    \\
+		\hline
+	\end{tabular} 	\label{tabla_pines}
+\end{table}
+
+\subsection{Medición}
+Al cumplirse el periodo de ahorro de energia o ocurrir una interrupcion, esta función del firmware pone en alto los pines 13 y 14 con el fin de activar los \textit{load switch} de 3,3 V y 5 V para configurar el hardware en modo medición.\\
+El realy cambia de estado y conecta el transformador de intensidad al shunt de medición. La etapa de medicion de valor RMS formada por los circuitos de las figuras \ref{fig:ctomedidorrms} y \ref{fig:ctoopamp}, otorgan a la entrada del conversor una tensión DC filtrada y acondicionada lista para ser digitalizada.\\
+La comunicación con el conversor se realiza a través del periférico de comunicaciones I2C. Una biblioteca de libre acceso lista para interactuar con el ADS1015, se utiliza para tomar 10 valores consecutivos de la señal de interés y almacenarlos en un arreglo. Finalmente se calcula su media aritmética.
+El mismo método se invoca para digitalizar la tensión correspondiente al supercapacitor otorgada por el circuito de la figura \ref{fig:ctodivisorresistivo}.
+
+\subsection{Compresión de las mediciones y transmisión a través de LoRa}\label{compresion_lecturas}
+Con el objeto de optimizar el tiempo de aire requerido para realizar la transmisión de los datos a la red LoRaWAN, se deben comprimir las lecturas como un conjunto consecutivo de 48 bits.\\
+La porcion de codigo presentada en \ref{codigo_compresion}, realiza la compresion de las 4 mediciones recibidas como un arreglo mediante corrimiento de 12 bits para finalmente retornar un valor de 48 bits equivalente a la carga util.\\
+
+\begin{lstlisting}[label=codigo_compresion,caption=Función encargada de comprimir las 4 lecturas de 12 bits.]
+def compress_analog_reading_payload(self, mediciones):
+"""
+el orden es mediciones = [0x111, 0x222, 0x333, 0xccc]
+para hacer una anidacion de todos tengo que ir corriendo de a 12 bits
+# 1 tribble = 3 nibbles = 12 bits
+"""
+payload = 0
+NUMBER_OF_PARAMETERS = 4 # 3 Phase RMS CURRENT readings + SUPERCAP VOLTAGE
+DEFAULT_ERROR_PAYLOAD = [3333] * NUMBER_OF_PARAMETERS
+
+if isinstance(mediciones, list) and len(mediciones) == NUMBER_OF_PARAMETERS:
+	tribble_shifts = len(mediciones) - 1
+else:
+	print("ERROR: Did not receive the right amount of params to compress.\
+	Was expecting {0} but received {1}."\
+	.format(NUMBER_OF_PARAMETERS, len(mediciones)))
+	print("Returning: ", DEFAULT_ERROR_PAYLOAD)
+return DEFAULT_ERROR_PAYLOAD
+
+if all(isinstance(medicion, int) for medicion in mediciones):
+	for medicion in mediciones:
+	#print(medicion << (12 * tribble_shifts))
+	payload = payload | (medicion << (12 * tribble_shifts))
+	tribble_shifts -=1
+	return payload
+else:
+	print("ERROR: not all the elements of the list are INT. VERIFY!!!")
+	print("Returning: ", DEFAULT_ERROR_PAYLOAD)
+	return DEFAULT_ERROR_PAYLOAD
+\end{lstlisting}
+
+Finalizada la creación de la carga útil, se transmite a la red LoRaWAN mediante el transceptor embebido en la misma placa.\\
+Una biblioteca provista por Pycom se encarga de gestionar la interacción con las capas superiores del protocolo LoRaWAN para autenticarse y acceder a la red.\\
+
+\subsection{Modo ahorro de energia e interrupciones}
+Antes de configurarse en modo ahorro de energía, se habilita la interrupcion por flanco ascendente en el pin físico 10. La señal conectada a este pin, es la salida del circuito de la figura \ref{fig:ctodetectorcortes}.
+La funcion asociado a la interrupción, genera una señal de restablecimiento del sistema y el ciclo de la figura \ref{fig:patronpowersaveloop} se repite.\\
+En caso de que no exista una interrupcion, el microcontrolador permanecera en modo ahorro de energia durante 5 minutos y se restablecera debido al \textit{timeout} generado.\\
 
 \section{Servicios de Backend}
 \label{seccion_bes}
 
-\section{Integraci\'{o}n de la red LoRaWAN}
+\subsection{Integraci\'{o}n de la red LoRaWAN}
+Al recibir la red LoRaWAN la carga útil generada por cada nodo, es necesario realizar el camino inverso al descrito en \ref{compresion_lecturas}.\\
+\textit{The Things Network} provee una herramienta dedicada llamada \textit{payload format decoder}. Con esta herramienta cada vez que un paquete de un nodo llega, el decodificador lo procesa y separa cada lectura como clave de un elemento JSON (figura \ref{fig:payloaddecoder}) antes de realizar el envio a los servicios de backend.\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Figures/payload_decoder}
+	\caption{Decodificador de tramas en The Things Network.}
+	\label{fig:payloaddecoder}
+\end{figure}\\
+Las primeras experiencias de integración con \textit{The Things Network} se realizaron a través de suscripciones a un tópico de MQTT. Sin embargo, \textit{The Things Network} ya no da soporte a esta integración, motivo por el cual se cambió a envíos HTTPs utilizando el método POST.\\
+En el servidor web de los servicios de backend, se encuentra un script PHP (ver anexo) que atiende las consultas que llegan desde \textit{The Things Network}. Este mismo script es el encargado de almacenar los datos en la base de datos. Las credenciales de usuario de la base de datos que se utiliza en este script, tiene por motivos de seguridad, solo permisos de INSERT.\\
 
-\section{Base de Datos}
+\subsection{Base de Datos}
 
-\section{GUI basada en Grafana}
-
+\subsection{GUI basada en Grafana}
+Como único contratiempo se puede mencionar la dificultad que tiene grafana de manejar muestras temporales si no se utiliza la misma zona horaria que el sistema operativo. En este proyecto se prefirió guardar la información, en la base de datos en formato UTC para aumentar la compatibilidad y poder desplegar el sistema en cualquier lugar del mundo, independientemente de la zona horaria local.\\
+Para subsanar las diferencias entre la base de datos y Grafana se generaron manualmente las consultas SQL agregando el parámetro zona horaria.
