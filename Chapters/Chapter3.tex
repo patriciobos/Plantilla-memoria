@@ -1,8 +1,8 @@
 \chapter{Diseño e implementación} % Main chapter title
 \label{Chapter3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
-En este capítulo se detalla el HW desarrollado en etapas con un enfoque individual a cada etapa. Se presentan circuitos esquemáticos correspondientes al circuito implementado para cada etapa individual y su rol en el sistema. 
-La subsección \ref{seccion_firmware} expone el patrón \textit{power save loop} adoptado en la lógica de negocios, los periféricos del MC con los cuales interactúa y la rutina de interrupción que atiende al generarse un corte.
-Por último, la sección \ref{seccion_bes} da al lector detalle acerca de la integración entre la red LoRaWAN y los servicios adoptados para este proyecto.
+En este capítulo se exponen los componentes del hardware y software desarrollado en etapas con un enfoque individual.\\
+La subsección \ref{seccion_firmware} expone el patrón \textit{power save loop} adoptado en la lógica de negocios, los periféricos del microcontrolador con los cuales interactúa y la rutina de interrupción que atiende al generarse un corte.
+Por último, la sección \ref{seccion_bes} otorga al lector detalles acerca de la integración entre la red LoRaWAN y los servicios de backend implementados para este proyecto.
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -44,22 +44,30 @@ Por último, la sección \ref{seccion_bes} da al lector detalle acerca de la int
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-\section{Detalle del hardware por etapas}
+\section{Diseño del hardware por etapas}
+En esta sección se presentan circuitos esquemáticos correspondientes a cada etapa individual y su rol en el sistema.
 \subsection{Circuito de selección de modo}
-Considerando el caso límite donde el nivel del acumulador es bajo y el MC ordena al relay (RL) con retención cambiar su estado, la energía necesaria para excitar al RL puede generar una caída de tensión significativa en el acumulador y resultar en un circuito totalmente desenergizado sin posibilidad de volver a entrar en operación a no ser mediante la intervención humana.\\
-Un caso extremo como el mencionado, implica que el HW posea un mecanismo para restablecer su operación tras largos periodos de tiempo aun después de haberse vaciado el acumulador.\\
-En la figura \ref{fig:ctoselecciondemodo} se implementó el RL sin retención presentado en \ref{fig:relay} y su circuito de mando. Los terminales del TI, se encuentran conectados por defecto a la etapa de conversión y acumulación de energía (terminales \textit{NC1} y \textit{NC2}). Una vez que la tensión en bornes del acumulador alcanza el valor de mínimo para que el conversor DC/DC entre en operación, también la electrónica sin la necesidad de una intervención externa.\\
+Considerando el caso límite donde el nivel del acumulador es bajo y el microcontrolador ordena al relay con retención cambiar su estado, la energía necesaria para excitar al relay puede generar una caída de tensión significativa en el acumulador y dejar a todo el hardware totalmente desenergizado sin posibilidad de volver a entrar en operación a menos que exista una intervención humana.\\
+Un caso extremo como el mencionado, implica que el hardware posea un mecanismo para restablecer su operación tras largos per\'{i}odos de tiempo aun después de haberse vaciado el acumulador.\\
+En la figura \ref{fig:ctoselecciondemodo} se implementó el relay sin retención presentado en \ref{fig:relay} y su circuito de mando. Los terminales del transformador de corriente se encuentran conectados por defecto a la etapa de conversión y acumulación de energía (terminales NC1 y NC2). Una vez que la tensión en bornes del acumulador alcanza el valor de mínimo para que el conversor DC/DC entre en operación, también la electrónica sin la necesidad de una intervención externa.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/cto_seleccion_de_modo}
+	\includegraphics[width=0.8\linewidth]{Figures/cto_seleccion_de_modo}
 	\caption{circuito selector de modo basado en el relay HF115-005-2ZS4.}
 	\label{fig:ctoselecciondemodo}
 \end{figure}\\
-Cada vez que se desea tomar una medición de corriente, el MC enciende la bobina del relay y conecta el TI al circuito de medición de valor RMS. Al \\
+Cada vez que se desea tomar una medición de corriente, el microcontrolador enciende la bobina del relay y conecta el trnasformador de corriente al circuito de medición de valor RMS.\\
 
 \subsection{Puente rectificador de onda completa}
-Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la figura \ref{fig:rect_MOSFET}. Con el objeto de reducir el espacio ocupado en el PCB, se optó por utilizar un chip DMHC3025 en encapsulado SOIC-8 [REFERENCIA A DATASHEET]. El encapsulado presentado en la \ref{fig:esquematicointernorctificadormosfet} alberga un puente H formado dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicación son presentadas en la tabla \ref{tabla_transistores_rectificador}.
+Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la figura \ref{fig:rect_MOSFET}. Con el objeto de reducir el espacio ocupado en el circuito impreso, se optó por utilizar un chip DMHC3025 \citep{dmhc3025}. El encapsulado SOIC-8 presentado en la \ref{fig:esquematicointernorctificadormosfet} alberga un puente H formado dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicación son presentadas en la tabla \ref{tabla_transistores_rectificador}.
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Figures/esquematico_interno_rctificador_mosfet}
+	\caption{Pinout y esquemáticos interno del DMHC3025 \citep{dmhc3025}.}
+	\label{fig:esquematicointernorctificadormosfet}
+\end{figure}
 \begin{table}[h]
 	\centering
 	\caption{Características eléctricas de los transistores que forman parte del rectificador de onda completa.}
@@ -67,71 +75,64 @@ Para el prototipo desarrollado en este trabajo, se replicó el circuito rectific
 		\hline
 		\textbf{\textbf{Parámetro}} & \begin{tabular}[c]{@{}c@{}}\textbf{}\\\textbf{\textbf{Valor máximo}}\end{tabular}  \\ 
 		\hline
-		Rds                         & 25 miliohms                                                                        \\
+		Rds                       & 25 m$\Omega$                                                           \\
 		Id                          & 6 A                                                                                \\
-		Vdss                        & 30 V                                                                               \\
+		Vdss                     & 30 V                                                                            \\
 		\hline
 	\end{tabular}\label{tabla_transistores_rectificador}
 \end{table}
 
+El circuito final implementado encargado de la recitificacion y filtrado de la tensión DC a la salida se presenta en la figura \ref{fig:ctorectificacionfiltrado}. Dos diodos zener D1 y D2 en antiparalelo protegen a los transistores de sobretensión recortando la onda a 27 V para cada semiciclo de la onda senoidal a la entrada.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{Figures/esquematico_interno_rctificador_mosfet}
-	\caption{Pinout y esquemáticos interno del DMHC3025 \citep{dmhc3025}.}
-	\label{fig:esquematicointernorctificadormosfet}
-\end{figure}
-El circuito final implementado encargado de la recitificacion y filtrado de la tensión DC a la salida se presenta en la figura \ref{fig:ctorectificacionfiltrado}. Dos diodos zener \textit{D1} y \textit{D2} en antiparalelo protegen el a los transistores  de picos de sobretensión recortando la onda a 27 V para cada semiciclo de la onda senoidal a la entrada.\\
-% TODO: \usepackage{graphicx} required
-\begin{figure}
-	\centering
-	\includegraphics[width=0.8\linewidth]{Figures/cto_rectificacion_filtrado}
+	\includegraphics[width=0.9\linewidth]{Figures/cto_rectificacion_filtrado}
 	\caption{Etapa de rectificación, filtrado y acumulación implementada.}
 	\label{fig:ctorectificacionfiltrado}
 \end{figure}\\
-A su salida, un conjunto de capacitores cerámicos \textit{C5}, \textit{C6} y \textit{C7} filtran ruido de alta frecuencia para luego acumular toda la energía en el SC conectado a \textit{J5}.\\
+A su salida, un conjunto de capacitores cerámicos C5, C6 y C7 filtran ruido de alta frecuencia para luego acumular la energía en el supercapacitor conectado a J5.\\
 
 \subsection{Acumulador de energía basado en supercapacitores}
-A la salida del rectificador de onda completa de la figura \ref{fig:ctorectificacionfiltrado}, se conecta en la bornera \textit{J5} un banco de dos SC de 500 F x 2,7 V en serie con una capacitancia equivalente de 250F x 5,4 V.\\
-Los SC, se presentan en la figura \ref{fig:imagensupercap} como un módulo único donde ya se encuentran montados sobre una placa con una electrónica adicional de protección. El circuito de protección, se encarga de limitar la tensión en sus bornes a 2,5 V y disipar la potencia excedente.\\
+A la salida del rectificador de onda completa de la figura \ref{fig:ctorectificacionfiltrado}, se conecta a la bornera J5 un banco compuesto por dos supercapacitores de 500 F x 2,7 V que resulta en una capacitancia equivalente de 250F x 5,4 V.\\
+Los supercapacitores, se presentan en la figura \ref{fig:imagensupercap} como un módulo único donde ya se encuentran montados sobre una placa con una electrónica adicional de protección. El circuito de protección, se encarga de limitar la tensión en sus bornes a 2,5 V y disipar la potencia excedente.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/imagen_supercap}
-	\caption{Banco de SC de 250 F x 5,4 V utilizado como acumulador.}
+	\caption{Banco de supercapacitor de 250 F x 5,4 V utilizado como acumulador.}
 	\label{fig:imagensupercap}
 \end{figure}\\
-Al tratarse de una capacitancia total considerablemente mayor que la de un capacitor habitual, almacenará también más energía. El SC puede entonces cumplir la función de acumular energía para mantener operativa la electrónica en caso de que se interrumpa la conversión de energía.\\
+Al tratarse de una capacitancia total considerablemente mayor que la de un capacitor habitual, almacenará también más energía. El supercapacitor puede entonces cumplir la función de acumular energía para mantener operativa la electrónica en caso de que se interrumpa la conversión de energía.\\
 Adicionalmente el módulo elegido, aporta simpleza al esquemático final y un rango de temperatura de operación mayor que una solución que además incluya una batería \citep{PORCARELLI20141671}.\\
 
  \subsection{Circuito de detección de cortes}
- Una de las funcionalidades relevantes del HW, es detectar interrupciones en la distribución de energía debido a razones tales como sobrecarga en la línea o desastres naturales.\\
- El circuito detector de cortes propuesto en \ref{fig:ctodetectorcortes} está basado en un comparador TLV3691 de la firma Texas Instruments. Su salida se encarga de generar una interrupción (IRQ) por flanco ascendente y despertar al MC.\\
- % TODO: \usepackage{graphicx} required
+ Una de las funcionalidades relevantes del hardware, es detectar interrupciones en la distribución de energía debido a razones tales como sobrecarga en la línea o desastres naturales.\\
+ El circuito detector de cortes propuesto en \ref{fig:ctodetectorcortes} está basado en un comparador TLV3691 de la firma Texas Instruments. Su salida se encarga de generar una interrupción que despierta al microcontrolador.\\
+   % TODO: \usepackage{graphicx} required
  \begin{figure}[h]
  	\centering
- 	\includegraphics[width=0.7\linewidth]{Figures/cto_detector_cortes}
+ 	\includegraphics[width=0.8\linewidth]{Figures/cto_detector_cortes}
  	\caption{Circuito utilizado como detector de cortes.}
  	\label{fig:ctodetectorcortes}
- \end{figure}\\
- Como referencia para generar la señal IRQ, se toma un valor de 1,65 V obtenido a partir de un divisor resistivo formado por \textit{R16} y \textit{R17}. Este divisor resistivo puede ser reemplazado por un potenciómetro en caso de ser necesario.\\
- La salida del puente rectificador se conecta al detector mediante el diodo \textit{D6}. A continuación los capacitores \textit{C23} y \textit{C24} filtran el rizado presente en la señal resultando en una señal de continua a la entrada no inversora del comparador.\\
- En el caso de que ocurra un corte en la línea de distribución, la corriente que circule por \textit{D6} es nula y los capacitores se descargan a través de \textit{R18}. Al bajar su tensión por debajo de 1,65 V, la salida se pondrá en alto y la IRQ será atendida por el FW del MC.\\
+ \end{figure}
+ Como referencia para generar la señal de interrupción, se toma un valor de 1,65 V obtenido a partir de un divisor resistivo formado por R16 y R17. Este arreglo puede ser reemplazado por un potenciómetro en caso de ser necesario.\\
+ La salida del puente rectificador se conecta al detector mediante el diodo D6. A continuación los capacitores C23 y C24 filtran el rizado presente en la señal, resultando en una señal DC a la entrada no inversora del comparador.\\
+ En el caso de que ocurra un corte en la línea de distribución, la corriente que circula por D6 es nula y los capacitores se descargar\'{a}n a través de R18. Al bajar su tensión por debajo de 1,65 V, la salida se pondrá en alto y la interrupción será atendida por el firmware del microcontrolador.\\
  
  \subsection{Circuito de apagado y encendido mediante load switch}
- Con el objeto de lograr un mínimo consumo en estado ocioso, es necesario desenergizar toda electrónica asociada al HW que se encuentre en desuso, con excepción del MC y el circuito detector de la figura \ref{fig:ctodetectorcortes}.\\
- Para interrumpir la alimentación de manera electrónica, se adoptaron dos circuitos independientes basados en un \textit{load switch} (LS) FPF2100 y se presentan en la figura \ref{fig:ctoloadswitch}.
+ Con el objeto de minimizar el consumo en estado ocioso, es necesario desenergizar toda electrónica asociada al hardware que se encuentre en desuso, con excepción del microcontrolador y el circuito detector de la figura \ref{fig:ctodetectorcortes}.\\
+ Para interrumpir la alimentación de manera electrónica, se adoptaron dos circuitos independientes basados en un \textit{load switch} FPF2100 de la firma ON Semiconductor \citep{fpf2100} que se presentan en la figura \ref{fig:ctoloadswitch}.
  % TODO: \usepackage{graphicx} required
  \begin{figure}[h]
  	\centering
  	\includegraphics[width=0.7\linewidth]{Figures/cto_load_switch}
- 	\caption{Circuito de encendido y apagado de las diferentes etapas de HW mediante un load switch FPF2100 \citep{fpf2100}.}
+ 	\caption{Circuito de encendido y apagado de las diferentes etapas de hardware mediante un load switch FPF2100 \citep{fpf2100}.}
  	\label{fig:ctoloadswitch}
  \end{figure}\\
-De esta manera las diferentes etapas de 3,3 V y 5 V se energizan únicamente cuando el MC pone en estado alto el pin \textit{ON} a la entrada del LS.\\
+De esta manera las diferentes etapas de 3,3 V y 5 V se energizan únicamente cuando el microcontrolador pone en estado alto el pin ON a la entrada del \textit{load switch}.\\
  
 \subsection{Transformador de Intensidad}
-Teniendo en cuenta que el comisionamiento debe realizarse sobre redes ya existentes y operativas, no resulta práctico utilizar un TI de núcleo sólido. Un TI de tipo núcleo partido como el presentado en la figura \ref{fig:ti_abierto} permite sortear el problema de interrumpir el cable a monitorear para enhebrarlo por el primario facilitar notablemente su comisionamiento o remoción.\\
+Teniendo en cuenta que el comisionamiento debe realizarse sobre redes ya existentes y operativas, no resulta práctico utilizar un transformador de intensidad de núcleo sólido. Uno de tipo núcleo partido como el presentado en la figura \ref{fig:ti_abierto}, permite sortear el problema de tener que interrumpir el cable a monitorear para enhebrarlo por el primario facilitando notablemente el comisionamiento o remoción del hardware.\\
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}[b]{0.4\textwidth}
@@ -147,14 +148,14 @@ Teniendo en cuenta que el comisionamiento debe realizarse sobre redes ya existen
 		\caption{}
 		\label{fig:ti_dimensiones}
 	\end{subfigure}
-	\caption{TI de tipo núcleo partido y sus dimensiones. Imágenes tomadas de \citep{ct_hobut}}
+	\caption{Transformador de intensidad de tipo núcleo partido y sus dimensiones. Imágenes tomadas de \citep{ct_hobut}.}
 	\label{fig:ti_mosaico}
 \end{figure}\\
 Basado en el requerimiento \ref{requerimientos_corriente_ti}, se eligió uno fabricado por la empresa Howard Butler Ltd modelo CTSCM40-200/5 y sus características se presentan en la \ref{tabla_caracteristicas_ti}.\\ 
 
 \begin{table}
 	\centering
-	\caption{Características del CTSCM40-200/5 \citep{ct_hobut}}
+	\caption{Características del CTSCM40-200/5 \citep{ct_hobut}.}
 	\begin{tabular}{lc} 
 		\hline
 		\multicolumn{1}{c}{Parámetro}                                                       & \begin{tabular}[c]{@{}c@{}}Valor\\máximo~\end{tabular}  \\ 
@@ -170,8 +171,9 @@ Basado en el requerimiento \ref{requerimientos_corriente_ti}, se eligió uno fab
 \end{table}
 
 \subsection{Circuito de medición de valor RMS de corriente y acondicionamiento de señal}
-Para medir corriente mediante un TI, es primero necesario convertir la intensidad en una señal de tensión representativa y partir de esta ahí calcular su valor RMS. Un resistor shunt de 0,1 Ohms con encapsulado TO-220-2 fue adoptado para convertir la corriente del secundario del TI en una señal de tensión apta para realizar su medición RMS.\\
-En el mercado existen circuitos integrados (CI) dedicados a cumplir esta tarea, estos funcionan generalmente otorgando una tensión DC a la salida proporcional al valor RMS de la tensión a la entrada. Una tabla comparativa resaltando el ancho de banda, la tensión pico a pico máxima admitida a sus entradas y tensión de operación de los posibles candidatos a utilizar en este proyecto se elaboró en la tabla \ref{tabla_chip_rms}\\
+Para medir corriente mediante un transformador de intensidad, primero es necesario convertir la intensidad en una señal de tensión representativa y partir de esta ahí calcular su valor RMS. Un resistor shunt de 0,1 $\Omega$ con encapsulado TO-220-2 fue adoptado para convertir la corriente del secundario del transformador de intensidad en una señal de tensión apta para realizar su medición RMS.\\
+En el mercado existen circuitos integrados dedicados para realizar la medicion RMS de señales. Generalmente otorgan una tensión DC a la salida proporcional al valor RMS de la tensión a la entrada.\\
+Una tabla comparativa resaltando el ancho de banda, la tensión pico a pico máxima admitida a sus entradas y tensión de operación de los posibles candidatos a utilizar en este proyecto se elaboró en la tabla \ref{tabla_chip_rms}\\
 \begin{table}[h]
 	\centering
 	\caption{Tabla comparativa de chips aptos para medición RMS.}
@@ -184,33 +186,33 @@ En el mercado existen circuitos integrados (CI) dedicados a cumplir esta tarea, 
 		\textcolor[rgb]{0.2,0.2,0.2}{LTC1966}\citep{ltc1966} & 800 kHz                                                      & +/- 1 V                                            & 5,5 V                                                                \\
 		\hline
 	\end{tabular}\label{tabla_chip_rms}
-\end{table}
-Por disponibilidad del autor al momento del ensayo se eligió el LTC1966 de la firma Linear Technologies.\\
-El CI posee dos entradas \textit{IN1} e \textit{IN2} que se conectan a la señal tensión generada en bornes del shunt representado por \textit{R6} en el esquemático Figura RMS. A su salida \textit{VOUT}, otorga una tensión DC proporcional al valor RMS de la señal senoidal inyectada entre \textit{IN1} e \textit{IN2}.\\
-Siendo el valor máximo de un semiciclo de una onda senoidal en la entrada de 500 mV, el valor eficaz de esa señal de entrada y esperado a la salida del IC es
+\end{table}\\
+Por disponibilidad del autor al momento del ensayo se eligió el LTC1966 de la firma Linear Technologies \citep{ad636}.\\
+El LTC1966 posee dos entradas IN1 e IN2 que se conectan a la señal tensión generada en bornes del shunt representado por R6 en el esquemático \ref{fig:ctomedidorrms}. A su salida VOUT, otorga una tensión DC proporcional al valor RMS de la señal senoidal inyectada entre IN1 e IN2.\\
+Siendo 500 mV el valor de pico de un semiciclo de una onda senoidal en la entrada, el valor eficaz de esa señal de entrada y esperado a la salida del IC es
 \begin{equation}
 	Vrms=\frac{Vmax}{\sqrt{2}}=\frac{500}{\sqrt{2}}= 353,55 mV
 \end{equation}
-Los capacitores \textit{C10} y \textit{C12} se encargan de realizar el promedio y filtrar el posible ruido de alta frecuencia.\\
-\textit{C9} y \textit{C11} filtran la tensión de alimentación que energiza al CI.\\
+Los capacitores C10 y C12 se encargan de realizar el promedio y filtrar el posible ruido de alta frecuencia.\\
+C9 y C11 filtran la tensión de alimentación que energiza al circuito integrado.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/cto_medidor_rms}
-	\caption{Circuito medidor de valor RMS implementado usando el LTC1966.}
+	\includegraphics[width=1.0\linewidth]{Figures/cto_medidor_rms}
+	\caption{Circuito medidor de valor RMS implementado con el LTC1966.}
 	\label{fig:ctomedidorrms}
-\end{figure}
-Dado que las mediciones a realizar se harán en líneas de distribución que operen a 50 Hz o 60 Hz, se ajustó la etapa de filtrado de la señal de entrada. Adoptada una impedancia de entrada de 8 Megaohms entre los pines IN1 e IN2 el capacitor C8 en serie forma un filtro pasa alto (HPF).\\
+\end{figure}\\
+Dado que las mediciones a realizar se harán en líneas de distribución que operen a 50 Hz o 60 Hz, se ajustó la etapa de filtrado de la señal de entrada. Con una impedancia de entrada de 8 Megaohms entre los pines IN1 e IN2 el capacitor C8 en serie forma un filtro pasa alto (HPF).\\
 La frecuencia de corte (fc) adoptada por el autor para este HPF es de 5 Hz, por lo tanto
 \begin{equation}
 	fc = \frac{1}{2.\pi.R.C}\rightarrow\frac{1}{2.\pi.R.fc}\\
 \end{equation}
 \begin{equation}
-	C=\frac{1}{2.\pi.8x10^6.5}=3,978x10^{-9} F
+	C=\frac{1}{2.\pi.{8x10^6}.5}=3,978x10^{-9} F
 \end{equation}
-El valor comercial más próximo adoptado para \textit{C8} fue entonces 3,9 nanofaradios.\\
-Antes de conectar la señal de salida del LTC1966 es necesario amplificarla de modo que el fondo de escala de la medición tenga como máximo la misma tensión de alimentación que el ADC (3,3 V).\\
-El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional MCP6001U \citep{mcp6001} en configuración amplificador no inversor. La ganancia \textit{A} del arreglo est\'{a} definida por
+El valor comercial más próximo adoptado para C8 fue 3,9 nF.\\
+La señal de salida del LTC1966 es del orden de los mV. Para poder digitalizarla con un conversor analogico digital es necesario amplificarla de modo que el fondo de escala de la medición tenga como máximo la misma tensión de alimentación que el conversor (3,3 V).\\
+El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional MP6001U \citep{mcp6001} en configuración amplificador no inversor. La ganancia A del arreglo est\'{a} definida por la ecuacion
 \begin{equation}
 	A=\frac{R7+Pot1+R8}{R7}
 \end{equation}
@@ -218,49 +220,50 @@ El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/cto_op_amp}
+	\includegraphics[width=1.0\linewidth]{Figures/cto_op_amp}
 	\caption{Circuito amplificador de la señal de salida del LTC1966.}
 	\label{fig:ctoopamp}
 \end{figure}
-Calibrada la ganancia del amplificador mediante una tensión constante a la entrada \textit{IN+} y el potenciómetro \textit{POT1}, la salida se encuentra lista para ser conectada a la entrada \textit{AIN0} del ADC.\\
+El ajuste de la ganancia del amplificador, se realiz\'{o} mediante una tensión de 353,55 mV constante a la entrada IN+ y variando el potenciómetro POT1 hasta que la salida alcance 3,3 V. FInalizado el ajuste, la salida se encuentra lista para ser conectada a la entrada del conversor analógico digital.\\
 
 \subsection{Monitoreo de tensión en bornes del acumulador}
-La tensión máxima a la que puede llegar el acumulador de la figura \ref{fig:imagensupercap} es 5V, este valor de tensión es mayor que el máximo admitido por las entradas del ADC. Para obtener una señal de tensión apta y equivalente a la tensión en bornes del acumulador, es necesario atenuar la tensión máxima a medir a una tensión de 3,3V o menos.\\
-El divisor resistivo formado por \textit{R4} y \textit{R5} implementado en el circuito de la Figura divisor resistivo SC, es una solución efectiva para atenuar una señal de tensión DC. De esta manera un valor de 5V en bornes del acumulador, representa como máximo 2,5V a la entrada del ADC.\\
+La tensión máxima a la que puede llegar el acumulador de la figura \ref{fig:imagensupercap} es 5V, este valor de tensión es mayor que el máximo admitido por las entradas del conversor analogico digital (3,3 V). Para obtener una señal de tensión apta y equivalente a la tensión en bornes del acumulador, es necesario atenuar la tensión máxima a medir a una tensión de 3,3V o menos.\\
+El divisor resistivo formado por R4 y R5 presentado de la figura \ref{fig:ctodivisorresistivo}, es una solución efectiva para atenuar una señal de tensión DC. De esta manera un valor de tension de 5 V en bornes del acumulador, representa como máximo 2,5V a la entrada del conversor analogico digital.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/cto_divisor_resistivo}
-	\caption{Divisor resistivo utilizado para medir la tensión en bornes del SC.}
+	\caption{Divisor resistivo utilizado para medir la tensión en bornes del supercapacitor.}
 	\label{fig:ctodivisorresistivo}
 \end{figure}
 
 \subsection{Etapa de conversión analógica digital}
-Las señales correspondientes a la tensión en bornes del SC, y valor RMS de corriente son analógicas. Por este motivo, es necesario digitalizar las señales para que luego puedan ser transmitidas por el módulo de comunicaciones LoRa. Para digitalizar las señales, se adoptó el chip ADS1015 de la firma Texas Instruments presentado en figura \ref{fig:ctoadc}. El ADS1015 consiste en un conversor analógico digital de 12 bits de resolución, 3,3 V de tensión de alimentación, interfaz de comunicaciones I2C, 4 canales de entrada, tensión de referencia interna y amplificador de ganancia programable.\\
+Las señales correspondientes a la tensión en bornes del supercapacitor, y valor RMS de corriente son analógicas. Por este motivo, es necesario digitalizar las señales para que luego puedan ser transmitidas por el módulo de comunicaciones.\\
+Para esto, se adoptó el chip ADS1015 de la firma Texas Instruments presentado en figura \ref{fig:ctoadc}. El ADS1015 consiste en un conversor analógico digital de 12 bits de resolución, 3,3 V de tensión de alimentación, interfaz de comunicaciones I2C, 4 canales de entrada, tensión de referencia interna y amplificador de ganancia programable.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/cto_adc}
-	\caption{Circuito implementado para digitalizar tensiones de SC y valor RMS de corriente.}
+	\includegraphics[width=1.0\linewidth]{Figures/cto_adc}
+	\caption{Etapa de conversion analogico-digital basada en ADS1015.}
 	\label{fig:ctoadc}
-\end{figure}
-Las señales correspondientes al valor RMS de corriente y tensión en bornes del SC se conectan a las entradas AIN0 y AIN3 del chip respectivamente. Las entradas restantes AIN1 y AIN2 se conectaron a una tira de pines para agregar de manera opcional otros 2 módulos de medición de corriente.\\
+\end{figure}\\
+Las señales correspondientes al valor RMS de corriente y tensión en bornes del supercapacitor se conectan a las entradas AIN0 y AIN3 del chip respectivamente. Las  restantes entradas AIN1 y AIN2, se conectaron a una tira de pines para agregar de manera opcional otros 2 módulos de medición de corriente.\\
 
 
 \section{Firmware implementado}
 \label{seccion_firmware}
 \subsection{Lógica de negocios y patrón arquitectónico adoptado}
-Cada HW tomará una medición y la transmitirá de manera periódica. Al momento de su comisionamiento, el HW se encontrará en modo conversión y acumulación por defecto.\\
+Cada hardware tomará una medición y la transmitirá de manera periódica. Al momento de su comisionamiento, el hardware se encontrará en modo conversión y acumulación por defecto.\\
 Para lograr la lógica de negocios se adoptó el patrón arquitectónico de la figura \ref{fig:patronpowersaveloop}, resultante de una combinación entre un sistema reactivo y un bucle de ahorro de energía.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/patron_power_save_loop}
-	\caption{Patrón adoptado para la implementación de la lógica de negocios del FW.}
+	\includegraphics[width=0.8\linewidth]{Figures/patron_power_save_loop}
+	\caption{Patrón adoptado para la implementación de la lógica de negocios del firmware.}
 	\label{fig:patronpowersaveloop}
 \end{figure}
-Al entrar en operación, el MC verificará que la tensión en bornes del SC sea suficiente antes de enviar su primer reporte de estado. Seguidamente, entrará en modo ahorro de energía o \textit{deep sleep} durante un lapso de tiempo determinado hasta cumplir el periodo.\\
-Si durante el modo \textit{deep sleep} ocurre un corte en el suministro de energía, la señal IRQ generada por el circuito de la figura \ref{fig:ctodetectorcortes} hará que el sistema se restablezca, realice una medición, transmita y nuevamente vuelva a modo ahorro de energía.\\
+Al entrar en operación, el microcontrolador verificará que la tensión en bornes del supercapacitor sea suficiente antes de enviar su primer reporte de estado. Seguidamente, entrará en modo ahorro de energía o \textit{deep sleep} durante un lapso de tiempo determinado hasta cumplir el periodo.\\
+Si durante el modo \textit{deep sleep} ocurre un corte en el suministro de energía, la señal generada por el circuito de la figura \ref{fig:ctodetectorcortes} hará que el sistema se restablezca, realice una medición, transmita y nuevamente vuelva a modo ahorro de energía.\\
 
 \subsection{ Asignación e inicialización de periféricos}
 
