@@ -60,11 +60,11 @@ En la figura \ref{fig:ctoselecciondemodo} se implementó el relay sin retención
 Cada vez que se desea tomar una medición de corriente, el microcontrolador enciende la bobina del relay y conecta el transformador de corriente al circuito de medición de valor RMS.\\
 
 \subsection{Puente rectificador de onda completa}
-Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la figura \ref{fig:rect_MOSFET}. Con el objeto de reducir el espacio ocupado en el circuito impreso, se optó por utilizar un chip DMHC3025 \citep{dmhc3025}. El encapsulado SOIC-8 presentado en la \ref{fig:esquematicointernorctificadormosfet} alberga un puente H formado dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicación son presentadas en la tabla \ref{tabla_transistores_rectificador}.
+Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la figura \ref{fig:rect_MOSFET}. Con el objeto de reducir el espacio ocupado en el circuito impreso, se optó por utilizar un chip DMHC3025 \citep{dmhc3025}. El encapsulado SOIC-8 presentado en la figura \ref{fig:esquematicointernorctificadormosfet}, alberga un puente H formado dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicación son presentadas en la tabla \ref{tabla_transistores_rectificador}.
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=1.0\linewidth]{Figures/esquematico_interno_rctificador_mosfet}
+	\includegraphics[width=0.7\linewidth]{Figures/esquematico_interno_rctificador_mosfet}
 	\caption{Pinout y esquemático interno del DMHC3025 \citep{dmhc3025}.}
 	\label{fig:esquematicointernorctificadormosfet}
 \end{figure}
@@ -86,7 +86,7 @@ El circuito final implementado encargado de la rectificación y filtrado de la t
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.9\linewidth]{Figures/cto_rectificacion_filtrado}
+	\includegraphics[width=1.0\linewidth]{Figures/cto_rectificacion_filtrado}
 	\caption{Etapa de rectificación, filtrado y acumulación implementada.}
 	\label{fig:ctorectificacionfiltrado}
 \end{figure}\\
@@ -98,7 +98,7 @@ Los supercapacitores, se presentan en la figura \ref{fig:imagensupercap} como un
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/imagen_supercap}
+	\includegraphics[width=0.6\linewidth]{Figures/imagen_supercap}
 	\caption{Banco de supercapacitores de 500 F x 2,7 V utilizado como acumulador.}
 	\label{fig:imagensupercap}
 \end{figure}\\
@@ -114,7 +114,7 @@ Adicionalmente el módulo elegido, aporta simpleza al esquemático final y un ra
  	\includegraphics[width=0.9\linewidth]{Figures/cto_detector_cortes}
  	\caption{Circuito detector de cortes basado en el TLV3691 \citep{tlv3691}.}
  	\label{fig:ctodetectorcortes}
- \end{figure}
+ \end{figure}\\
  Como referencia para generar la señal de interrupción, se toma un valor de 1,65 V obtenido a partir de un divisor resistivo formado por R16 y R17. Este arreglo puede ser reemplazado por un potenciómetro en caso de ser necesario.\\
  La salida del puente rectificador se conecta al detector mediante el diodo D6. A continuación los capacitores C23 y C24 filtran el rizado presente en la señal, resultando en una señal DC a la entrada no inversora del comparador.\\
  En el caso de que ocurra un corte en la línea de distribución, la corriente que circula por D6 es nula y los capacitores se descargar\'{a}n a través de R18. Al bajar su tensión por debajo de 1,65 V, la salida se pondrá en alto y la interrupción será atendida por el firmware del microcontrolador.\\
@@ -243,6 +243,7 @@ El divisor resistivo formado por R4 y R5 presentado de la figura \ref{fig:ctodiv
 \subsection{Etapa de conversión analógica digital}
 Las señales correspondientes a la tensión en bornes del supercapacitor, y valor RMS de corriente son analógicas. Por este motivo, es necesario digitalizar las señales para que luego puedan ser transmitidas por el módulo de comunicaciones.\\
 Para esto, se adoptó el chip ADS1015 de la firma Texas Instruments \citep{ads1015} en el esquematico de la figura \ref{fig:ctoadc}. 
+El ADS1015 consiste en un conversor analógico digital de 12 bits de resolución, 3,3 V de tensión de alimentación, interfaz de comunicaciones I2C, 4 canales de entrada, tensión de referencia interna y amplificador de ganancia programable.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
@@ -250,7 +251,6 @@ Para esto, se adoptó el chip ADS1015 de la firma Texas Instruments \citep{ads10
 	\caption{Etapa de conversión analógico-digital basada en el ADS1015.}
 	\label{fig:ctoadc}
 \end{figure}\\
-El ADS1015 consiste en un conversor analógico digital de 12 bits de resolución, 3,3 V de tensión de alimentación, interfaz de comunicaciones I2C, 4 canales de entrada, tensión de referencia interna y amplificador de ganancia programable.\\
 Las señales correspondientes al valor RMS de corriente y tensión en bornes del supercapacitor se conectan a las entradas AIN0 y AIN3 del chip respectivamente. Las restantes entradas AIN1 y AIN2, se conectaron a una tira de pines para agregar de manera opcional otros 2 módulos de medición de corriente.\\
 
 
@@ -270,7 +270,7 @@ Al entrar en operación, el microcontrolador verificará que la tensión en born
 Si durante el modo \textit{deep sleep} ocurre un corte en el suministro de energía, la señal generada por el circuito de la figura \ref{fig:ctodetectorcortes} hará que el sistema se restablezca, realice una medición, transmita y nuevamente vuelva a modo ahorro de energía.\\
 
 \subsection{Inicialización de periféricos}
-Esta es la primera tarea que se ejecutará cada vez que ocurra se repite el ciclo.
+Esta es la primera tarea que se ejecutará cada vez que ocurre un reset en el microcontrolador.
 La tabla \ref{tabla_pines} presenta la función asignada de cada pin físico de la placa de desarrollo LoPy 4, dirección y periférico interno del microcontrolador asociado.\\
 \begin{table}[h!]
 	\centering
@@ -290,7 +290,7 @@ La tabla \ref{tabla_pines} presenta la función asignada de cada pin físico de 
 	\end{tabular} 	\label{tabla_pines}
 \end{table}
 
-\subsection{Medición}
+\subsection{Medición}\label{secc:medicion}
 Al cumplirse el periodo de ahorro de energía u ocurrir una interrupción, esta función del firmware pone en alto los pines 13 y 14 con el fin de activar los \textit{load switch} de 3,3 V y 5 V para configurar el hardware en modo medición.\\
 El relay cambia de estado y conecta el transformador de intensidad al shunt de medición. La etapa de medición de valor RMS formada por los circuitos de las figuras \ref{fig:ctomedidorrms} y \ref{fig:ctoopamp}, otorgan a la entrada del conversor una tensión DC filtrada y acondicionada lista para ser digitalizada.\\
 La comunicación con el conversor se realiza a través del periférico de comunicaciones I2C. Una biblioteca de libre acceso lista para interactuar con el ADS1015, se utiliza para tomar 10 valores consecutivos de la señal de interés y almacenarlos en un arreglo. Finalmente se calcula su media aritmética.
@@ -336,27 +336,63 @@ Finalizada la creación de la carga útil, se transmite a la red LoRaWAN mediant
 Una biblioteca provista por Pycom se encarga de gestionar la interacción con las capas superiores del protocolo LoRaWAN para autenticarse y acceder a la red.\\
 
 \subsection{Modo ahorro de energía e interrupciones}
-Antes de configurarse en modo ahorro de energía, se habilita la interrupción por flanco ascendente en el pin físico 10. La señal conectada a este pin, es la salida del circuito de la figura \ref{fig:ctodetectorcortes}.
-La funcion asociada a la interrupción, genera una señal de restablecimiento del sistema y el ciclo de la figura \ref{fig:patronpowersaveloop} se repite.\\
-En caso de que no exista una interrupción, el microcontrolador permanecerá en modo ahorro de energía durante 5 minutos y se restablecerá debido al \textit{timeout} generado.\\
+Luego de tomar y transmitir mediciones acorde a lo descrito en \ref{secc:medicion} y \ref{compresion_lecturas}, y antes de configurarse en modo ahorro de energía, el firmware habilita la interrupción por flanco ascendente en el pin físico 10 de la placa de desarrollo.\\
+El tiempo t1 requerido para tomar y transmitir mediciones es de tan solo algunos segundos. En comparación con el tiempo t2 en el que el microcontrolador permanece en modo ahorro de energía, que suele ser de varios minutos, puede ser casi despreciable.\\ 
+En caso de que no exista una interrupción, el microcontrolador permanecerá en modo ahorro de energía durante un periodo t2 hasta cumplir un ciclo T y se restablecerá debido al \textit{timeout} generado (figura \ref{fig:ciclodeepsleep}).\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{Figures/ciclodeepsleep}
+	\caption{Ciclo de ahorro de transmisión, ahorro de energía e interrupciones generadas por cortes.}
+	\label{fig:ciclodeepsleep}
+\end{figure}
+Si durante el lapso de tiempo t2 ocurre un corte de luz, el circuito de la figura \ref{fig:ctodetectorcortes} genera una señal de restablecimiento del sistema y el ciclo comienza nuevamente midiendo y transmitiendo.\\
+
 
 \section{Servicios de Backend}
 \label{seccion_bes}
 
 \subsection{Integraci\'{o}n de la red LoRaWAN}
+\label{seccion_lorawan}
 Al recibir la red LoRaWAN la carga útil generada por cada nodo, es necesario realizar el camino inverso al descrito en \ref{compresion_lecturas}.\\
-\textit{The Things Network} provee una herramienta dedicada llamada \textit{payload format decoder}. Con esta herramienta cada vez que un paquete de un nodo llega, el decodificador lo procesa y separa cada lectura como clave de un elemento JSON (figura \ref{fig:payloaddecoder}) antes de realizar el env\'{i}o a los servicios de backend.\\
-% TODO: \usepackage{graphicx} required
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1.0\linewidth]{Figures/payload_decoder}
-	\caption{Decodificador de tramas en The Things Network.}
-	\label{fig:payloaddecoder}
-\end{figure}\\
+\textit{The Things Network} provee una herramienta dedicada llamada \textit{payload format decoder}. Con esta herramienta cada vez que un paquete de un nodo llega, el codigo \ref{codigo_descompresion} lo procesa y separa cada lectura como clave de un elemento JSON antes de realizar el env\'{i}o a los servicios de backend.\\
+\begin{lstlisting}[label=codigo_descompresion,caption=Función encargada de descomprimir las 4 lecturas de 12 bits.]
+function Decoder(byte, port) {
+	factor_conversion_corriente = 127/1635;
+	
+	i1 = ((byte[0] << 4) | (byte[1]>>4))*factor_conversion_corriente;
+	i2 = (((byte[1] & 0x0F) << 8) | byte[2])*factor_conversion_corriente;
+	i3 = (((byte[3] << 4) | (byte[4]>>4)))*factor_conversion_corriente;
+	supercapacitor_adc = (byte[4] & 0x0F) << 8 | byte[5];
+	
+	FACTOR_DIVISOR_RESISTIVO = 2
+	supercapacitor = (((supercapacitor_adc<<4) *4.096/32767))*FACTOR_DIVISOR_RESISTIVO;	
+	
+	var decoded = {};
+
+	decoded.corriente_1 = i1;
+	decoded.corriente_2 = i2;
+	decoded.corriente_3 = i3;
+	decoded.super_capacitor = supercapacitor;
+
+	return decoded;  
+}   
+
+\end{lstlisting}
 Las primeras experiencias de integración con \textit{The Things Network} se realizaron a través de suscripciones a un tópico de MQTT. Sin embargo, \textit{The Things Network} ya no da soporte a esta integración, motivo por el cual se cambió a envíos HTTPs utilizando el método POST.\\
 En el servidor web de los servicios de backend, se encuentra un script PHP (ver anexo) que atiende las consultas que llegan desde \textit{The Things Network}. Este mismo script es el encargado de almacenar los datos en la base de datos. Las credenciales de usuario de la base de datos que se utiliza en este script, tiene por motivos de seguridad, solo permisos de INSERT.\\
 
 \subsection{Base de Datos}
+Los datos recibidos a traves de cada petición POST mencionada en la subseccion \ref{seccion_lorawan}, se almacenan de manera cronológica en una tabla.\\
+La información se guarda en una tabla llamada \textit{corrientes\_por\_fase}. Las columnas que componen esta tabla y el tipo de dato que almacenan se presentan en la figura \ref{fig:tablacorrientesporfase}.\\
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Figures/tabla_corrientes_por_fase}
+	\caption{Tabla de la base de datos utilizada para guardar los datos de los nodos.}
+	\label{fig:tablacorrientesporfase}
+\end{figure}\\
+Es relevante destacar que el origen de los datos guardados es una combinación entre las mediciones realizadas por el hadware (\textit{I\_fase\_1, I\_fase\_2, I\_fase\_3, v\_supercap}), información acerca de la señal de RF (\textit{rssi} y \textit{snr}) y metadatos propios de cada nodo (\textit{id\_sensor, latitud, longitud}) provistos por el servidor de aplicaciones de \textit{The Things Network}.\\
 
 \subsection{Interfaz gráfica basada en Grafana}
 Como único contratiempo se puede mencionar la dificultad que tiene Grafana de manejar muestras temporales si no se utiliza la misma zona horaria que el sistema operativo. En este proyecto se prefirió guardar la información, en la base de datos en formato UTC para aumentar la compatibilidad y poder desplegar el sistema en cualquier lugar del mundo, independientemente de la zona horaria local.\\
