@@ -134,7 +134,24 @@ De esta manera las diferentes etapas de 3,3 V y 5 V se energizan únicamente cua
  
 \subsection{Transformador de Intensidad}
 Teniendo en cuenta que el comisionamiento debe realizarse sobre redes ya existentes y operativas, no resulta práctico utilizar un transformador de intensidad de núcleo sólido. Uno de tipo núcleo partido como el presentado en la figura \ref{fig:ti_abierto}, permite sortear el problema de tener que interrumpir el cable a monitorear para enhebrarlo por el primario. Esto facilita notablemente el comisionamiento o remoción del hardware.\\
-Basado en el requerimiento \ref{requerimientos_corriente_ti}, se eligió uno fabricado por la empresa Howard Butler Ltd modelo CTSCM40-200/5 y sus características se presentan en la \ref{tabla_caracteristicas_ti}.\\
+Basado en el requerimiento \ref{requerimientos_corriente_ti}, se eligió uno fabricado por la empresa Howard Butler Ltd modelo CTSCM40-200/5 y sus características se presentan en la tabla \ref{tabla_caracteristicas_ti}.\\
+\begin{table}[h]
+	\centering
+	\caption{Características del CTSCM40-200/5 \citep{ct_hobut}.}
+	\begin{tabular}{lc} 
+		\hline
+		\multicolumn{1}{c}{Parámetro}                                                       & \begin{tabular}[c]{@{}c@{}}Valor\\máximo~\end{tabular}  \\ 
+		\hline
+		Burden (VA)                                                                         & 2,5                                                     \\
+		\begin{tabular}[c]{@{}l@{}}Corriente sobre el\\circuito primario (A)\end{tabular}   & 200                                                     \\
+		\begin{tabular}[c]{@{}l@{}}Corriente sobre~el\\circuito secundario (A)\end{tabular} & 5                                                       \\
+		\begin{tabular}[c]{@{}l@{}}Relación de \\transformación (N)\end{tabular}            & 40                                                      \\
+		\begin{tabular}[c]{@{}l@{}}Rango de~\\frecuencia (Hz)\end{tabular}                  & 50 - 60                                                 \\
+		Clase                                                                               & 1                                                       \\
+		\hline
+	\end{tabular}\label{tabla_caracteristicas_ti}
+\end{table}
+
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}[b]{0.4\textwidth}
@@ -153,23 +170,6 @@ Basado en el requerimiento \ref{requerimientos_corriente_ti}, se eligió uno fab
 	\caption{Transformador de intensidad de tipo núcleo partido y sus dimensiones. Imágenes tomadas de \citep{ct_hobut}.}
 	\label{fig:ti_mosaico}
 \end{figure} 
-
-\begin{table}
-	\centering
-	\caption{Características del CTSCM40-200/5 \citep{ct_hobut}.}
-	\begin{tabular}{lc} 
-		\hline
-		\multicolumn{1}{c}{Parámetro}                                                       & \begin{tabular}[c]{@{}c@{}}Valor\\máximo~\end{tabular}  \\ 
-		\hline
-		Burden (VA)                                                                         & 2,5                                                     \\
-		\begin{tabular}[c]{@{}l@{}}Corriente sobre el\\circuito primario (A)\end{tabular}   & 200                                                     \\
-		\begin{tabular}[c]{@{}l@{}}Corriente sobre~el\\circuito secundario (A)\end{tabular} & 5                                                       \\
-		\begin{tabular}[c]{@{}l@{}}Relación de \\transformación (N)\end{tabular}            & 40                                                      \\
-		\begin{tabular}[c]{@{}l@{}}Rango de~\\frecuencia (Hz)\end{tabular}                  & 50 - 60                                                 \\
-		Clase                                                                               & 1                                                       \\
-		\hline
-	\end{tabular}\label{tabla_caracteristicas_ti}
-\end{table}
 
 \subsection{Circuito de medición de valor RMS de corriente y acondicionamiento de señal}
 Para medir corriente mediante un transformador de intensidad, primero es necesario convertir la intensidad en una señal de tensión equivalente y partir de esta calcular su valor RMS. Un resistor shunt de 0,1 $\Omega$ con encapsulado TO-220-2 fue adoptado para convertir la corriente del secundario del transformador de intensidad en una señal de tensión apta para realizar su medición RMS.\\
@@ -345,7 +345,7 @@ En caso de que no exista una interrupción, el microcontrolador permanecerá en 
 \begin{figure}
 	\centering
 	\includegraphics[width=1.0\linewidth]{Figures/ciclodeepsleep}
-	\caption{Ciclo de ahorro de transmisión, ahorro de energía e interrupciones generadas por cortes.}
+	\caption{Ciclo de transmisión, ahorro de energía e interrupciones generadas por cortes.}
 	\label{fig:ciclodeepsleep}
 \end{figure}\\
 Si durante el lapso de tiempo t2 ocurre un corte en el suministro de energ\'{i}a el\'{e}ctrica, el circuito de la figura \ref{fig:ctodetectorcortes} genera una señal de restablecimiento del sistema y el ciclo comienza nuevamente midiendo y transmitiendo.\\
