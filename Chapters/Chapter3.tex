@@ -47,9 +47,9 @@ Por último, la sección \ref{seccion_bes} otorga al lector detalles acerca de l
 \section{Diseño del hardware por etapas}
 En esta sección se presentan circuitos esquemáticos correspondientes a cada etapa individual y su rol en el sistema.
 \subsection{Circuito de selección de modo}
-Considerando el caso límite donde el nivel del acumulador es bajo y el microcontrolador ordena al relay con retención cambiar su estado, la energía necesaria para excitar al relay puede generar una caída de tensión significativa en el acumulador y dejar a todo el hardware totalmente desenergizado sin posibilidad de volver a entrar en operación a menos que exista una intervención humana.\\
+Considerando el caso límite donde el nivel del acumulador es bajo y el microcontrolador ordena a un relay con retención cambiar su estado, la energía necesaria para excitar al relay puede generar una caída de tensión significativa en el acumulador y dejar a todo el hardware totalmente desenergizado sin posibilidad de volver a entrar en operación a menos que exista una intervención humana.\\
 Un caso extremo como el mencionado, implica que el hardware posea un mecanismo para restablecer su operación tras largos per\'{i}odos de tiempo aun después de haberse vaciado el acumulador.\\
-En la figura \ref{fig:ctoselecciondemodo} se implementó el relay sin retención presentado en \ref{fig:relay} y su circuito de mando. Los terminales del transformador de corriente se encuentran conectados por defecto a la etapa de conversión y acumulación de energía (terminales NC1 y NC2). Una vez que la tensión en bornes del acumulador alcanza el valor de mínimo para que el conversor DC/DC entre en operación, también la electrónica sin la necesidad de una intervención externa.\\
+En la figura \ref{fig:ctoselecciondemodo} se implementó el relay sin retención presentado en \ref{fig:relay} y su circuito de mando. Los terminales del transformador de corriente se encuentran conectados por defecto a la etapa de conversión y acumulación de energía (terminales NC1 y NC2). Una vez que la tensión en bornes del acumulador alcanza el valor mínimo para que el conversor DC/DC entre en operación, también la electrónica sin la necesidad de una intervención externa.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
@@ -57,10 +57,10 @@ En la figura \ref{fig:ctoselecciondemodo} se implementó el relay sin retención
 	\caption{Circuito selector de modo basado en el relay HF115-005-2ZS4.}
 	\label{fig:ctoselecciondemodo}
 \end{figure}\\
-Cada vez que se desea tomar una medición de corriente, el microcontrolador enciende la bobina del relay y conecta el transformador de corriente al circuito de medición de valor RMS.\\
+Cada vez que se desea tomar una medición de corriente, el microcontrolador activa la bobina del relay y conecta el transformador de corriente al circuito de medición de valor RMS.\\
 
 \subsection{Puente rectificador de onda completa}
-Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la figura \ref{fig:rect_MOSFET}. Con el objeto de reducir el espacio ocupado en el circuito impreso, se optó por utilizar un chip DMHC3025 \citep{dmhc3025}. El encapsulado SOIC-8 presentado en la figura \ref{fig:esquematicointernorctificadormosfet}, alberga un puente H formado dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicación son presentadas en la tabla \ref{tabla_transistores_rectificador}.
+Para el prototipo desarrollado en este trabajo, se replicó el circuito rectificador de onda completa presentado en la figura \ref{fig:rect_MOSFET}. Con el objeto de reducir el espacio ocupado en el circuito impreso, se optó por utilizar un chip DMHC3025 \citep{dmhc3025}. El encapsulado SOIC-8 presentado en la figura \ref{fig:esquematicointernorctificadormosfet}, alberga un puente H formado por dos transistores MOSFET tipo P y dos tipo N. Las características eléctricas de relevancia para esta aplicación son presentadas en la tabla \ref{tabla_transistores_rectificador}.
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
@@ -93,8 +93,8 @@ El circuito final implementado encargado de la rectificación y filtrado de la t
 A su salida, un conjunto de capacitores cerámicos C5, C6 y C7 filtran ruido de alta frecuencia para luego acumular la energía en el supercapacitor conectado a J5.\\
 
 \subsection{Acumulador de energía basado en supercapacitores}
-A la salida del rectificador de onda completa de la figura \ref{fig:ctorectificacionfiltrado}, se conecta a la bornera J5 un banco compuesto por dos supercapacitores de 500 F x 2,7 V que resulta en una capacitancia equivalente de 250F x 5,4 V.\\
-Los supercapacitores, se presentan en la figura \ref{fig:imagensupercap} como un módulo único donde ya se encuentran montados sobre una placa con una electrónica adicional de protección. El circuito de protección, se encarga de limitar la tensión en sus bornes a 2,5 V y disipar la potencia excedente.\\
+A la salida del rectificador de onda completa de la figura \ref{fig:ctorectificacionfiltrado}, se conecta a través de la bornera J5 un banco compuesto por dos supercapacitores de 500 F x 2,7 V en serie, que resulta en una capacitancia equivalente de 250F x 5,4 V.\\
+Los supercapacitores se presentan en la figura \ref{fig:imagensupercap} como un módulo donde ya se encuentran montados sobre una placa con una electrónica adicional de protección. El circuito de protección, se encarga de limitar la tensión en sus bornes a 2,5 V y disipar la potencia excedente.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
@@ -102,12 +102,12 @@ Los supercapacitores, se presentan en la figura \ref{fig:imagensupercap} como un
 	\caption{Banco de supercapacitores de 500 F x 2,7 V utilizado como acumulador.}
 	\label{fig:imagensupercap}
 \end{figure}\\
-Al tratarse de una capacitancia total considerablemente mayor que la de un capacitor habitual, almacenará también más energía. El supercapacitor puede entonces cumplir la función de acumular energía para mantener operativa la electrónica en caso de que se interrumpa la conversión de energía.\\
+Al tratarse de una capacitancia total considerablemente mayor que la de un capacitor habitual, almacenará también más energía. El supercapacitor puede entonces, cumplir la función de acumular energía para mantener operativa la electrónica en caso de que se interrumpa la conversión de energía.\\
 Adicionalmente el módulo elegido, aporta simpleza al esquemático final y un rango de temperatura de operación mayor que una solución que además incluya una batería \citep{PORCARELLI20141671}.\\
 
  \subsection{Circuito de detección de cortes}
  Una de las funcionalidades relevantes del hardware, es detectar interrupciones en la distribución de energía debido a razones tales como sobrecarga en la línea o desastres naturales.\\
- El circuito detector de cortes propuesto en \ref{fig:ctodetectorcortes} está basado en un comparador TLV3691 de la firma Texas Instruments \citep{tlv3691}. Su salida se encarga de generar una interrupción que despierta al microcontrolador.\\
+ El circuito detector de cortes propuesto en \ref{fig:ctodetectorcortes} está basado en un comparador TLV3691 de la firma Texas Instruments \citep{tlv3691}. La salida, genera una señal de 3,3 V que desencadena en una interrupción por hardware que despierta al microcontrolador.\\
    % TODO: \usepackage{graphicx} required
  \begin{figure}[h]
  	\centering
@@ -115,7 +115,7 @@ Adicionalmente el módulo elegido, aporta simpleza al esquemático final y un ra
  	\caption{Circuito detector de cortes basado en el TLV3691 \citep{tlv3691}.}
  	\label{fig:ctodetectorcortes}
  \end{figure}\\
- Como referencia para generar la señal de interrupción, se toma un valor de 1,65 V obtenido a partir de un divisor resistivo formado por R16 y R17. Este arreglo puede ser reemplazado por un potenciómetro en caso de ser necesario.\\
+ Como referencia para generar la señal de interrupción, se toma un valor de 1,65 V obtenido a partir de un divisor resistivo formado por R16 y R17. Este arreglo puede ser reemplazado por un \textit{preset} en caso de ser necesario.\\
  La salida del puente rectificador se conecta al detector mediante el diodo D6. A continuación los capacitores C23 y C24 filtran el rizado presente en la señal, resultando en una señal DC a la entrada no inversora del comparador.\\
  En el caso de que ocurra un corte en la línea de distribución, la corriente que circula por D6 es nula y los capacitores se descargar\'{a}n a través de R18. Al bajar su tensión por debajo de 1,65 V, la salida se pondrá en alto y la interrupción será atendida por el firmware del microcontrolador.\\
  
@@ -171,7 +171,7 @@ Basado en el requerimiento \ref{requerimientos_corriente_ti}, se eligió uno fab
 \end{table}
 
 \subsection{Circuito de medición de valor RMS de corriente y acondicionamiento de señal}
-Para medir corriente mediante un transformador de intensidad, primero es necesario convertir la intensidad en una señal de tensión representativa y partir de esta ahí calcular su valor RMS. Un resistor shunt de 0,1 $\Omega$ con encapsulado TO-220-2 fue adoptado para convertir la corriente del secundario del transformador de intensidad en una señal de tensión apta para realizar su medición RMS.\\
+Para medir corriente mediante un transformador de intensidad, primero es necesario convertir la intensidad en una señal de tensión equivalente y partir de esta calcular su valor RMS. Un resistor shunt de 0,1 $\Omega$ con encapsulado TO-220-2 fue adoptado para convertir la corriente del secundario del transformador de intensidad en una señal de tensión apta para realizar su medición RMS.\\
 En el mercado existen circuitos integrados dedicados para realizar la medición RMS de señales. Generalmente otorgan una tensión DC a la salida proporcional al valor RMS de la tensión a la entrada.\\
 Una tabla comparativa resaltando el ancho de banda, la tensión pico a pico máxima admitida a sus entradas y tensión de operación de los posibles candidatos a utilizar en este proyecto se elaboró en la tabla \ref{tabla_chip_rms}\\
 \begin{table}[h]
@@ -203,7 +203,7 @@ C9 y C11 filtran la tensión de alimentación que energiza al circuito integrado
 	\caption{Circuito medidor de valor RMS implementado con el LTC1966.}
 	\label{fig:ctomedidorrms}
 \end{figure}\\
-Dado que las mediciones a realizar se harán en líneas de distribución que operen a 50 Hz o 60 Hz, se ajustó la etapa de filtrado de la señal de entrada. Con una impedancia de entrada de 8 Megaohms entre los pines IN1 e IN2 el capacitor C8 en serie forma un filtro pasa alto.\\
+Dado que las mediciones a realizar se harán en líneas de distribución que operen a 50 Hz o 60 Hz, se ajustó la etapa de filtrado de la señal de entrada. Con una impedancia de entrada de 8 M$\Omega$ entre los pines IN1 e IN2 el capacitor C8 en serie forma un filtro pasa alto.\\
 La frecuencia de corte (fc) adoptada por el autor para este filtro es de 5 Hz, y el valor de capacitancia quedó determinado por la ecuación \ref{eq_capacitor_hpf}.
 \begin{equation}
 	fc = \frac{1}{2.\pi.R.C}\rightarrow\frac{1}{2.\pi.R.fc}\\
@@ -227,11 +227,11 @@ El circuito de la figura \ref{fig:ctoopamp}, utiliza un amplificador operacional
 	\caption{Circuito amplificador de la señal de salida del LTC1966.}
 	\label{fig:ctoopamp}
 \end{figure}
-El ajuste de la ganancia del amplificador, se realiz\'{o} mediante una tensión de 353,55 mV constante a la entrada IN+ y variando el potenciómetro POT1 hasta que la salida alcance 3,3 V. Finalizado el ajuste, la salida se encuentra lista para ser conectada a la entrada del conversor analógico digital.\\
+El ajuste de la ganancia del amplificador, se realiz\'{o} mediante una tensión de 353,55 mV constante a la entrada IN+ y variando el preset POT1 hasta que la salida alcance 3,3 V. Finalizado el ajuste, la salida se encuentra lista para ser conectada a la entrada del conversor analógico digital.\\
 
 \subsection{Monitoreo de tensión en bornes del acumulador}
-La tensión máxima a la que puede llegar el acumulador de la figura \ref{fig:imagensupercap} es 5 V, este valor de tensión es mayor que el máximo admitido por las entradas del conversor analógico-digital (3,3 V). Para obtener una señal de tensión apta y equivalente a la tensión en bornes del acumulador, es necesario atenuar la tensión máxima a medir a una tensión de 3,3 V o menos.\\
-El divisor resistivo formado por R4 y R5 presentado de la figura \ref{fig:ctodivisorresistivo}, es una solución efectiva para atenuar una señal de tensión DC. De esta manera un valor de tensión de 5 V en bornes del acumulador, representa como máximo 2,5V a la entrada del conversor analógico-digital.\\
+La tensión máxima a la que puede llegar el acumulador de la figura \ref{fig:imagensupercap} es 5 V, este valor de tensión es mayor que el máximo admitido por las entradas del conversor analógico-digital (3,3 V). Para obtener una señal de tensión apta y equivalente a la tensión en bornes del acumulador, es necesario atenuar la tensión máxima a medir a un valor de 3,3 V o menos.\\
+El divisor resistivo formado por R4 y R5 presentado de la figura \ref{fig:ctodivisorresistivo}, es una solución efectiva para atenuar una señal de tensión DC. De esta manera un valor de tensión de 5 V en bornes del acumulador, representa como máximo 2,5 V a la entrada del conversor analógico-digital.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
@@ -242,7 +242,7 @@ El divisor resistivo formado por R4 y R5 presentado de la figura \ref{fig:ctodiv
 
 \subsection{Etapa de conversión analógica digital}
 Las señales correspondientes a la tensión en bornes del supercapacitor, y valor RMS de corriente son analógicas. Por este motivo, es necesario digitalizar las señales para que luego puedan ser transmitidas por el módulo de comunicaciones.\\
-Para esto, se adoptó el chip ADS1015 de la firma Texas Instruments \citep{ads1015} en el esquematico de la figura \ref{fig:ctoadc}. 
+Como solución, en el esquematico de la figura \ref{fig:ctoadc} se adoptó el chip ADS1015 de la firma Texas Instruments \citep{ads1015}. 
 El ADS1015 consiste en un conversor analógico digital de 12 bits de resolución, 3,3 V de tensión de alimentación, interfaz de comunicaciones I2C, 4 canales de entrada, tensión de referencia interna y amplificador de ganancia programable.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
@@ -265,9 +265,9 @@ Para lograr la lógica de negocios se adoptó el patrón arquitectónico de la f
 	\includegraphics[width=0.8\linewidth]{Figures/patron_power_save_loop}
 	\caption{Patrón adoptado para la implementación de la lógica de negocios del firmware.}
 	\label{fig:patronpowersaveloop}
-\end{figure}
-Al entrar en operación, el microcontrolador verificará que la tensión en bornes del supercapacitor sea suficiente antes de enviar su primer reporte de estado. Seguidamente, entrará en modo ahorro de energía o \textit{deep sleep} durante un lapso de tiempo determinado hasta cumplir el periodo.\\
-Si durante el modo \textit{deep sleep} ocurre un corte en el suministro de energía, la señal generada por el circuito de la figura \ref{fig:ctodetectorcortes} hará que el sistema se restablezca, realice una medición, transmita y nuevamente vuelva a modo ahorro de energía.\\
+\end{figure}\\
+Al entrar en operación, el microcontrolador verificará que la tensión en bornes del supercapacitor sea mayor a un umbral de 2,5 V antes de enviar su primer reporte de estado. Seguidamente, entrará en modo ahorro de energía o \textit{deep sleep} durante un lapso de tiempo determinado.\\
+Si durante el modo \textit{deep sleep} ocurre un corte en el suministro de energía, la señal generada por el circuito de la figura \ref{fig:ctodetectorcortes} hará que el sistema prematuramente, realice una medición, transmita y nuevamente vuelva a modo ahorro de energía.\\
 
 \subsection{Inicialización de periféricos}
 Esta es la primera tarea que se ejecutará cada vez que ocurre un reset en el microcontrolador.
@@ -332,11 +332,11 @@ else:
 	return DEFAULT_ERROR_PAYLOAD
 \end{lstlisting}
 
-Finalizada la creación de la carga útil, se transmite a la red LoRaWAN mediante el transceptor embebido en la misma placa.\\
+Finalizado el ensamblado de la carga útil, se transmite a la red LoRaWAN mediante el transceptor embebido en la misma placa.\\
 Una biblioteca provista por Pycom se encarga de gestionar la interacción con las capas superiores del protocolo LoRaWAN para autenticarse y acceder a la red.\\
 
 \subsection{Modo ahorro de energía e interrupciones}
-Luego de tomar y transmitir mediciones acorde a lo descrito en \ref{secc:medicion} y \ref{compresion_lecturas}, y antes de configurarse en modo ahorro de energía, el firmware habilita la interrupción por flanco ascendente en el pin físico 10 de la placa de desarrollo.\\
+Luego de tomar y transmitir mediciones acorde a lo descrito en \ref{secc:medicion} y \ref{compresion_lecturas}, y antes de configurarse en modo ahorro de energía, el firmware habilita la interrupción por flanco ascendente en el pin 10 de la LoPy4 para permitir que un agente externo haga salir al hardware del modo ahorro de energ\'{i}a.\\
 El tiempo t1 requerido para tomar y transmitir mediciones es de tan solo algunos segundos. En comparación con el tiempo t2 en el que el microcontrolador permanece en modo ahorro de energía, que suele ser de varios minutos, puede ser casi despreciable.\\ 
 En caso de que no exista una interrupción, el microcontrolador permanecerá en modo ahorro de energía durante un periodo t2 hasta cumplir un ciclo T y se restablecerá debido al \textit{timeout} generado (figura \ref{fig:ciclodeepsleep}).\\
 % TODO: \usepackage{graphicx} required
@@ -345,17 +345,18 @@ En caso de que no exista una interrupción, el microcontrolador permanecerá en 
 	\includegraphics[width=1.0\linewidth]{Figures/ciclodeepsleep}
 	\caption{Ciclo de ahorro de transmisión, ahorro de energía e interrupciones generadas por cortes.}
 	\label{fig:ciclodeepsleep}
-\end{figure}
-Si durante el lapso de tiempo t2 ocurre un corte de luz, el circuito de la figura \ref{fig:ctodetectorcortes} genera una señal de restablecimiento del sistema y el ciclo comienza nuevamente midiendo y transmitiendo.\\
+\end{figure}\\
+Si durante el lapso de tiempo t2 ocurre un corte en el suministro de energ\'{i}a el\'{e}ctrica, el circuito de la figura \ref{fig:ctodetectorcortes} genera una señal de restablecimiento del sistema y el ciclo comienza nuevamente midiendo y transmitiendo.\\
 
 
 \section{Servicios de Backend}
 \label{seccion_bes}
+En esta sección se presenta la integración entre los servicios de backend, la red \textit{The Things Network} y la estructura de los datos almacenados para el desarrollo de la interfaz gráfica de usuario.\\
 
 \subsection{Integraci\'{o}n de la red LoRaWAN}
 \label{seccion_lorawan}
 Al recibir la red LoRaWAN la carga útil generada por cada nodo, es necesario realizar el camino inverso al descrito en \ref{compresion_lecturas}.\\
-\textit{The Things Network} provee una herramienta dedicada llamada \textit{payload format decoder}. Con esta herramienta cada vez que un paquete de un nodo llega, el codigo \ref{codigo_descompresion} lo procesa y separa cada lectura como clave de un elemento JSON antes de realizar el env\'{i}o a los servicios de backend.\\
+\textit{The Things Network} provee una herramienta dedicada llamada \textit{payload format decoder}. Con esta herramienta cada vez que un paquete de un nodo llega, el código \ref{codigo_descompresion} lo procesa y separa cada lectura como clave de un elemento JSON antes de realizar el env\'{i}o a los servicios de backend.\\
 \begin{lstlisting}[label=codigo_descompresion,caption=Función encargada de descomprimir las 4 lecturas de 12 bits.]
 function Decoder(byte, port) {
 	factor_conversion_corriente = 127/1635;
@@ -379,11 +380,11 @@ function Decoder(byte, port) {
 }   
 
 \end{lstlisting}
-Las primeras experiencias de integración con \textit{The Things Network} se realizaron a través de suscripciones a un tópico de MQTT. Sin embargo, \textit{The Things Network} ya no da soporte a esta integración, motivo por el cual se cambió a envíos HTTPs utilizando el método POST.\\
+Las primeras experiencias de integración con \textit{The Things Network} se realizaron a través de suscripciones a un tópico de MQTT. Sin embargo, \textit{The Things Network} ya no da soporte a este servicio, motivo por el cual se cambió a envíos HTTPs utilizando el método POST.\\
 En el servidor web de los servicios de backend, se encuentra un script PHP (ver anexo) que atiende las consultas que llegan desde \textit{The Things Network}. Este mismo script es el encargado de almacenar los datos en la base de datos. Las credenciales de usuario de la base de datos que se utiliza en este script, tiene por motivos de seguridad, solo permisos de INSERT.\\
 
-\subsection{Base de Datos}
-Los datos recibidos a traves de cada petición POST mencionada en la subseccion \ref{seccion_lorawan}, se almacenan de manera cronológica en una tabla.\\
+\subsection{Base de datos}
+Los datos recibidos a traves de cada petición POST mencionada en la subsecci\'{o}n \ref{seccion_lorawan}, se almacenan de manera cronológica en una tabla.\\
 La información se guarda en una tabla llamada \textit{corrientes\_por\_fase}. Las columnas que componen esta tabla y el tipo de dato que almacenan se presentan en la figura \ref{fig:tablacorrientesporfase}.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
@@ -392,7 +393,7 @@ La información se guarda en una tabla llamada \textit{corrientes\_por\_fase}. L
 	\caption{Tabla de la base de datos utilizada para guardar los datos de los nodos.}
 	\label{fig:tablacorrientesporfase}
 \end{figure}\\
-Es relevante destacar que el origen de los datos guardados es una combinación entre las mediciones realizadas por el hadware (\textit{I\_fase\_1, I\_fase\_2, I\_fase\_3, v\_supercap}), información acerca de la señal de RF (\textit{rssi} y \textit{snr}) y metadatos propios de cada nodo (\textit{id\_sensor, latitud, longitud}) provistos por el servidor de aplicaciones de \textit{The Things Network}.\\
+Es relevante destacar que el origen de los datos almacenados, es una combinación entre las mediciones realizadas por el hadware (\textit{I\_fase\_1, I\_fase\_2, I\_fase\_3, v\_supercap}), información acerca de la señal de RF provista por el \textit{gateway} (\textit{rssi} y \textit{snr}) y metadatos propios de cada nodo (\textit{id\_sensor, latitud, longitud}) provistos por el servidor de aplicaciones de \textit{The Things Network}.\\
 
 \subsection{Interfaz gráfica basada en Grafana}
 Como único contratiempo se puede mencionar la dificultad que tiene Grafana de manejar muestras temporales si no se utiliza la misma zona horaria que el sistema operativo. En este proyecto se prefirió guardar la información, en la base de datos en formato UTC para aumentar la compatibilidad y poder desplegar el sistema en cualquier lugar del mundo, independientemente de la zona horaria local.\\
