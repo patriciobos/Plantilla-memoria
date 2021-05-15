@@ -1,0 +1,57 @@
+% Appendix Template
+
+\chapter{C\'{o}digo en PHP encargado de recibir peticiones POST y almacenar en la base de datos} % Main appendix title
+
+\label{Appendix_PHP_code} % Change X to a consecutive letter; for referencing this appendix elsewhere, use \ref{AppendixX}
+
+\lstset{language=php}
+\begin{lstlisting}[label=codigo_php,caption=Codigo PHP encargado de recibir peticiones POST desde \textit{The Things Network}.]
+<?php
+//Make sure that it is a POST request.
+if(strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') != 0){
+	throw new Exception('Request method must be POST!');
+}
+
+//Make sure that the content type of the POST request has been set to application/json
+$contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+if(strcasecmp($contentType, 'application/json') != 0){
+	throw new Exception('Content type must be: application/json');
+}
+//// HTTP Authorization header
+//Receive the RAW post data.
+$content = trim(file_get_contents("php://input"));
+
+//Attempt to decode the incoming RAW post data from JSON.
+$decoded = json_decode($content, true);
+
+//If json_decode failed, the JSON is invalid.
+if(!is_array($decoded)){
+	throw new Exception('Received content contained invalid JSON!');
+}
+
+$id_sensor = $decoded['dev_id'];
+$datetime =  $decoded['metadata']['gateways'][0]['time'];
+$rssi = $decoded['metadata']['gateways'][0]['rssi'];
+$snr = $decoded['metadata']['gateways'][0]['snr'];
+$v_supercap = $decoded['payload_fields']['super_capacitor'];
+$I_fase_1 = $decoded['payload_fields']['corriente_1'];
+$I_fase_2 = $decoded['payload_fields']['corriente_2'];
+$I_fase_3 = $decoded['payload_fields']['corriente_3'];
+$I_Neutro = $decoded['payload_fields']['corriente_neutro'];
+$latitud = $decoded['metadata']['latitude'];
+$longitud = $decoded['metadata']['longitude'];
+
+// Create connection
+$servername = "mysqlserver";
+$username = "ttn";
+$password = "*************";
+$dbname = "estado_trafos";
+
+$myConnection= mysqli_connect($servername,$username,$password,$dbname) or die ("could not connect to mysql");
+
+$sqlCommand="INSERT INTO corrientes_por_fase(id_sensor,datetime,rssi,snr,v_supercap,I_fase_1,I_fase_2,I_fase_3,I_Neutro,latitud,longitud) VALUES('$id_sensor','$datetime','$rssi','$snr','$v_supercap','$I_fa$
+
+$query=mysqli_query($myConnection, $sqlCommand) or die(mysqli_error($myConnection));
+?>
+
+\end{lstlisting}

@@ -58,7 +58,7 @@ Las mediciones son tomadas por el hardware y transmitidas hacia la red LoRaWAN p
 			\item Otorgar 5 V a la salida.
 			\item Ser capaz de otorgar 300 mA a la salida.
 		\end{enumerate}
-		\item El transformador de corriente debe:
+		\item El transformador de corriente debe:\label{requerimientos_corriente_ti}
 		\begin{enumerate}%[label*=\arabic*.]
 			\item Ser de tipo núcleo partido.
 			\item Admitir 100 A de corriente en el circuito primario y un máximo de 5 A en el circuito secundario.
@@ -98,7 +98,7 @@ Las mediciones son tomadas por el hardware y transmitidas hacia la red LoRaWAN p
 \end{enumerate}
 
 
-\section{Detalle del hardware}
+\section{Componentes principales del hardware}
 \subsection{Transformador de corriente}
 Un transformador de corriente o intensidad (TI) es un dispositivo de medición utilizado para producir en su devanado secundario una corriente diferente y proporcional a la que circula por su devanado primario.\\
 El principio de operación de un transformador de corriente no es diferente al de un transformador de potencia convencional. A diferencia de uno de potencia, el devanado primario puede ser de una sola vuelta sobre un núcleo ferromagnético como se ve en la figura \ref{fig:dibujomedicionti}. El devanado secundario suele tener un número mayor de vueltas alrededor del núcleo que depende de que tanto se debe reducir la corriente.\\
@@ -219,7 +219,7 @@ La placa de desarrollo elegida para el prototipo fue la LoPy 4 producida por la 
 El lenguaje de programación de la LoPy4 es Micropython \citep{micropy}, un lenguaje de alto nivel lanzado por primera vez en el año 2014. Desde su lanzamiento y hasta la fecha de desarrollo de este trabajo, se presenta como una variante de Python atractiva para prototipar firmware sobre microcontroladores utilizando el paradigma de programación orientada a objetos.\\
 
 
-\section{Detalle del software}
+\section{Componentes principales del software}
 \subsection{Red LoRaWAN}
 LoRaWAN (Long Range Wide Area Network) es un protocolo de control de acceso al medio (MAC - \textit{Medium Acces Control}) definido por \textit{LoRa Aliance} \citep{lora_alliance}. Tiene por objeto permitir la conexión de nodos de baja potencia, generalmente alimentados a batería y sin capacidad de manejo de protocolos de enrutamiento, con aplicaciones finales conectadas a Internet mediante una conexión inalámbrica de largo alcance utilizando modulación LoRa.\\
 Las puertas de enlace (GW - \textit{gateways}), están conectadas al servidor central mediante conexiones IP (Internet Protocol) estándar, cumpliendo la función de puente, es decir, convierten los paquetes de radiofrecuencia (RF) en paquetes IP y viceversa \ref{fig:arqlorawan}.\\
