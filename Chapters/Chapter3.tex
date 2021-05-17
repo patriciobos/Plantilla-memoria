@@ -91,20 +91,20 @@ El circuito final implementado encargado de la rectificación y filtrado de la t
 	\caption{Etapa de rectificación, filtrado y acumulación implementada.}
 	\label{fig:ctorectificacionfiltrado}
 \end{figure}\\
-A su salida, un conjunto de capacitores cerámicos C5, C6 y C7 filtran ruido de alta frecuencia para luego acumular la energía en el supercapacitor conectado a J5.\\
+A su salida, un conjunto de capacitores cerámicos C5, C6 y C7 filtran ruido de alta frecuencia para luego acumular la energía en el supercapacitor conectado a J5.
 
 \subsection{Acumulador de energía basado en supercapacitores}
 A la salida del rectificador de onda completa de la figura \ref{fig:ctorectificacionfiltrado}, se conecta a través de la bornera J5 un banco compuesto por dos supercapacitores de 500 F x 2,7 V en serie, que resulta en una capacitancia equivalente de 250 F x 5,4 V.\\
 Los supercapacitores se presentan en la figura \ref{fig:imagensupercap} como un módulo, donde ya se encuentran montados sobre una placa con un circuito adicional de protección. El circuito de protección se encarga de limitar la tensión en sus bornes a 2,5 V y disipar la potencia excedente.\\
-Al tratarse de una capacitancia, considerablemente mayor que la de un capacitor habitual, almacena también más energía. El supercapacitor cumple entonces la función de acumular energía para mantener operativa la electrónica en caso de que se interrumpa la conversión de energía.\\
-Además de aportar simpleza al esquemático final, el módulo elegido provee un rango de temperatura de operación más amplio que el de una solución que además incluya una batería \citep{PORCARELLI20141671}.
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\linewidth]{Figures/imagen_supercap}
 	\caption{Banco de supercapacitores de 500 F x 2,7 V utilizado como acumulador.}
 	\label{fig:imagensupercap}
-\end{figure}
+\end{figure}\\
+Al tratarse de una capacitancia, considerablemente mayor que la de un capacitor habitual, almacena también más energía. El supercapacitor cumple entonces la función de acumular energía para mantener operativa la electrónica en caso de que se interrumpa la conversión de energía.\\
+Además de aportar simpleza al esquemático final, el módulo elegido provee un rango de temperatura de operación más amplio que el de una solución que además incluya una batería \citep{PORCARELLI20141671}.\\
 
  \subsection{Circuito de detección de cortes}
  Una de las funcionalidades relevantes del hardware, es detectar interrupciones en la distribución de energía debido a razones tales como sobrecarga en la línea o desastres naturales.\\
@@ -116,7 +116,6 @@ Además de aportar simpleza al esquemático final, el módulo elegido provee un 
  	\caption{Circuito detector de cortes basado en el TLV3691 \citep{tlv3691}.}
  	\label{fig:ctodetectorcortes}
  \end{figure}\\
- Como referencia para generar la señal de interrupción, se toma un valor de 1,65 V obtenido a partir de un divisor resistivo formado por R16 y R17. Este arreglo puede ser reemplazado por un \textit{preset} en caso de ser necesario.\\
  La salida del puente rectificador se conecta al detector mediante el diodo D6. A continuación los capacitores C23 y C24 filtran el rizado presente en la señal, resultando en una señal DC a la entrada no inversora del comparador.\\
  En el caso de que ocurra un corte en la línea de distribución, la corriente que circula por D6 es nula y los capacitores se descargar\'{a}n a través de R18. Al bajar su tensión por debajo de 1,65 V, la salida se pondrá en alto y la interrupción será atendida por el firmware del microcontrolador.\\
  
@@ -126,7 +125,7 @@ Además de aportar simpleza al esquemático final, el módulo elegido provee un 
  % TODO: \usepackage{graphicx} required
  \begin{figure}[h]
  	\centering
- 	\includegraphics[width=0.7\linewidth]{Figures/cto_load_switch}
+ 	\includegraphics[width=0.8\linewidth]{Figures/cto_load_switch}
  	\caption{Circuito de encendido y apagado de las diferentes etapas de hardware mediante un load switch FPF2100 \citep{fpf2100}.}
  	\label{fig:ctoloadswitch}
  \end{figure}\\
@@ -265,7 +264,7 @@ Si durante el modo \textit{deep sleep} ocurre un corte en el suministro de energ
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.8\linewidth]{Figures/patron_power_save_loop}
+	\includegraphics[width=0.7\linewidth]{Figures/patron_power_save_loop}
 	\caption{Patrón adoptado para la implementación de la lógica de negocios del firmware.}
 	\label{fig:patronpowersaveloop}
 \end{figure}
@@ -395,7 +394,6 @@ Las columnas que componen esta tabla y el tipo de dato que almacenan se presenta
 	\label{fig:tablacorrientesporfase}
 \end{figure}\\
 Es relevante destacar que el origen de los datos almacenados, es una combinación entre las mediciones realizadas por el hadware (\textit{I\_fase\_1, I\_fase\_2, I\_fase\_3, v\_supercap}), información acerca de la señal de RF provista por el \textit{gateway} (\textit{rssi} y \textit{snr}) y metadatos propios de cada nodo (\textit{id\_sensor, latitud, longitud}) provistos por el servidor de aplicaciones de \textit{The Things Network}.\\
-
 
 \subsection{Interfaz gráfica basada en Grafana}
 La integración entre MariaDB y Grafana fue inmediata. Gracias a asistentes dedicados, la conexión con la base de datos se redujo únicamente a configurar la dirección del host, usuario y contraseña.\\
