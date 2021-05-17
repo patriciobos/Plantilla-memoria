@@ -1,6 +1,6 @@
 \chapter{Diseño e implementación} % Main chapter title
 \label{Chapter3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
-En este capítulo se exponen los componentes del hardware y software desarrollado en etapas con un enfoque individual.\\
+En este capítulo se exponen los componentes del hardware y software, los que han sido desarrollados, probados e implementados en el presente proyecto.\\
 La subsección \ref{seccion_firmware} expone el patrón \textit{power save loop} adoptado en la lógica de negocios, los periféricos del microcontrolador con los cuales interactúa y la rutina de interrupción que atiende al generarse un corte.
 Por último, la sección \ref{seccion_bes} otorga al lector detalles acerca de la integración entre la red LoRaWAN y los servicios de backend implementados para este proyecto.
 
@@ -48,9 +48,9 @@ Por último, la sección \ref{seccion_bes} otorga al lector detalles acerca de l
 En esta sección se presentan circuitos esquemáticos correspondientes a cada etapa individual y su rol en el sistema.
 \subsection{Circuito de selección de modo}
 En el caso límite donde el nivel del acumulador es bajo y el microcontrolador ordena cambiar su estado a un relay con retención, la energía necesaria para excitar al relay puede generar una caída de tensión significativa en el acumulador. As\'{i}, todo el hardware quedaría totalmente desenergizado sin posibilidad de volver a entrar en operación, a menos que exista una intervención humana.\\
-Un caso extremo como el mencionado, implica que el hardware debe poseer un mecanismo para restablecer su operación tras largos per\'{i}odos de tiempo, a\'{u}n después de encontrarse el acumulador sin energ\'{i}a.\\
-En la figura \ref{fig:ctoselecciondemodo} se muestra el relay sin retención que se implementó,  presentado en la secci\'{o}n \ref{fig:relay},y su circuito de mando. Los terminales del transformador de corriente se encuentran conectados por defecto a la etapa de conversión y acumulación de energía (terminales NC1 y NC2). Una vez que la tensión en bornes del acumulador alcanza el valor mínimo para que el conversor DC/DC entre en operación, también lo hace la electrónica sin la necesidad de intervención externa.\\
-Cada vez que se desea tomar una medición de corriente, el microcontrolador activa la bobina del relay y desconecta el transformador de corriente del circuito de conversi\'{o}n para conectarlo al circuito de medición de valor RMS.\\
+Un caso extremo como el anteriormente mencionado, implica que el hardware debe ser capaz de restablecer su estado de operación normal tras largos períodos de tiempo fuera de servicio, aún después de la salida de servicio por falta de provisión de energía.\\
+En la figura \ref{fig:ctoselecciondemodo} se muestra el relay sin retención que se implementó,  presentado en la secci\'{o}n \ref{fig:relay}, como as\'{i} tambi\'{e}n su circuito de mando. Los terminales del transformador de corriente se encuentran conectados por defecto a la etapa de conversión y acumulación de energía (terminales NC1 y NC2). Una vez que la tensión en bornes del acumulador alcanza el valor mínimo para que el conversor DC/DC entre en operación, también lo hace la electrónica sin la necesidad de intervención externa.\\
+Cada vez que se desea realizar la medición de corriente, el microcontrolador activa la bobina del relay y desconecta el transformador de corriente del circuito de conversi\'{o}n para conectarlo al circuito de medición de valor RMS.\\
 % TODO: \usepackage{graphicx} required
 \begin{figure}[h]
 	\centering
