@@ -364,7 +364,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\begin{titlepage}
 	\begin{center}
 	
-	\includegraphics[width=.8\textwidth]{./Figures/logoFIUBA.png}
+	\includegraphics[width=.8\textwidth]{./Figures/logoFIUBA.pdf}
 	\vspace{2cm}
 	
 	\textsc{\huge{\degreename}}
