@@ -30,18 +30,18 @@ headsepline, % Uncomment to get a line under the header
 %	INFORMACIÓN DE LA MEMORIA
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Título del trabajo} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
+\thesistitle{Sistema de riego y control de huertas} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
-\posgrado{Carrera de Especialización en Sistemas Embebidos} 
-%\posgrado{Carrera de Especialización en Internet de las Cosas} 
+%\posgrado{Carrera de Especialización en Sistemas Embebidos} 
+\posgrado{Carrera de Especialización en Internet de las Cosas} 
 %\posgrado{Carrera de Especialización en Intelegencia Artificial}
 %\posgrado{Maestría en Sistemas Embebidos} 
 %\posgrado{Maestría en Internet de las cosas}
 
-\author{Nombre del autor} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
+\author{Lic. Gustavo Hernan Siciliano} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
 
-\director{Nombre del director (pertenencia)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \dirname
+\director{Mg. Ing. Osvaldo Ivani (FIUBA)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \dirname
 \codirector{Nombre del codirector (pertenencia)} % El nombre del codirector si lo hubiera, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \codirname.  Para activar este campo se debe descomentar la opción "codirector" en el comando \documentclass, línea 23.
 
 \juradoUNO{Nombre del jurado 1 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
@@ -49,10 +49,10 @@ headsepline, % Uncomment to get a line under the header
 \juradoTRES{Nombre del jurado 3 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
 
 %\ciudad{Ciudad Autónoma de Buenos Aires}
-\ciudad{ciudad de Mendoza}
+\ciudad{ciudad de Avellaneda}
 
-\fechaINICIO{marzo de 2020}
-\fechaFINAL{diciembre de 2020}
+\fechaINICIO{mayo de 2023}
+\fechaFINAL{agosto de 2023}
 
 
 \keywords{Sistemas embebidos, FIUBA} % Keywords for your thesis, print it elsewhere with \keywordnames
@@ -76,7 +76,9 @@ headsepline, % Uncomment to get a line under the header
 %The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
 \centering
 
-El resumen debe escribirse en uno o dos párrafo.  Debe ser breve y conciso sin ningún elemento de formato en el texto como itálicas o negrita. Tampoco se deben usar siglas ni acrónimos que no resulten obvios para un lector promedio de la memoria, ni referencias bibliográficas o notas al pie de página.  No debe faltar qué es lo que se hizo/logró, qué importancia/valor tiene el proyecto/resultado, qué va a encontrar el lector en la memoria y qué contenidos de la especialización/maestría se aplicaron en el proyecto.
+La presente memoria describe el diseño y desarrollo de un prototipo tecnológico que realice acciones de monitoreo y cuidado sobre un conjunto de cultivos en una huerta. La idea nace a partir de un proyecto de investigación originado en la UNLa (Universidad Nacional de Lanús), que apunta a formar conocimiento sobre agricultura 4.0 y a trabajar en torno al concepto de empleo verde en la universidad. El producto será desplegado y utilizado en el predio de la universidad, con fines tanto académicos como socio culturales.
+
+Para el desarrollo de este trabajo fueron importantes los conocimientos sobre los módulos ESP y sus posibilidades de integración con diferentes sensores. Además, se destacan los aprendizajes adquiridos en desarrollo web y bases de datos a gran escala. Finalmente, fue fundamental la comprensión de los distintos protocolos de comunicación y la seguridad con la que deben contar para operar correctamente.
 
 \end{abstract}
 
@@ -88,7 +90,13 @@ El resumen debe escribirse en uno o dos párrafo.  Debe ser breve y conciso sin 
 %\addchaptertocentry{\acknowledgementname} % Descomentando esta línea se puede agregar los agradecimientos al índice
 \vspace{1.5cm}
 
-Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONAL}.  
+A mi mamá Amada que siempre va a estar en mis recuerdos.
+
+A mi papá Gustavo y mi hermana Lucia que siempre están cuando los necesito.
+
+A mi novia Carolina que, además de incentivarme para volver a estudiar, me hace muy feliz y me llena de amor y alegría.
+
+A mi familia y amigos que tanto quiero y aprecio.
 
 \end{acknowledgements}
 
@@ -101,13 +109,6 @@ Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONA
 \listoffigures % Prints the list of figures
 
 \listoftables % Prints the list of tables
-
-
-%----------------------------------------------------------------------------------------
-%	CONTENIDO DE LA MEMORIA  - DEDICATORIA
-%----------------------------------------------------------------------------------------
-
-\dedicatory{\textbf{Dedicado a... [OPCIONAL]}}  % escribir acá si se desea una dedicatoria
 
 %----------------------------------------------------------------------------------------
 %	CONTENIDO DE LA MEMORIA  - CAPÍTULOS
